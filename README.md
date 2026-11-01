@@ -6,19 +6,22 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
 ## Progreso y Componentes
 
 - **Punto 1: Procesamiento Inicial con Python**
-  - Implementación de scripts en Python para la lectura, análisis y preparación de los conjuntos de datos (`legacy_policies` y `target_policies`).
+  - Implementación de scripts en Python (`quality_framework.py`) para la lectura, análisis y preparación de los conjuntos de datos (`legacy_policies` y `target_policies`).
 
 - **Punto 2: Validación y Conciliación de Datos (Snowflake)**
   - Carga de datos en Snowflake manejando los formatos de fecha `DD/MM/YYYY`.
-  - Script implementado en `reconciliation.sql` para auditar la integridad de la migración:
-    - Conteo volumétrico total entre origen y destino.
-    - Identificación de registros faltantes en el destino (`MISSING_TARGET`).
-    - Detección de duplicados.
-    - Auditoría campo por campo de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
+  - Script implementado en `reconciliation.sql` para auditar la integridad de la migración.
+
+  ### Evidencias de Ejecución (Punto 2):
+
+  1. **Conteo Volumétrico (Comparativa de registros totales):**
+     ![Conteo Total](Conteo_Total.png)
+
+  2. **Registros Faltantes / Sin Migrar (Pólizas en legacy no encontradas en target):**
+     ![Sin Migrar](Sin%20migrar.png)
+
+  3. **Detección de Duplicados en el Destino:**
+     ![Duplicados](Duplicados.png)
 
 - **Punto 3 y 4: Transformaciones y Modelado**
-  - *Próximamente:* Modelado analítico y transformaciones estructuradas.
-
----
-**Evidencia de Ejecución (Punto 2 en Snowflake):**
-![Evidencia Snowflake](evidence_point2.png)
+  - *Próximamente:* Modelado analítico y transformaciones estructuradas mediante dbt.
