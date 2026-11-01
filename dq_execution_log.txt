@@ -1,0 +1,22 @@
+======================================================================
+ REPORTE DE CALIDAD DE DATOS - LOG DE EJECUCIÓN
+ Timestamp de Ejecución: 2026-11-01 11:25:37
+======================================================================
+
+Resumen General: Se detectaron 1 incidencias totales.
+
+--- Dataset Evaluado: ACCOUNTS ---
+Status: ⚠️ ATENCIÓN (1 registros con errores)
+  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido (falta el @).
+--------------------------------------------------
+
+--- Dataset Evaluado: LEGACY_POLICIES ---
+Status: ✅ OK (Sin anomalías detectadas)
+
+
+--- Dataset Evaluado: TARGET_POLICIES ---
+Status: ✅ OK (Sin anomalías detectadas)
+
+
