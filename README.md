@@ -1,13 +1,24 @@
-# Gallagher Migration Test - Data Quality Framework
+# Gallagher Data Engineering Technical Assessment
 
-Repositorio oficial para la prueba técnica de Data Engineer, enfocado en el diseño de arquitecturas de datos, validación de calidad y flujos de migración.
+## Descripción del Proyecto
+Este repositorio contiene la solución para la prueba técnica de ingeniería de datos para Gallagher, enfocada en la migración, validación y conciliación de pólizas.
 
-## 📂 Estructura del Proyecto
-- **`quality_framework.py`**: Script principal desarrollado en Python orientado a objetos para la validación de reglas de negocio mediante funciones dinámicas (`lambda`).
-- **`dq_execution_log.txt`**: Registro de auditoría (log) generado automáticamente con las marcas de tiempo y resultados de validación.
-- **`.gitignore`**: Configuración para excluir datos crudos, archivos comprimidos y documentos confidenciales del control de versiones.
+## Progreso y Componentes
 
-## 🚀 Instrucciones de Ejecución
-Para ejecutar el framework de calidad de datos localmente, asegúrate de tener Python instalado y ejecuta:
-```bash
-python quality_framework.py
+- **Punto 1: Procesamiento Inicial con Python**
+  - Implementación de scripts en Python para la lectura, análisis y preparación de los conjuntos de datos (`legacy_policies` y `target_policies`).
+
+- **Punto 2: Validación y Conciliación de Datos (Snowflake)**
+  - Carga de datos en Snowflake manejando los formatos de fecha `DD/MM/YYYY`.
+  - Script implementado en `reconciliation.sql` para auditar la integridad de la migración:
+    - Conteo volumétrico total entre origen y destino.
+    - Identificación de registros faltantes en el destino (`MISSING_TARGET`).
+    - Detección de duplicados.
+    - Auditoría campo por campo de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
+
+- **Punto 3 y 4: Transformaciones y Modelado**
+  - *Próximamente:* Modelado analítico y transformaciones estructuradas.
+
+---
+**Evidencia de Ejecución (Punto 2 en Snowflake):**
+![Evidencia Snowflake](evidence_point2.png)
