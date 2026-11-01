@@ -12,8 +12,7 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
   - Carga de datos en Snowflake manejando los formatos de fecha `DD/MM/YYYY`.
   - Script implementado en `reconciliation.sql` para auditar la integridad de la migración.
 
-  ### Evidencias de Ejecución (Punto 2):
-
+  ### Evidencias Gráficas (Imágenes):
   1. **Conteo Volumétrico (Comparativa de registros totales):**
      ![Conteo Total](Conteo_Total.png)
 
@@ -22,6 +21,13 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
 
   3. **Detección de Duplicados en el Destino:**
      ![Duplicados](Duplicados.png)
+
+  ### Resultados y Análisis Detallados (Archivos CSV):
+  4. **Auditoría Campo por Campo (`Auditoria.csv`):**
+     - Validación detallada de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
+
+  5. **Análisis de Clientes (`Clientes con mas de una poliza en el origen.csv`):**
+     - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy.
 
 - **Punto 3 y 4: Transformaciones y Modelado**
   - *Próximamente:* Modelado analítico y transformaciones estructuradas mediante dbt.
