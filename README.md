@@ -112,33 +112,36 @@ graph LR
 ```
 - **Punto 4: Diseño de Solución End-to-End para Migración Masiva (OPTIMA LATAM)**
 
-- flowchart TD
+- **Punto 4: Diseño de Solución End-to-End para Migración Masiva (OPTIMA LATAM)**
+
+```mermaid
+flowchart TD
     subgraph Origen [1. Source]
         A[(Legacy DB / RDBMS)]
     end
 
     subgraph Extraccion_Landing [2. Extraction & 3. Landing]
-        B[Airflow / Data Pipelines] -->|Extracción particionada en Parquet| C[Cloud Object Storage\nLanding / RAW Bucket]
+        B[Airflow / Data Pipelines] -->|Extracción particionada en Parquet| C[Cloud Object Storage Landing / RAW Bucket]
     end
 
     subgraph Perfilamiento_Calidad [4. Profiling & 5. Data Quality]
         C --> D[Snowflake RAW Stage]
-        D --> E[Snowflake / dbt-expectations\nProfiling & Pre-ingestion DQ]
+        D --> E[Snowflake / dbt-expectations Profiling & Pre-ingestion DQ]
     end
 
     subgraph Transformacion_Mapeo [6. Mapping & 7. Transformation]
-        E -->|Registros Válidos| F[dbt Transformation Pipeline\nStaging / Intermediate / Marts]
+        E -->|Registros Válidos| F[dbt Transformation Pipeline Staging / Intermediate / Marts]
         E -->|Registros Rechazados| G[(Dead Letter Queue / Quarantine)]
     end
 
     subgraph Carga_Destino [8. Migration & 9. Destination]
-        F -->|Carga Idempotente MERGE| H[(OPTIMA LATAM\nData Warehouse)]
+        F -->|Carga Idempotente MERGE| H[(OPTIMA LATAM Data Warehouse)]
     end
 
     subgraph Validacion_Reporte [10. Reconciliation & 11. Reporting]
-        H --> I[Reconciliation Framework\nVolumetría, Hashes & Sum(Premium)]
+        H --> I[Reconciliation Framework Volumetría, Hashes & Sum Premium]
         G --> J[Observability & Incident Management]
-        I --> K[Executive Dashboard\nPower BI / Streamlit]
+        I --> K[Executive Dashboard Power BI / Streamlit]
         J --> K
     end
 
