@@ -16,18 +16,22 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
   2.1. **Conteo Volumétrico (Comparativa de registros totales):**
      ![Conteo Total](Conteo_Total.png)
 
-  2.2. **Registros Faltantes / Sin Migrar (Pólizas en legacy no encontradas en target):**
+  2.2. **Control Adicional / Nulos en Origen y Destino:**
+     ![Sin Migrar](Nulos_source_dest.png)
+
+  2.3. **Registros Faltantes / Sin Migrar (Pólizas en legacy no encontradas en target):**
      ![Sin Migrar](Sin%20migrar.png)
 
-  2.3. **Detección de Duplicados en el Destino:**
-     ![Duplicados](Duplicados.png)
+  2.4. **Control Adicional / Polizas del destino que no existen en origen (BASURA):**
+     ![Sin Migrar](Sin%20migrar.png)
 
-  ### Resultados y Análisis Detallados (Archivos CSV):
-  
-  2.4. **Análisis de Clientes (`Clientes con mas de una poliza en el origen.csv`):**
+  2.5. **Detección de Duplicados en el Origen y destino:**
+     ![Duplicados](5_origen_destino.png)
+
+  2.6. **Clientes con más de una poliza en el origen:**
      - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy.
     
-  2.5. **Auditoría Campo por Campo (`Auditoria.csv`):**
+  2.7. **Auditoría Campo por Campo (`Auditoria.csv`):**
      - Validación detallada de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
 
  - **Punto 3: Arquitectura y Modelado en dbt (Consolidación LATAM - OneSource)**
