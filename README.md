@@ -6,7 +6,7 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
 ## Progreso y Componentes
 
 - **Punto 1: Procesamiento Inicial con Python**
-  - Implementación de scripts en Python (`quality_framework.py`) para la lectura, análisis y preparación de los conjuntos de datos (`legacy_policies` y `target_policies`).
+  - Implementación de scripts en Python (`Pregunta1/quality_framework.py`) para la lectura, análisis y preparación de los conjuntos de datos (`legacy_policies` y `target_policies`).
 
 - **Punto 2: Validación y Conciliación de Datos (Snowflake)**
   - Carga de datos en Snowflake manejando los formatos de fecha `DD/MM/YYYY`.
