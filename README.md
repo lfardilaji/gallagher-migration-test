@@ -181,10 +181,18 @@ La siguiente matriz detalla el rol técnico, las herramientas y la responsabilid
 | **11. Reporting & Observability** | Apache Superset / Metabase + Prometheus / Grafana | Tablero ejecutivo en tiempo real para seguimiento del progreso del corte (*Go/No-Go*), monitoreo de throughput (registros/segundo) y métricas de registros desviados a la DLQ. |
 
 
-3. Justificación del Stack Tecnológico (Agnóstico / Open Source)La elección de una arquitectura basada en estándares abiertos (Parquet, SQL, orquestación por grafos) garantiza la independencia tecnológica (Zero Vendor Lock-in). Esta modularidad permite desplegar la solución en nubes corporativas (Azure, AWS) o infraestructuras locales según las licencias de cada país, optimizando costos al centrar la inversión exclusivamente en cómputo y almacenamiento.
-4. Estrategias Técnicas de la MigraciónProcesamiento de Grandes Volúmenes (~12M de registros): Extracción particionada en el origen para evitar bloqueos transaccionales. Ingesta paralela mediante archivos Parquet comprimidos y carga en cascada estricta (Clientes $\rightarrow$ Pólizas $\rightarrow$ Ítems/Endosos) para prevenir cuellos de botella e inconsistencias relacionales.
-   Control de Calidad de Datos: Framework automatizado en tres barreras: estructural (no nulos, unicidad), integridad referencial (prevención de entidades huérfanas con dbt-expectations) y reglas de negocio (consistencia temporal y homologación corporativa de catálogos).
-   Gestión de Errores y Reprocesamiento: Desvío automático de registros inválidos hacia una Dead Letter Queue (DLQ) sin detener la migración general. Toda carga aplica idempotencia (MERGE INTO) mediante llaves hash, garantizando que los reprocesos o fallos de red no generen datos duplicados.
+### 3. Justificación Tecnológica (Agnóstico / Open Source)
+
+Elegí herramientas open source (Parquet, SQL con dbt, Airflow) para evitar depender de un solo proveedor (*Vendor Lock-in*). Esto significa que la solución es portátil: se puede montar en Azure, AWS o servidores locales, ajustándose a lo que tenga cada país y pagando solo por el almacenamiento y cómputo que realmente se use.
+
+### 4. Estrategias Técnicas de Migración
+
+* **Manejo de Grandes Volúmenes (~12M de registros):** Extraemos los datos por partes (lotes) y en paralelo para no colapsar la base de datos de origen. La ingesta se hace en orden estricto (Clientes $\rightarrow$ Pólizas $\rightarrow$ Ítems/Endosos) para que ningún dato quede "huérfano".
+* **Calidad de Datos (Data Quality):** Validamos en tres filtros: estructural (sin nulos ni duplicados), relacional (que todo coincida) y negocio (fechas lógicas, catálogos estándar).
+* **Manejo de Errores (Dead Letter Queue - DLQ):** Si un dato viene mal, no frenamos todo. Se manda a una tabla de "cuarentena" (DLQ) para revisarlo después. Además, usamos cargas seguras (`MERGE INTO`) para que si algo falla y toca repetir, no se dupliquen los datos.
+* **Fases de Migración:** Para no afectar la operación, lo dividimos en tres: 1) Carga histórica gigante (hasta un día antes); 2) Sincronización de lo nuevito (delta); 3) Fin de semana de "corte" final (se bloquea el origen y se prende el nuevo).
+* **Conciliación (Origen vs. Destino):** Cuadramos todo al centavo. Validamos que el total de registros coincida, que la plata sume lo mismo y usamos un código criptográfico (hash) para asegurar que cada campo sea idéntico.
+* **Métricas y Monitoreo:** Medimos la velocidad en tiempo real y aseguramos un 99.5% de éxito. Todo se muestra en un tablero que sirve como "firma" para dar el visto bueno al salir a producción.
    Migración Incremental y por Lotes: Estrategia en tres fases mitigando el downtime: 1) Carga histórica masiva en frío hasta $T-1$; 2) Sincronización de deltas incrementales recientes; 3) Ventana de corte final (Cutover) bloqueando el sistema legado en modo solo lectura.
    Conciliación entre Origen y Destino: Cuadre de auditoría en tres ejes: balance volumétrico exacto, control financiero agregado ($\sum \text{Premium}_{\text{Origen}} \equiv \sum \text{Premium}_{\text{Destino}}$), y paridad campo a campo generada por hashing criptográfico (SHA256).
    Métricas e Informes de Avance: Monitoreo en tiempo real del throughput de ingestión y la efectividad de carga ($\ge 99.5\%$). Tablero ejecutivo visual utilizado como certificado formal de auditoría para firmar la salida a producción (Go / No-Go).
