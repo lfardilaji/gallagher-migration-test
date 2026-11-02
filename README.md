@@ -1,80 +1,52 @@
 # Gallagher – Prueba Técnica de Data Engineering
 
-Repositorio con la solución integral a los cuatro desafíos técnicos de ingeniería de datos para Gallagher: **Framework de Calidad de Datos (P1)**, **Conciliación de Migración en Snowflake (P2)**, **Consolidación Regional LATAM con dbt (P3)** y **Arquitectura End-to-End de Migración Masiva para OPTIMA LATAM (P4)**.
+Repositorio con la solución integral a los desafíos técnicos de ingeniería de datos para Gallagher: **Framework de Calidad de Datos (P1)**.
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
-El repositorio está organizado modularmente por pregunta para facilitar su navegación, revisión de evidencias y reproducibilidad:
+El repositorio está organizado modularmente para facilitar su navegación, revisión de evidencias y reproducibilidad:
 
-| Carpeta / Archivo | Pregunta | Contenido Principal |
-| :--- | :---: | :--- |
-| [`Enunciado/`](Enunciado/) | Base | Datasets CSV originales entregados: ([`accounts.csv`](Enunciado/accounts.csv) , ([`legacy_policies.csv`](Enunciado/legacy_policies.csv), ([`target_policies.csv`](Enunciado/target_policies.csv).
-| [`Pregunta1/`](Pregunta1/) | **P1** | Motor y scripts de validación de calidad de datos ([`quality_framework.py`](Pregunta1/quality_framework.py)), reglas y logs de ejecución. |
-| [`Pregunta2/`](Pregunta2/) | **P2** | Script de auditoría y conciliación en Snowflake ([`reconciliation.sql`](Pregunta2/reconciliation.sql)), reportes CSV ([`Auditoria.csv`](Pregunta2/Auditoria.csv), [`duplicados_src.csv`](Pregunta2/duplicados_src.csv)) y evidencias gráficas. |
-| [`Pregunta3/`](Pregunta3/) | **P3** | Modelos de transformación modular en dbt: configuración de fuentes [`_sources.yml`](Pregunta3/_sources.yml) , capa *staging*, *intermediate* y tabla final [`fact_policy.sql`](Pregunta3/fact_policy.sql). |
-| [`Pregunta4/`](Pregunta4/) | **P4** | Diseño de arquitectura End-to-End.
+- Enunciado/: Datasets CSV originales entregados: accounts.csv, legacy_policies.csv, target_policies.csv.
+- Pregunta1/: Motor y scripts de validación de calidad de datos (quality_framework.py), reglas y log de ejecución (dq_execution_log.txt).
 
 ---
 
-## ⚙️ Cómo Ejecutar (Reproducibilidad)
+## Cómo Ejecutar (Reproducibilidad)
 
-**Prerrequisitos:** Python 3.11 o superior. Para P2 y P3, contar con acceso a Snowflake (usando un rol funcional de menor privilegio, no `ACCOUNTADMIN`), SnowSQL y `dbt-snowflake`.
+Prerrequisitos: Python 3.11 o superior.
 
-### 1. Instalación del entorno y validaciones locales (P1 y Linting)
-```bash
-pip install -r requirements.txt
+### 1. Instalación del entorno y validaciones locales (P1)
+Desde la carpeta raíz del repositorio, instala las dependencias utilizando el archivo de requerimientos ejecutando: pip install -r requirements.md
 
-make dq      # Ejecuta el framework de calidad (Pregunta1/quality_framework.py) sobre los CSV
-make test    # Ejecuta las pruebas unitarias del motor de calidad
-make lint    # Valida la sintaxis SQL de Pregunta2 con sqlfluff (dialecto Snowflake)
-```
+Una vez instaladas las dependencias, dirígete a la carpeta Pregunta1 y ejecuta el framework de calidad de datos escribiendo: cd Pregunta1 seguido de python quality_framework.py.
+(Esto procesará los CSV ubicados en Enunciado/ preservando los formatos de texto y generará el archivo de salida dq_execution_log.txt en la misma carpeta).
 
-### 2. Conciliación en Snowflake (P2)
-Ejecutar el script de auditoría y conciliación conectándose a la instancia de Snowflake:
-```bash
-snowsql -f Pregunta2/reconciliation.sql
-```
-
-### 3. Transformación con dbt (P3)
-```bash
-make dbt     # Ejecuta dbt deps + dbt build (modelos y tests de calidad)
-```
+Para validaciones adicionales:
+- make test (Ejecuta las pruebas unitarias del motor de calidad)
 
 ---
 
-## 🛡️ Punto 1: Framework de Calidad de Datos (Python)
+## Punto 1: Framework de Calidad de Datos (Python)
 
-* **Implementación:** Desarrollo del script [`quality_framework.py`](Pregunta1/quality_framework.py) para la lectura segura, perfilamiento y validación de los conjuntos de datos [`accounts.csv`](Enunciado/accounts.csv), [`legacy_policies.csv`](Enunciado/legacy_policies.csv) y [`target_policies.csv`](Enunciado/target_policies.csv).
+- Implementación: Desarrollo del script quality_framework.py para la lectura segura, perfilamiento y validación de los conjuntos de datos accounts.csv, legacy_policies.csv y target_policies.csv.
 
 ### Decisiones de Diseño del Motor
-* **Reglas de fila, de conjunto y entre tablas:** El framework evalúa tanto formatos individuales como unicidad y relaciones cruzadas (integridad referencial entre clientes y pólizas).
-* **Niveles de Severidad:**
-  * `CRITICAL`: Bloquea la migración del registro y lo desvía a cuarentena (DLQ).
-  * `WARNING`: Permite migrar el registro marcándolo con una bandera de auditoría para su remediación en el origen.
-* **Lectura segura de tipos:** Los archivos CSV se procesan preservando el formato de texto en identificadores para no perder ceros a la izquierda ni el dígito verificador (`K`) en documentos chilenos (RUT).
-* **Trazabilidad:** Generación de reportes de resumen (% de cumplimiento por regla) y detalle de registros fallidos identificados por su llave primaria.
+- Portabilidad de Rutas: El framework utiliza resolución de rutas dinámicas mediante os.path, permitiendo su ejecución nativa en cualquier entorno o sistema operativo sin requerir rutas absolutas cableadas.
+- Lectura segura de tipos (dtype=str): Los archivos CSV se procesan preservando estrictamente el formato de texto en identificadores y documentos (garantizando que no se pierdan ceros a la izquierda ni el dígito verificador K en los documentos chilenos).
+- Reglas de fila, de conjunto y cruzadas: El framework evalúa tanto formatos individuales como unicidad y relaciones cruzadas (integridad referencial entre clientes y pólizas).
+- Niveles de Severidad:
+  * CRITICAL: Bloquea la migración del registro y lo desvía a cuarentena (DLQ).
+  * WARNING: Permite migrar el registro marcándolo con una bandera de auditoría para su remediación en el origen.
+- Trazabilidad y Evidencias: Generación automática del archivo de salida dq_execution_log.txt con el registro detallado de incidencias por regla, severidad y llave primaria.
 
-### Hallazgos Principales en los Datos Entregados
-Dado que en el sistema origen solo `Client_ID` y `Created_Date` eran autogenerados y el resto de los campos se ingresaban manualmente, las reglas detectaron las siguientes anomalías:
+### Hallazgos Principales en los Datos Entregados (Log de Ejecución Real)
+La ejecución validada del framework sobre los datasets reporta las siguientes incidencias reales capturadas por el motor:
 
-| Anomalía Detectada | Tabla | Registros | Severidad | Acción Recomendada |
-| :--- | :---: | :---: | :---: | :--- |
-| **Cliente duplicado:** Miguel Vargas (RUT `966030828`) con dos `client_id` distintos | `accounts` | 2 | `CRITICAL` | Unificar registros aplicando regla de supervivencia aprobada por negocio. |
-| **Formato de documento inválido:** Números con 5, 6 y 11 dígitos | `accounts` | 3 | `CRITICAL` | Corregir en el sistema origen antes de migrar. |
-| **Fechas de nacimiento imposibles:** Años `1880` y `1893` | `accounts` | 2 | `CRITICAL` | Corregir en origen. |
-| **Póliza huérfana (`POL-000008`):** Error de digitación en el UUID del `client_id` | `target` | 1 | `CRITICAL` | Bloquear carga y corregir referencia del `client_id`. |
-| **Correos inválidos:** Formatos como `@example.com`, `c@example.com` o sin `@` | `accounts` | 4 | `WARNING` | Migrar como `NULL` con bandera de calidad. |
-| **Correo compartido:** Mismo email asignado a clientes distintos | `accounts` | 8 | `WARNING` | Validar titularidad real con el área comercial. |
-| **Teléfono de relleno (`7010001`):** Valor por defecto repetido masivamente | `accounts` | 51 | `WARNING` | Migrar como `NULL` con bandera de calidad. |
-| **Inconsistencia País/Documento:** Tipo `RUT` (Chile) asignado a clientes de Perú (`PER`) | `accounts` | 98 | `WARNING` | Homologar catálogo de tipos de documento con negocio. |
-| **Titular menor de edad:** Menos de 18 años al momento de `Created_Date` | `accounts` | 5 | `WARNING` | Validar si la regla de suscripción lo permite. |
-| **Póliza `ACTIVE` en cliente `INACTIVE`:** `POL-000010`, `034` y `049` | `legacy` / `target` | 3 + 3 | `WARNING` | Revisar estado del cliente o vigencia de la póliza. |
-| **Póliza `ACTIVE` con inicio futuro:** `start_date` posterior a la fecha actual | `legacy` / `target` | 25 + 25 | `WARNING` | Validar definición de estado `ACTIVE` vs. `PENDING`. |
-| **Vigencia anterior a creación del cliente:** `POL-000037` (año 2014) | `target` | 1 | `WARNING` | Error introducido en la migración; corregir `start_date`. |
-
----
+- Formato de correo inválido (Malformed_Email) en accounts | Registro: 73dd490c-d769-457f-82e7-54ac4edd0593 | Severidad: WARNING | Acción: Migrar como NULL con bandera de calidad.
+- Póliza huérfana (Orphan_Policy) en target_policies | Registro: e88f1410-f52f-47fb-96bb-41751a1f5cd1 | Severidad: CRITICAL | Acción: Bloquear carga y corregir referencia del client_id.
+- Resto de hallazgos históricos en accounts / legacy / target | Múltiples registros detectados por perfilamiento | Severidad: CRITICAL / WARNING | Acción: Aplicar limpieza en origen y unificación de duplicados.
 
 ## 🔍 Punto 2: Validación y Conciliación de Datos (Snowflake)
 
