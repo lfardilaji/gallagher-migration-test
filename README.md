@@ -10,7 +10,7 @@ El repositorio está organizado modularmente por pregunta para facilitar su nave
 
 | Carpeta / Archivo | Pregunta | Contenido Principal |
 | :--- | :---: | :--- |
-| [`Enunciado/`](Enunciado/) | Base | Datasets CSV originales entregados: `accounts.csv`, `legacy_policies.csv`, `target_policies.csv`. |
+| [`Enunciado/`](Enunciado/) | Base | Datasets CSV originales entregados: ([`accounts.csv`](Enunciado/accounts.csv) , ([`legacy_policies.csv`](Enunciado/legacy_policies.csv), ([`target_policies.csv`](Enunciado/target_policies.csv).
 | [`Pregunta1/`](Pregunta1/) | **P1** | Motor y scripts de validación de calidad de datos ([`quality_framework.py`](Pregunta1/quality_framework.py)), reglas y logs de ejecución. |
 | [`Pregunta2/`](Pregunta2/) | **P2** | Script de auditoría y conciliación en Snowflake ([`reconciliation.sql`](Pregunta2/reconciliation.sql)), reportes CSV ([`Auditoria.csv`](Pregunta2/Auditoria.csv), [`duplicados_src.csv`](Pregunta2/duplicados_src.csv)) y evidencias gráficas. |
 | [`Pregunta3/`](Pregunta3/) | **P3** | Modelos de transformación modular en dbt: configuración de fuentes (`_sources.yml`), capa *staging*, *intermediate* y tabla final `fact_policy.sql`. |
