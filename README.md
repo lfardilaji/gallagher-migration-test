@@ -125,7 +125,7 @@ flowchart TD
     subgraph S2 [2. Extraction & 3. Landing - Open Source]
         B[Apache Airflow<br/>Python Extractors / Airbyte OSS]
         C[(MinIO / Ceph Object Storage<br/>Landing Parquet Bronze)]
-        B -->|Extracción particionada en lotes| C
+        B -->|Extracción particionada<br/>en lotes| C
     end
 
     subgraph S3 [4. Profiling & 5. Data Quality Inicial]
@@ -138,15 +138,15 @@ flowchart TD
         F{Great Expectations<br/>Validaciones DQ}
         G[(PostgreSQL / MinIO DLQ<br/>Dead Letter Queue)]
         H[dbt Marts<br/>Homologación & Lógica de Negocio]
-        D -->|Datos Crudos Validados| E
+        D -->|Datos Crudos<br/>Validados| E
         E --> F
-        F -->|Registros Rechazados| G
-        F -->|Registros Válidos| H
+        F -->|Registros<br/>Rechazados| G
+        F -->|Registros<br/>Válidos| H
     end
 
     subgraph S5 [8. Migration & 9. Destination - OPTIMA LATAM]
         I[(OPTIMA LATAM Lakehouse<br/>Trino / ClickHouse / PostgreSQL)]
-        H -->|Carga Idempotente MERGE| I
+        H -->|Carga Idempotente<br/>MERGE| I
     end
 
     subgraph S6 [10. Reconciliation & 11. Reporting]
@@ -160,3 +160,4 @@ flowchart TD
     end
 
     A --> B
+```
