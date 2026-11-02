@@ -168,7 +168,7 @@ La siguiente matriz detalla el rol técnico, las herramientas y la responsabilid
 | Etapa / Componente | Tecnología de Referencia (Open Source / Agnóstica) | Función Principal y Responsabilidad Técnica |
 | :--- | :--- | :--- |
 | **1. Source (Origen)** | RDBMS Legado (PostgreSQL / Oracle / MySQL) | Sistema transaccional del país a migrar. Aloja los datos históricos no estandarizados de clientes (500k), pólizas (2M), ítems (8M) y endosos (1.5M). |
-| **2. Extraction (Extracción)** | Apache Airflow / Python Extractors (Airbyte OSS) | Orquesta extracciones concurrentes y particionadas (por rangos de ID o fecha) en lotes controlados para evitar contención de recursos o bloqueos en la base de datos de producción. |
+| **2. Extraction (Extracción)** | Apache Airflow / Python Extractors | Orquesta extracciones concurrentes y particionadas (por rangos de ID o fecha) en lotes controlados para evitar saturación de recursos o bloqueos en la base de datos productiva. |
 | **3. Landing / RAW (Aterrizaje)** | MinIO / Ceph (Object Storage compatible S3) | Zona de almacenamiento inmutable (*Bronze Layer*) que recibe los datos crudos extraídos en formato Parquet comprimido con Snappy, garantizando desacoplamiento y persistencia temporal para auditorías. |
 | **4. Profiling (Perfilamiento)** | Python Profiler (Pandas/Polars) / Scripts SQL | Análisis exploratorio automatizado previo a la carga: distribución de frecuencias, conteo de nulos, detección de formatos atípicos y cardinalidad de llaves foráneas. |
 | **5. Pre-ingestion Data Quality** | Great Expectations / Validadores Schema | Control preventivo de calidad estructural: verificación de tipados, no nulidad de identificadores críticos y detección temprana de esquemas corruptos antes del modelado. |
