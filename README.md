@@ -30,10 +30,11 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
      ![Duplicados](Pregunta2/5_origen_destino.png)
 
   2.6. **Clientes con más de una poliza en el origen:**
-     - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy, [`Clientes con mas de una poliza en el origen.csv`](Pregunta2/Clientes con mas de una poliza en el origen.csv)
+     - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy, [`duplicados_src.csv`](Pregunta2/duplicados_src.csv)
     
   2.7. **Auditoría Campo por Campo (`Pregunta2/Auditoria.csv`) :**
      - Validación detallada de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
+     - [`Auditoria.csv`](Pregunta2/Auditoria.csv)
 
  - **Punto 3: Arquitectura y Modelado en dbt (Consolidación LATAM - OneSource)**
   - Diseño de arquitectura en capas utilizando dbt para estandarizar y consolidar las fuentes regionales (`RAW_PERU.POLICIES`, `RAW_CHILE.POLICIES`, `RAW_COLOMBIA.POLICIES`) en un único dataset analítico corporativo: `ANALYTICS.FACT_POLICY`.
