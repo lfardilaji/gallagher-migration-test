@@ -146,7 +146,7 @@ flowchart TD
 
     subgraph S5 [8. Migration & 9. Destination - OPTIMA LATAM]
         I[(OPTIMA LATAM Lakehouse<br/>Trino / ClickHouse / PostgreSQL)]
-        H -->|Carga Idempotente<br/>MERGE| I
+        H -->|MERGE| I
     end
 
     subgraph S6 [10. Reconciliation & 11. Reporting]
