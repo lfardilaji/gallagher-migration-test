@@ -6,11 +6,11 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
 ## Progreso y Componentes
 
 - **Punto 1: Procesamiento Inicial con Python**
-  - Implementación de scripts en Python [`quality_framework.py`](Pregunta1/quality_framework.py) para la lectura, análisis y preparación de los conjuntos de datos )[`legacy_policies.csv`](Enunciado/legacy_policies.csv) y `target_policies`(Enunciado/target_policies.csv)).
+  - Implementación de scripts en Python [`quality_framework.py`](Pregunta1/quality_framework.py) para la lectura, análisis y preparación de los conjuntos de datos [`legacy_policies.csv`](Enunciado/legacy_policies.csv) y [`target_policies.csv`](Enunciado/target_policies.csv)
 
 - **Punto 2: Validación y Conciliación de Datos (Snowflake)**
   - Carga de datos en Snowflake manejando los formatos de fecha `DD/MM/YYYY`.
-  - Script implementado en `reconciliation.sql` para auditar la integridad de la migración.
+  - Script implementado en [`reconciliation.sql`](Pregunta2/reconciliation.sql) para auditar la integridad de la migración.
 
   ### Evidencias Gráficas (Imágenes):
   2.1. **Conteo Volumétrico (Comparativa de registros totales):**
@@ -30,9 +30,9 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
      ![Duplicados](Pregunta2/5_origen_destino.png)
 
   2.6. **Clientes con más de una poliza en el origen:**
-     - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy.
+     - Identificación de clientes que poseen más de una póliza registrada dentro del sistema legacy, [`Clientes con mas de una poliza en el origen.csv`](Pregunta2/Clientes con mas de una poliza en el origen.csv)
     
-  2.7. **Auditoría Campo por Campo (`Pregunta2/Auditoria.csv`):**
+  2.7. **Auditoría Campo por Campo (`Pregunta2/Auditoria.csv`) :**
      - Validación detallada de atributos críticos (`premium`, `currency`, `start_date`, `end_date`, `status`) con indicadores de estatus (`OK` / `ERROR`).
 
  - **Punto 3: Arquitectura y Modelado en dbt (Consolidación LATAM - OneSource)**
