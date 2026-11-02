@@ -133,7 +133,7 @@ flowchart TD
         C --> D
     end
 
-    subgraph S4 [6. Transformation & 7. Dead Letter Queue]
+    subgraph S4 [6. Transformation & 7. Tabla de Cuarentena]
         E[dbt Core<br/>Modelado Modular SQL]
         F{Great Expectations<br/>Validaciones DQ}
         G[(PostgreSQL / MinIO DLQ<br/>Dead Letter Queue)]
