@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw_latam
+    database: RAW_DB
+    tables:
+      - name: policies_peru
+        identifier: RAW_PERU.POLICIES
+      - name: policies_chile
+        identifier: RAW_CHILE.POLICIES
+      - name: policies_colombia
+        identifier: RAW_COLOMBIA.POLICIES
