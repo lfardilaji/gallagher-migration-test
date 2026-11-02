@@ -211,51 +211,8 @@ Solución de arquitectura para incorporar un nuevo país a la plataforma transac
 
 ### 🏗️ 1. Diagrama de Arquitectura End-to-End
 
-```mermaid
-flowchart TD
-    subgraph S1 [1. Source]
-        A[(Base de Datos Legada<br/>PostgreSQL / MySQL / Oracle)]
-    end
+(`arquitectura_migracion_optima.sql`)](Pregunta4/arquitectura_migracion_optima.png)
 
-    subgraph S2 [2. Extraction & 3. Landing - Open Source]
-        B[Apache Airflow<br/>Python Extractors / Airbyte OSS]
-        C[(MinIO / Ceph Object Storage<br/>Landing Parquet Bronze)]
-        B -->|Extracción particionada<br/>en lotes| C
-    end
-
-    subgraph S3 [4. Profiling & 5. Data Quality Inicial]
-        D[Great Expectations / Python Profiler<br/>Auditoría Estructural & Tipado]
-        C --> D
-    end
-
-    subgraph S4 [6. Transformation & 7. Tabla de Cuarentena]
-        E[dbt Core<br/>Modelado Modular SQL]
-        F{Great Expectations<br/>Validaciones DQ}
-        G[(PostgreSQL / MinIO DLQ<br/>Tabla Cuarentena)]
-        H[dbt Marts<br/>Homologación & Lógica de Negocio]
-        D -->|Datos Crudos<br/>Validados| E
-        E --> F
-        F -->|Registros<br/>Rechazados| G
-        F -->|Registros<br/>Válidos| H
-    end
-
-    subgraph S5 [8. Migration & 9. Destination - OPTIMA LATAM]
-        I[(OPTIMA LATAM Core & Lakehouse<br/>Snowflake / ClickHouse / PostgreSQL)]
-        H -->|Carga Idempotente<br/>MERGE / Batch API| I
-    end
-
-    subgraph S6 [10. Reconciliation & 11. Reporting]
-        J[Framework Python / SQL<br/>Conciliación Hashing & Sum Premium]
-        K[Apache Superset / Power BI<br/>Dashboard de Auditoría y Certificación]
-        L[Prometheus + Grafana<br/>Telemetría & Monitoreo del Pipeline]
-        I --> J
-        G --> L
-        J --> K
-        L --> K
-    end
-
-    A --> B
-```
 
 ### 📋 2. Descripción de Componentes y Funciones del Pipeline
 
