@@ -119,46 +119,44 @@ Solución de arquitectura para la incorporación masiva de un nuevo país a la p
 ```mermaid
 flowchart TD
     subgraph S1 [1. Source]
-        A[(Sistema Legado<br/>RDBMS / Archivos)]
+        A[(Base de Datos Legada<br/>PostgreSQL / MySQL / Oracle)]
     end
 
-    subgraph S2 [2. Extraction & 3. Landing - Azure]
-        B[Azure Data Factory<br/>Pipelines & SHIR]
-        C[(Azure Data Lake Storage Gen2<br/>Landing / Bronze Parquet)]
-        B -->|Extracción particionada| C
+    subgraph S2 [2. Extraction & 3. Landing - Open Source]
+        B[Apache Airflow<br/>Python Extractors / Airbyte OSS]
+        C[(MinIO / Ceph Object Storage<br/>Landing Parquet Bronze)]
+        B -->|Extracción particionada en lotes| C
     end
 
-    subgraph S3 [4. Profiling & Ingesta Inicial]
-        D[(Snowflake External Stage<br/>Storage Integration)]
-        E[Snowflake RAW Tables]
+    subgraph S3 [4. Profiling & 5. Data Quality Inicial]
+        D[Great Expectations / Python Profiler<br/>Auditoría Estructural & Tipado]
         C --> D
-        D -->|COPY INTO paralelizado| E
     end
 
-    subgraph S4 [5. DQ, 6. Mapping & 7. Transformation]
-        F[dbt Core / Cloud<br/>Staging & Intermediate]
-        G{dbt-expectations<br/>Validaciones DQ}
-        H[(Snowflake Quarantine<br/>Dead Letter Queue)]
-        I[dbt Marts<br/>Homologación & Business Logic]
+    subgraph S4 [6. Transformation & 7. Dead Letter Queue]
+        E[dbt Core<br/>Modelado Modular SQL]
+        F{Great Expectations<br/>Validaciones DQ}
+        G[(PostgreSQL / MinIO DLQ<br/>Dead Letter Queue)]
+        H[dbt Marts<br/>Homologación & Lógica de Negocio]
+        D -->|Datos Crudos Validados| E
         E --> F
-        F --> G
-        G -->|Registros Rechazados| H
-        G -->|Registros Válidos| I
+        F -->|Registros Rechazados| G
+        F -->|Registros Válidos| H
     end
 
-    subgraph S5 [8. Migration & 9. Destination]
-        J[(OPTIMA LATAM<br/>Snowflake Gold Layer)]
-        I -->|Carga Idempotente MERGE| J
+    subgraph S5 [8. Migration & 9. Destination - OPTIMA LATAM]
+        I[(OPTIMA LATAM Lakehouse<br/>Trino / ClickHouse / PostgreSQL)]
+        H -->|Carga Idempotente MERGE| I
     end
 
     subgraph S6 [10. Reconciliation & 11. Reporting]
-        K[Snowflake Engine<br/>Auditoría SQL & Hashes]
-        L[Azure Monitor & Log Analytics]
-        M[Power BI Dashboard<br/>Certificación de Corte & Avance]
+        J[Framework Python / SQL<br/>Conciliación Hashing & Sum Premium]
+        K[Apache Superset / Metabase<br/>Dashboard de Auditoría y Certificación]
+        L[Prometheus + Grafana<br/>Telemetría & Monitoreo del Pipeline]
+        I --> J
+        G --> L
         J --> K
-        H --> L
-        K --> M
-        L --> M
+        L --> K
     end
 
     A --> B
