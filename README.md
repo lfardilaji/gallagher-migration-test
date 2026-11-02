@@ -161,3 +161,21 @@ flowchart TD
 
     A --> B
 ```
+### 📋 2. Descripción de Componentes y Funciones del Pipeline
+
+La siguiente matriz detalla el rol técnico, las herramientas y la responsabilidad de cada etapa en el ciclo de vida de la migración de los ~12 millones de registros hacia la plataforma corporativa OPTIMA LATAM:
+
+| Etapa / Componente | Tecnología de Referencia (Open Source / Agnóstica) | Función Principal y Responsabilidad Técnica |
+| :--- | :--- | :--- |
+| **1. Source (Origen)** | RDBMS Legado (PostgreSQL / Oracle / MySQL) | Sistema transaccional del país a migrar. Aloja los datos históricos no estandarizados de clientes (500k), pólizas (2M), ítems (8M) y endosos (1.5M). |
+| **2. Extraction (Extracción)** | Apache Airflow / Python Extractors (Airbyte OSS) | Orquesta extracciones concurrentes y particionadas (por rangos de ID o fecha) en lotes controlados para evitar contención de recursos o bloqueos en la base de datos de producción. |
+| **3. Landing / RAW (Aterrizaje)** | MinIO / Ceph (Object Storage compatible S3) | Zona de almacenamiento inmutable (*Bronze Layer*) que recibe los datos crudos extraídos en formato Parquet comprimido con Snappy, garantizando desacoplamiento y persistencia temporal para auditorías. |
+| **4. Profiling (Perfilamiento)** | Python Profiler (Pandas/Polars) / Scripts SQL | Análisis exploratorio automatizado previo a la carga: distribución de frecuencias, conteo de nulos, detección de formatos atípicos y cardinalidad de llaves foráneas. |
+| **5. Pre-ingestion Data Quality** | Great Expectations / Validadores Schema | Control preventivo de calidad estructural: verificación de tipados, no nulidad de identificadores críticos y detección temprana de esquemas corruptos antes del modelado. |
+| **6. Mapping (Homologación)** | dbt Seeds / Tablas Maestras de Catálogo | Matriz de correspondencia corporativa que traduce catálogos locales y heterogéneos (códigos de ramo, monedas locales, planes, tipos de documento) a los estándares globales de OPTIMA. |
+| **7. Transformation (Transformación)** | dbt Core (Staging $\rightarrow$ Intermediate $\rightarrow$ Marts) | Procesamiento modular en SQL con control de versiones. Aplica limpieza de textos, normalización de vigencias, resolución de llaves subrogadas (`Surrogate Keys` con hash) y reglas de negocio. |
+| **7.1. Dead Letter Queue (DLQ)** | Tablas de Cuarentena (PostgreSQL / MinIO) | Aislamiento automático de registros que incumplen reglas de negocio o presentan referencias huérfanas, almacenando el payload crudo, el código de falla y la marca de tiempo para no abortar el pipeline. |
+| **8. Migration (Carga)** | Pipeline ELT Idempotente | Ejecución controlada de la carga en dos fases: carga masiva histórica en frío (*Bulk Load* hasta $T-1$) y sincronización incremental final (*Delta Sync*) durante la ventana de corte. |
+| **9. Destination (Destino)** | Lakehouse / Data Warehouse (Trino / ClickHouse / Snowflake) | Repositorio corporativo analítico y transaccional centralizado (*Gold Layer* en esquema `OPTIMA_LATAM`), estructurado para consultas masivas de alta velocidad y analítica transversal. |
+| **10. Reconciliation (Conciliación)** | Engine de Conciliación SQL / Scripts Python | Auditoría automatizada de paridad volumétrica (conteos totales), sumatorias de control financiero ($\sum \text{Premium}$) y paridad campo a campo mediante hashing (`SHA256`). |
+| **11. Reporting & Observability** | Apache Superset / Metabase + Prometheus / Grafana | Tablero ejecutivo en tiempo real para seguimiento del progreso del corte (*Go/No-Go*), monitoreo de throughput (registros/segundo) y métricas de registros desviados a la DLQ. |
