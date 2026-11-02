@@ -112,36 +112,53 @@ graph LR
 ```
 - **Punto 4: Diseño de Solución End-to-End para Migración Masiva (OPTIMA LATAM)**
 
+Solución de arquitectura para la incorporación masiva de un nuevo país a la plataforma corporativa OPTIMA LATAM, gestionando una volumetría estimada de **500,000 clientes, 2,000,000 de pólizas, 8,000,000 de ítems y 1,500,000 de endosos (~12 millones de registros en total)**.
+
+### 🏗️ 1. Diagrama de Arquitectura End-to-End
 
 ```mermaid
 flowchart TD
-    subgraph Origen [1. Source]
-        A[(Legacy DB / RDBMS)]
+    subgraph S1 [1. Source]
+        A[(Sistema Legado<br/>RDBMS / Archivos)]
     end
 
-    subgraph Extraccion_Landing [2. Extraction & 3. Landing]
-        B[Airflow / Data Pipelines] -->|Extracción particionada en Parquet| C[Cloud Object Storage Landing / RAW Bucket]
+    subgraph S2 [2. Extraction & 3. Landing - Azure]
+        B[Azure Data Factory<br/>Pipelines & SHIR]
+        C[(Azure Data Lake Storage Gen2<br/>Landing / Bronze Parquet)]
+        B -->|Extracción particionada| C
     end
 
-    subgraph Perfilamiento_Calidad [4. Profiling & 5. Data Quality]
-        C --> D[Snowflake RAW Stage]
-        D --> E[Snowflake / dbt-expectations Profiling & Pre-ingestion DQ]
+    subgraph S3 [4. Profiling & Ingesta Inicial]
+        D[(Snowflake External Stage<br/>Storage Integration)]
+        E[Snowflake RAW Tables]
+        C --> D
+        D -->|COPY INTO paralelizado| E
     end
 
-    subgraph Transformacion_Mapeo [6. Mapping & 7. Transformation]
-        E -->|Registros Válidos| F[dbt Transformation Pipeline Staging / Intermediate / Marts]
-        E -->|Registros Rechazados| G[(Dead Letter Queue / Quarantine)]
+    subgraph S4 [5. DQ, 6. Mapping & 7. Transformation]
+        F[dbt Core / Cloud<br/>Staging & Intermediate]
+        G{dbt-expectations<br/>Validaciones DQ}
+        H[(Snowflake Quarantine<br/>Dead Letter Queue)]
+        I[dbt Marts<br/>Homologación & Business Logic]
+        E --> F
+        F --> G
+        G -->|Registros Rechazados| H
+        G -->|Registros Válidos| I
     end
 
-    subgraph Carga_Destino [8. Migration & 9. Destination]
-        F -->|Carga Idempotente MERGE| H[(OPTIMA LATAM Data Warehouse)]
+    subgraph S5 [8. Migration & 9. Destination]
+        J[(OPTIMA LATAM<br/>Snowflake Gold Layer)]
+        I -->|Carga Idempotente MERGE| J
     end
 
-    subgraph Validacion_Reporte [10. Reconciliation & 11. Reporting]
-        H --> I[Reconciliation Framework Volumetría, Hashes & Sum Premium]
-        G --> J[Observability & Incident Management]
-        I --> K[Executive Dashboard Power BI / Streamlit]
+    subgraph S6 [10. Reconciliation & 11. Reporting]
+        K[Snowflake Engine<br/>Auditoría SQL & Hashes]
+        L[Azure Monitor & Log Analytics]
+        M[Power BI Dashboard<br/>Certificación de Corte & Avance]
         J --> K
+        H --> L
+        K --> M
+        L --> M
     end
 
     A --> B
