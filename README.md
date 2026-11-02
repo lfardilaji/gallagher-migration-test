@@ -112,7 +112,6 @@ graph LR
 ```
 - **Punto 4: Diseño de Solución End-to-End para Migración Masiva (OPTIMA LATAM)**
 
-- **Punto 4: Diseño de Solución End-to-End para Migración Masiva (OPTIMA LATAM)**
 
 ```mermaid
 flowchart TD
