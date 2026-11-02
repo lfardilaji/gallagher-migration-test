@@ -62,7 +62,7 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
       │   └── int_latam_policies_unioned.sql
       └── marts/
           └── fact_policy.sql
-
+```
 ### 💻 3. Implementación de Modelos Clave (Código Fuente)
 
   Para la evaluación de esta arquitectura, se muestra el código fuente de los modelos adjuntos en este repositorio haciendo clic en los siguientes enlaces:
