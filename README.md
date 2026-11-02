@@ -211,7 +211,7 @@ Solución de arquitectura para incorporar un nuevo país a la plataforma transac
 
 ### 🏗️ 1. Diagrama de Arquitectura End-to-End
 
-(`arquitectura_migracion_optima.png`)](Pregunta4/arquitectura_migracion_optima.png)
+![Arquitectura Migración OPTIMA](Pregunta4/arquitectura_migracion_optima.png)
 
 
 ### 📋 2. Descripción de Componentes y Funciones del Pipeline
