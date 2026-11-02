@@ -76,3 +76,37 @@ Este repositorio contiene la solución para la prueba técnica de ingeniería de
   1. **Modularidad y Reutilización:** Aislar las fuentes por país en la capa de *staging* permite absorber cambios en los sistemas locales (ej. si Perú cambia el formato de fecha) sin alterar los modelos intermedios ni los reportes finales.
   2. **Estandarización Temprana:** La limpieza de nulos (`COALESCE`), el casteo de tipos y la normalización de textos se ejecutan al inicio, garantizando que el consumo analítico sea consistente en las capas superiores.
   3. **Escalabilidad Geográfica:** Incorporar un nuevo país a la plataforma OneSource solo requiere la creación de un nuevo script `stg_<pais>_policies.sql` y su incorporación en el `UNION ALL` del modelo intermedio, manteniendo intacta la lógica de negocio de la tabla final (`fact_policy.sql`).
+
+
+### 📊 Diagrama de Arquitectura (Lineage dbt)
+
+```mermaid
+graph LR
+    subgraph Fuentes_RAW [Snowflake RAW Schemas]
+        A[RAW_PERU.POLICIES]
+        B[RAW_CHILE.POLICIES]
+        C[RAW_COLOMBIA.POLICIES]
+    end
+
+    subgraph Staging_Layer [Capa Staging]
+        D[stg_peru_policies]
+        E[stg_chile_policies]
+        F[stg_colombia_policies]
+    end
+
+    subgraph Intermediate_Layer [Capa Intermediate]
+        G[int_latam_policies_unioned]
+    end
+
+    subgraph Marts_Layer [Capa Marts / Analytics]
+        H[(ANALYTICS.FACT_POLICY)]
+    end
+
+    A --> D
+    B --> E
+    C --> F
+    D --> G
+    E --> G
+    F --> G
+    G --> H
+```
