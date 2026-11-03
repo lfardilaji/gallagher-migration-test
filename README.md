@@ -138,7 +138,7 @@ La auditoría financiera global compara la suma de primas entre el sistema de or
   * **USD:** Cuadre perfecto con **$175,759.89** tanto en origen como en destino ($\text{Diferencia} = \$0.00$), garantizando que la cartera en dólares migró sin alteraciones.
   * **PEN:** Presenta un total de **$102,540.13** en origen frente a **$88,985.98** en destino, arrojando una varianza contable neta de **$13,554.15** en Soles peruanos.
 
-### 🔗 2.8 Validación de Integridad Referencial en Snowflake (Pólizas Huérfanas)
+2.8 Validación de Integridad Referencial en Snowflake (Pólizas Huérfanas)
 
 Para garantizar la consistencia relacional, se implementó un control de integridad bidireccional (`legacy_policies` y `target_policies`) detectando pólizas que referencian a un titular inexistente en el maestro de cuentas (`accounts`).
 
@@ -149,8 +149,8 @@ Para garantizar la consistencia relacional, se implementó un control de integri
 - En origen (`legacy_policies`), la póliza `POL-000008` tenía un cliente válido.
 - En destino (`target_policies`), se identifica la póliza `POL-000008` asociada al `client_id` `e88f1410-f52f-47fb-96bb-41751a1f5cd1`, el cual **no existe** en la tabla `accounts`.
 - **Causa Raíz:** El error de integridad se debe a que el UUID del cliente sufrió una mutación durante el proceso de migración (cambió de `e88f6b10...` en origen a `e88f1410...` en destino). Este hallazgo SQL confirma la anomalía detectada por la regla `Orphan_Policy` del framework en Python.
- 
-### 👥 2.9 Clientes que posean más de una póliza
+
+2.9 Clientes que posean más de una póliza
 Se implementó el conteo mediante `COUNT(DISTINCT policy_id)` agrupado por `client_id` para validar la correcta migración de carteras de clientes múltiples, asegurando que ningún cliente perdiera pólizas asociadas en el entorno destino.
 ---
 
