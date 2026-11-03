@@ -1,3 +1,6 @@
-*.zip
-*.docx
-venv/
+# dbt
+Pregunta3/target/
+Pregunta3/logs/
+Pregunta3/dbt_packages/
+Pregunta3/.user.yml
+Pregunta3/profiles.yml
