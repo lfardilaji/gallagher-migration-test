@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: fact_policy
+    description: "Tabla de hechos corporativa consolidada (OneSource). Contiene una fila por póliza y país."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: policy_sk
+        data_type: varchar
+        description: "Llave subrogada única generada a partir del país y la clave de póliza."
+        tests:
+          - unique
+          - not_null
+
+      - name: policy_id
+        data_type: varchar
+        description: "Identificador original de la póliza en el sistema regional."
+
+      - name: client_id
+        data_type: varchar
+        description: "Identificador único del cliente asociado a la póliza."
+
+      - name: policy_number
+        data_type: varchar
+        description: "Número comercial o legible de la póliza."
+
+      - name: country_code
+        data_type: varchar
+        description: "Código ISO de 2 letras del país de origen (CO, PE, CL)."
+
+      - name: premium
+        data_type: number
+        description: "Monto de la prima de la póliza."
+
+      - name: currency
+        data_type: varchar
+        description: "Moneda de transacción (USD, PEN, etc.)."
+        tests:
+          - accepted_values:
+              values: ['USD', 'PEN', 'CLP', 'COP']
+
+      - name: start_date
+        data_type: date
+        description: "Fecha de inicio de vigencia de la póliza."
+
+      - name: end_date
+        data_type: date
+        description: "Fecha de fin de vigencia de la póliza."
+
+      - name: policy_status
+        data_type: varchar
+        description: "Estado operativo actual de la póliza."
+        tests:
+          - accepted_values:
+              values: ['active', 'inactive', 'cancelled', 'ACTIVE', 'INACTIVE', 'CANCELLED']
+
+      - name: dbt_updated_at
+        data_type: timestamp_ntz
+        description: "Marca de tiempo de la última actualización ejecutada por dbt."
