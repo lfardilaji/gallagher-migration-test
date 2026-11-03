@@ -225,3 +225,60 @@ Pregunta3/
 ├── fact_policy.sql
 ├── int_latam_policies_unioned.sql
 └── stg_colombia_policies.sql
+```
+## 🏗️ Punto 4: Arquitectura End-to-End para la Incorporación de un Nuevo País (OPTIMA LATAM)
+
+### 📊 1. Diagrama de Arquitectura de Alto Nivel
+
+![Arquitectura de Migración](arquitectura_migracion_optima.jpeg)
+
+---
+
+### 🏛️ 2. Descripción de Componentes y Stack Tecnológico (*Open Source & Agnóstico*)
+
+Para blindar el proyecto frente a cualquier restricción de licencias y garantizar portabilidad total (*Cero Vendor Lock-In*), se propone un stack agnóstico desplegable tanto en la nube (AWS/Azure) como en infraestructura local (Docker/Kubernetes):
+
+| Componente | Rol / Función en la Solución | Tecnología Seleccionada |
+| :--- | :--- | :--- |
+| **1. Origen (Source)** | Sistemas legados transaccionales del nuevo país (RDBMS). Volúmenes esperados: **500k clientes**, **2M pólizas**, **8M ítems** y **1.5M endosos**[cite: 6]. | PostgreSQL / Oracle / MySQL / SQL Server |
+| **2. Extracción** | Orquestación de pipelines y extracción por lotes particionados por rangos de ID o fecha. | Apache Airflow + Python |
+| **3. Landing / RAW (Bronze)** | Capa de almacenamiento inmutable en crudo para asegurar trazabilidad. | MinIO / Ceph S3 (Formato Parquet Snappy) |
+| **4. Profiling** | Análisis automatizado de calidad estructural y de dominio (nulos, formatos, cardinalidad). | Python (Pandas / Polars) |
+| **5. Data Quality** | Validación declarativa de reglas de negocio y restricciones relacionales antes de transformar. | Great Expectations |
+| **6. Mapping** | Homologación de catálogos, monedas, estados y ramos de seguros. | dbt Seeds / Tablas de Referencia |
+| **7. Transformación** | Modelado modular en capas (Staging $\rightarrow$ Intermediate $\rightarrow$ Marts) con generación de llaves subrogadas (*Surrogate Keys*). | dbt Core |
+| **8. Migración (Sink)** | Carga idempotente hacia el destino aplicando operaciones `MERGE INTO` y sincronización delta. | Pipeline ELT / dbt |
+| **9. Destino (Destination)** | Repositorio analítico final corporativo de OPTIMA LATAM[cite: 6]. | Lakehouse / DWH (Trino / ClickHouse / Snowflake) |
+| **10. Conciliación** | Motor de verificación cruzada (Origen vs. Destino + DLQ) con validación de sumas de primas y hashes SHA-256. | Motor SQL / Python |
+| **11. Reporting & Observability** | Cuadros de mando operativos, métricas de avance y certificación formal de pase a producción (*Go/No-Go*). | Apache Superset / Metabase + Prometheus / Grafana |
+
+---
+
+### ⚙️ 3. Estrategias Técnicas Clave
+
+#### A. Procesamiento de Grandes Volúmenes de Datos (Casca Relacional)
+* **Procesamiento por Lotes y Particionado:** Dada la alta cantidad de registros (**8M de ítems**), la extracción y transformación se ejecutan respetando estrictamente la cascada relacional: primero `Clientes` (500k) $\rightarrow$ luego `Pólizas` (2M) $\rightarrow$ después `Ítems` (8M) $\rightarrow$ y finalmente `Endosos` (1.5M). Esto evita desalineaciones de llaves foráneas.
+* **Optimización en MinIO / Parquet:** El almacenamiento en formato columnar **Parquet** con compresión `Snappy` reduce el tamaño físico de los archivos (estimado en ~12 GB totales)[cite: 7], permitiendo lecturas ultrarrápidas mediante motores distribuidos o scripts optimizados en Python/Polars.
+
+#### B. Control de Calidad de Datos (Data Quality)
+* **Validación en Dos Fases:** 
+  1. *Profiling inicial* con Python para detectar anomalías de tipos y nulos en la capa RAW[cite: 7].
+  2. *Validación estricta* con **Great Expectations** antes de la migración para asegurar la integridad referencial[cite: 7].
+
+#### C. Gestión de Errores y Reprocesamiento (DLQ / Cuarentena)
+* **Manejo de Registros Huérfanos:** Los registros que no cumplan con las reglas de validación o no tengan un cliente padre asociado no se descartan silenciosamente; son desviados automáticamente a una **Dead Letter Queue (DLQ)** almacenada en PostgreSQL/MinIO[cite: 7].
+* **Reprocesamiento Idempotente:** La DLQ guarda el payload crudo en formato JSON junto con el código de error y el timestamp. Una vez corregidos los datos en origen, se dispara un re-proceso idempotente aplicando la estrategia `MERGE INTO`[cite: 7].
+
+#### D. Migración Incremental y por Lotes
+* **Estrategia en 3 Fases:**
+  1. **Carga Histórica Fría (T-1):** Migración masiva inicial de todo el stock histórico en ventana de mantenimiento.
+  2. **Carga Incremental (Delta Sync):** Captura de cambios posteriores mediante marcas de tiempo (`_loaded_at` / `updated_at`).
+  3. **Corte Go-Live (Read-Only):** Sincronización final delta y paso a modo operativo oficial[cite: 7].
+
+#### E. Conciliación entre Origen y Destino
+* **Cruce Automatizado:** Se ejecuta una consulta de conciliación que compara conteos absolutos de registros, cruces por ID y funciones de resumen (`SUM(Premium)`) utilizando firmas hash (SHA-256) para garantizar que ni un solo centavo ni póliza se pierda en el tránsito[cite: 7].
+* **Estados de Salida:** El reporte final entrega una matriz estandarizada (`OK`, `ERROR`, `MISSING_TARGET`) idéntica a la solicitada en los requerimientos del negocio[cite: 6].
+
+#### F. Seguridad y Gobierno
+* **Protección PII:** Enmascaramiento y cumplimiento normativo de datos sensibles de clientes alineado con las leyes de privacidad de la región (Perú Ley 29733, Colombia Ley 1581, Chile Ley 19.628)[cite: 7].
+* **Linaje y Trazabilidad:** Documentación automática del flujo de datos mediante *dbt docs* y control total de versiones en Git[cite: 7].
