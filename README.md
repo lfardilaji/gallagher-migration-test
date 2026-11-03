@@ -112,6 +112,7 @@ Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target
 
 2.1. **Conteo Volumétrico (Comparativa de registros totales):**
 ![1](Pregunta2/1.png)
+![1](Pregunta2/1.png)
 
 2.2. **Control de Nulos en Origen y Destino:**
 ![Control de Nulos](Pregunta2/Nulos_source_dest.png)
