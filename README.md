@@ -198,3 +198,12 @@ graph LR
     E --> G
     F --> G
     G --> H
+
+## 🏛️ 2. Arquitectura en Capas y Responsabilidades
+
+| Capa | Materialización | Responsabilidad Técnica |
+| :--- | :---: | :--- |
+| **Sources (`_sources.yml`)** | Tablas RAW | Declaración modular por esquema (`raw_peru`, `raw_chile`, `raw_colombia`) con monitoreo de frescura (*freshness*) y control de carga (`_loaded_at`). |
+| **Staging (`models/staging/`)** | Vistas (`view`) | Estandarización de tipos (`try_to_date`), conversión de texto a mayúsculas/minúsculas, mapeo de `policy_id` a `policy_key`, inyección del código de país (`country_code`) y manejo seguro de nulos (`coalesce(premium, 0)`). Utilizan la referencia `source('raw_<pais>', 'policies')`. |
+| **Intermediate (`models/intermediate/`)** | Efímero (`ephemeral`) | Unificación estructural (`UNION ALL`) de los tres países mediante el modelo [`int_latam_policies_unioned.sql`](Pregunta3/int_latam_policies_unioned.sql). |
+| **Marts (`models/marts/`)** | Tabla (`table`) | Construcción de [`fact_policy.sql`](Pregunta3/fact_policy.sql) generando llaves subrogadas mediante `dbt_utils.generate_surrogate_key` a partir de `country_code` y `policy_key`. |
