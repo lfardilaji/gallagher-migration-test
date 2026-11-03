@@ -188,13 +188,13 @@ graph LR
     end
 
     subgraph Marts_Layer [Capa Marts / Analytics]
-        S[(Seed: fx_rates_to_usd)]
         H[(ANALYTICS.FACT_POLICY)]
     end
 
-    A --> D --> G
-    B --> E --> G
-    C --> F --> G
+    A --> D
+    B --> E
+    C --> F
+    D --> G
+    E --> G
+    F --> G
     G --> H
-    S --> H
-- Resto de hallazgos históricos en accounts / legacy / target | Múltiples registros detectados por perfilamiento | Severidad: CRITICAL / WARNING | Acción: Aplicar limpieza en origen y unificación de duplicados.
