@@ -156,6 +156,5 @@ GROUP BY currency;
 
 SELECT 'target' AS source, t.policy_id, t.client_id
 FROM GALLAGHER.PUBLIC.target_policies t
-LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id =
-t.client_id
+LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id =t.client_id
 WHERE a.client_id IS NULL;
