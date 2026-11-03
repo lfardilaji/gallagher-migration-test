@@ -69,16 +69,18 @@ La ejecución validada del framework sobre los datasets reporta el siguiente con
 
 | Anomalía / Regla Detectada | Dataset | Dimensión | Severidad | Registros Afectados / Hallazgo | Acción Recomendada |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Correos Inválidos / Placeholder (`Malformed_Email`)** | `accounts` | Validez | `WARNING` | `100` registros | Migrar como `NULL` con bandera de calidad. |
+| **Correos Inválidos / Placeholder (`Malformed_Email`)** | `accounts` | Validez | `WARNING` | `3` registros | Migrar como `NULL` con bandera de calidad. |
 | **Inconsistencia País vs. Documento (`Country_Document_Mismatch`)** | `accounts` | Consistencia | `WARNING` | `98` registros | Homologar catálogo de tipos de documento con negocio. |
 | **Teléfono Centinela (`Sentinel_Phone`)** | `accounts` | Validez | `WARNING` | `51` registros (`7010001`) | Migrar como `NULL` con bandera de calidad. |
-| **Pólizas con Inicio Futuro (`Future_Start_Date`)** | `target_policies` | Validez | `WARNING` | `11` registros | Validar definición de estado `ACTIVE` vs. `PENDING`. |
+| **Pólizas con Inicio Futuro (`Future_Start_Date`)** | `target_policies` | Validez | `WARNING` | `25` registros | Validar definición de estado `ACTIVE` vs. `PENDING`. |
 | **Titulares Menores de Edad (`Underage_At_Creation`)** | `accounts` | Validez | `WARNING` | `5` registros | Validar reglas de suscripción de la cuenta. |
 | **Documentos con Longitud Anómala (`Invalid_Document_Length`)** | `accounts` | Validez | `CRITICAL` | `3` registros (5, 6 u 11 dígitos) | Corregir en origen antes de migrar. |
 | **Pólizas Activas en Clientes Inactivos (`Active_Policy_Inactive_Client`)** | `target_policies` | Consistencia | `WARNING` | `3` registros (`POL-000010`, `034`, `049`) | Revisar estado del cliente o vigencia. |
 | **Clientes Duplicados por Documento (`Duplicate_Document`)** | `accounts` | Unicidad | `CRITICAL` | `2` registros (ej. Miguel Vargas) | Unificar aplicando regla de supervivencia. |
 | **Fechas de Nacimiento Imposibles (`Invalid_Birthdate_Range`)** | `accounts` | Validez | `CRITICAL` | `2` registros (años 1880 y 1893) | Corregir en origen. |
 | **Póliza Huérfana (`Orphan_Policy`)** | `target_policies` | Integridad Referencial | `CRITICAL` | `1` registro (`POL-000008`) | Bloquear carga y corregir referencia del `client_id`. |
+| **Correos Duplicados (`Duplicate_Email`)** | `accounts` | Unicidad | `WARNING` | `8` registros | Unificar o limpiar cuentas duplicadas por correo. |
+| **Vigencia de Póliza Anterior a Creación (`Policy_Before_Client_Creation`)** | `target_policies` | Consistencia | `WARNING` | `1` registro (`POL-000037`) | Revisar fechas de creación y vigencia histórica. |
 
 
 
