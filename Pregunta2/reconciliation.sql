@@ -116,17 +116,25 @@ WITH comparison AS (
                  AND l.status IS NOT DISTINCT FROM t.status THEN 'OK'
             ELSE 'ERROR'
         END AS validation_status,
-        -- Identificación dinámica de campos discrepantes
-        TRIM(
-            CONCAT(
-                IFF(l.client_id IS DISTINCT FROM t.client_id, 'client_id, ', ''),
-                IFF(l.policy_number IS DISTINCT FROM t.policy_number, 'policy_number, ', ''),
-                IFF(l.premium IS DISTINCT FROM t.premium, 'premium, ', ''),
-                IFF(l.currency IS DISTINCT FROM t.currency, 'currency, ', ''),
-                IFF(l.start_date IS DISTINCT FROM t.start_date, 'start_date, ', ''),
-                IFF(l.end_date IS DISTINCT FROM t.end_date, 'end_date, ', ''),
-                IFF(l.status IS DISTINCT FROM t.status, 'status, ', '')
-            ), ', '
+        -- Identificación dinámica de campos discrepantes blindada
+        IFF(
+            t.policy_id IS NULL, 
+            NULL, 
+            NULLIF(
+                TRIM(
+                    CONCAT(
+                        IFF(l.client_id IS DISTINCT FROM t.client_id, 'client_id, ', ''),
+                        IFF(l.policy_number IS DISTINCT FROM t.policy_number, 'policy_number, ', ''),
+                        IFF(l.premium IS DISTINCT FROM t.premium, 'premium, ', ''),
+                        IFF(l.currency IS DISTINCT FROM t.currency, 'currency, ', ''),
+                        IFF(l.start_date IS DISTINCT FROM t.start_date, 'start_date, ', ''),
+                        IFF(l.end_date IS DISTINCT FROM t.end_date, 'end_date, ', ''),
+                        IFF(l.status IS DISTINCT FROM t.status, 'status, ', '')
+                    ), 
+                    ', '
+                ), 
+                ''
+            )
         ) AS fields_with_differences
     FROM GALLAGHER.PUBLIC.legacy_policies l
     LEFT JOIN GALLAGHER.PUBLIC.target_policies t ON l.policy_id = t.policy_id

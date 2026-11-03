@@ -39,7 +39,7 @@ POL-000037,ERROR,start_date
 POL-000038,ERROR,"start_date, end_date"
 POL-000039,OK,
 POL-000040,OK,
-POL-000041,MISSING_TARGET,"client_id, policy_number, premium, currency, start_date, end_date, status"
+POL-000041,MISSING_TARGET,
 POL-000042,OK,
 POL-000043,OK,
 POL-000044,OK,
