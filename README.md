@@ -148,11 +148,11 @@ Para garantizar la consistencia relacional, se implementó un control de integri
 **Hallazgo Detectado y Causa Raíz:**
 - En origen (`legacy_policies`), la póliza `POL-000008` tenía un cliente válido.
 - En destino (`target_policies`), se identifica la póliza `POL-000008` asociada al `client_id` `e88f1410-f52f-47fb-96bb-41751a1f5cd1`, el cual **no existe** en la tabla `accounts`.
-- **Causa Raíz:** El error de integridad se debe a que el UUID del cliente sufrió una mutación durante el proceso de migración (cambió de `e88f6b10...` en origen a `e88f1410...` en destino). Este hallazgo SQL confirma la anomalía detectada por la regla `Orphan_Policy` del framework en Python.\
+- **Causa Raíz:** El error de integridad se debe a que el UUID del cliente sufrió una mutación durante el proceso de migración (cambió de `e88f6b10...` en origen a `e88f1410...` en destino). Este hallazgo SQL confirma la anomalía detectada por la regla `Orphan_Policy` del framework en Python.
 
-2.9  Clientes que posean más de una póliza: 
+### 👥 2.9 Clientes que posean más de una póliza
 
-Se implementó el conteo mediante `COUNT(DISTINCT policy_id)` agrupado por `client_id` para validar la correcta migración de carteras de clientes múltiples, asegurando que ningún cliente perdiera pólizas asociadas en el entorno destino.
+Se implementó el conteo mediante `COUNT(DISTINCT policy_id)` agrupado por `client_id` para validar la correcta migración de carteras de clientes múltiples, asegurando que ningún cliente perdiera pólizas asociadas en el entorno destino.|
 ---
 
 ### 💡 Conclusiones de Negocio a Partir de los Resultados
