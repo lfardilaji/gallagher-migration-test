@@ -199,6 +199,7 @@ graph LR
     F --> G
     G --> H
 
+```
 ## 🏛️ 2. Arquitectura en Capas y Responsabilidades
 
 | Capa | Materialización | Responsabilidad Técnica |
