@@ -85,29 +85,25 @@ La ejecución validada del framework sobre los datasets reporta el siguiente con
 
 ## 🔍 Punto 2: Validación y Conciliación de Datos (Snowflake)
 
-- **Implementación:** Carga de datos en Snowflake estandarizando formatos de fecha (`DD/MM/YYYY`) y tipado numérico exacto (`NUMBER(18,2)` para primas).
-- **Script de Auditoría:** [`reconciliation.sql`](Pregunta2/reconciliation.sql) diseñado para auditar paridad volumétrica, financiera, integridad referencial y consistencia campo a campo.
+- **Script de Auditoría:** [`reconciliation.sql`](Pregunta2/reconciliation.sql) diseñado específicamente para auditar paridad volumétrica, conciliación financiera y consistencia de atributos campo a campo mediante operaciones relacionales.
 
 ### Resumen Ejecutivo de la Conciliación
-Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target`)**, con el siguiente balance de control:
+Se evaluaron **50 pólizas en origen (`legacy_policies`)** frente a **49 en destino (`target_policies`)**, obteniendo el siguiente balance de control:
 
 | Control de Auditoría | Resultado Obtenido |
 | :--- | :--- |
 | **Registros Origen vs. Destino** | `50` / `49` (38 `OK`, 11 `ERROR`, 1 `MISSING_TARGET`) |
 | **Pólizas no migradas (`MISSING_TARGET`)** | `POL-000041` |
-| **Registros fantasma solo en destino (`MISSING_SOURCE`)** | Ninguno (`0`) |
 | **Pólizas con discrepancias de atributos (`ERROR`)** | `POL-000008` (`client_id`), `POL-000030` a `037` (`start_date`), `POL-000038` (`start_date`, `end_date`), `POL-000047` (`premium`) |
-| **Duplicados de pólizas (`policy_id`, `policy_number`, fila)** | Ninguno en origen ni en destino (`0`) |
-| **Clientes duplicados por documento** | RUT `966030828` (Miguel Vargas) con 2 `client_id` |
-| **Clientes con múltiples pólizas en el origen** | `12` clientes (detalle en [`duplicados_src.csv`](Pregunta2/duplicados_src.csv)) |
+| **Duplicados de Pólizas en Origen/Destino** | Sin duplicados por `policy_id` (`0`) |
 | **Suma de Primas (Origen vs. Destino)** | `$278,300.02` vs. `$264,745.87` |
 | **Varianza Financiera Total** | `-$13,554.15` $\rightarrow$ explicada exactamente por `POL-000041` (`$7,215.12` no migrada) + `POL-000047` (`$6,339.03` de diferencia en prima) |
-| **Pólizas huérfanas (sin cliente en `accounts`)** | `POL-000008` en destino |
 
 ### Decisiones Técnicas en SQL
 - **Comparación segura de atributos (`IS NOT DISTINCT FROM`):** Se utiliza este operador nativo de Snowflake para evaluar la igualdad campo a campo, asegurando que un valor `NULL` en ambos lados se trate correctamente como coincidencia (`OK`), mientras que cualquier asimetría dispare una discrepancia (`ERROR`).
-- **Auditoría modular y simétrica:** Se emplea una combinación de `LEFT JOIN` (para aislar registros faltantes en destino como `MISSING_TARGET`) y consultas de exclusión cruzada (para detectar excesos no autorizados como `EXTRA_IN_TARGET`), garantizando un control volumétrico y de integridad estricto.
-- **Deduplicación y trazabilidad de diferencias (`CONCAT` / `IFF`):** Construcción de dinámicas de campos disímiles (`fields_with_differences`) para identificar exactamente qué atributo a nivel de columna (ej. `premium`, `client_id`, `start_date`) causó la variación financiera o de negocio.
+- **Auditoría basada en LEFT JOIN:** Se emplea una estructura de `LEFT JOIN` desde el origen hacia el destino para aislar de forma determinista los registros no migrados (`MISSING_TARGET`).
+- **Deduplicación y trazabilidad de diferencias (`CONCAT` / `IFF`):** Construcción dinámica de la columna `fields_with_differences` para identificar exactamente qué atributo a nivel de columna causó la variación, blindando el resultado para omitir campos en los registros faltantes.
+
 ### 📸 Evidencias Gráficas y Archivos de Ejecución
 
 2.1. **Conteo Volumétrico (Comparativa de registros totales):**
@@ -119,26 +115,23 @@ Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target
 2.3. **Registros Faltantes / Sin Migrar (`legacy` vs. `target`):**
 ![Sin Migrar](Pregunta2/missing.png)
 
-2.4. **Control de Pólizas en Destino Inexistentes en Origen (`MISSING_SOURCE`):**
+2.4. **Control de Pólizas en Destino Inexistentes en Origen:**
 ![Basura en Destino](Pregunta2/no_go.png)
 
 2.5. **Detección de Duplicados en Origen y Destino:**
 ![Duplicados](Pregunta2/dupli.png)
 
-2.6. **Clientes con más de una póliza en el origen:**
-- Exportación de clientes con múltiples pólizas activas/históricas en el sistema legado: [`duplicados_src.csv`](Pregunta2/duplicados_src.csv).
-
-2.7. **Auditoría Detallada Campo por Campo:**
+2.6. **Auditoría Detallada Campo por Campo:**
 - Validación a nivel de atributo (`premium`, `currency`, `start_date`, `end_date`, `status`) clasificada por estado (`OK` / `ERROR`): [`Auditoria.csv`](Pregunta2/Auditoria.csv).
 
-2.8. 💵 Conciliación Financiera por Moneda y Análisis de Varianza
+2.7. 💵 Conciliación Financiera por Moneda y Análisis de Varianza
 
 La auditoría financiera global compara la suma de primas entre el sistema de origen (`legacy_policies`) y el destino (`target_policies`), segmentada por moneda para garantizar trazabilidad contable al centavo.
 
 **Evidencia de Ejecución (Snowflake):**
 ![Financiera](Pregunta2/financiera.png)
 
-* **Resumen de Cuadre Financiero:**
+- **Resumen de Cuadre Financiero:**
   * **USD:** Cuadre perfecto con **$175,759.89** tanto en origen como en destino ($\text{Diferencia} = \$0.00$), garantizando que la cartera en dólares migró sin alteraciones.
   * **PEN:** Presenta un total de **$102,540.13** en origen frente a **$88,985.98** en destino, arrojando una varianza contable neta de **$13,554.15** en Soles peruanos.
 
@@ -153,10 +146,10 @@ La auditoría financiera global compara la suma de primas entre el sistema de or
    * *Suma de control:* $\$7,215.12 + \$6,339.03 = \mathbf{\$13,554.15}$. Este nivel de precisión es el requisito indispensable exigido por el área de Finanzas para firmar el acta de aceptación (*Go-Live*).
 
 2. **Mitigación de Riesgos de Suscripción por Datos Incompletos:**
-   La existencia de la póliza no migrada (`POL-000041`) y el registro huérfano detectado (`POL-000008`, que apunta a un `client_id` inexistente en `accounts`) evidencian la necesidad imperativa de ejecutar barreras de validación relacional antes de abrir los canales transaccionales a los usuarios de negocio en OPTIMA LATAM.
+   La existencia de la póliza no migrada (`POL-000041`) evidencia la necesidad imperativa de ejecutar barreras de validación relacional antes de abrir los canales transaccionales a los usuarios de negocio en OPTIMA LATAM.
 
 3. **Estrategia de Saneamiento y Cierre de Brechas (*Data Remediation*):**
-   * **Acción Inmediata 1:** Inyectar manualmente la póliza rezagada `POL-000041` junto con su cliente asociado en el entorno de destino.
+   * **Acción Inmediata 1:** Inyectar manualmente la póliza rezagada `POL-000041` en el entorno de destino.
    * **Acción Inmediata 2:** Corregir el monto de la prima de la póliza `POL-000047` para nivelar la contabilidad en Soles (`PEN`).
    * **Criterio de Aceptación Final:** Una vez ejecutadas estas dos correcciones, la varianza financiera será exactamente **$0.00**, permitiendo al comité técnico firmar el certificado de salida a producción sin reparos de auditoría.
 
