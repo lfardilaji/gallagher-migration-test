@@ -136,6 +136,7 @@ La auditoría financiera global compara la suma de primas entre el sistema de or
 - **Resumen de Cuadre Financiero:**
   * **USD:** Cuadre perfecto con **$175,759.89** tanto en origen como en destino ($\text{Diferencia} = \$0.00$), garantizando que la cartera en dólares migró sin alteraciones.
   * **PEN:** Presenta un total de **$102,540.13** en origen frente a **$88,985.98** en destino, arrojando una varianza contable neta de **$13,554.15** en Soles peruanos.
+
 2.8. 🔗 Validación de Integridad Referencial en Snowflake (Pólizas Huérfanas)
 
 Para garantizar la consistencia relacional entre tablas en el entorno de destino, se implementó un control de integridad para detectar pólizas que referencian a un titular inexistente en el maestro de cuentas (`accounts`).
