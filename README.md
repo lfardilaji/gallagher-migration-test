@@ -101,10 +101,11 @@ Se evaluaron **50 pólizas en origen (`legacy_policies`)** frente a **49 en dest
 | **Suma de Primas (Origen vs. Destino)** | `$278,300.02` vs. `$264,745.87` |
 | **Varianza Financiera Total** | `-$13,554.15` $\rightarrow$ explicada exactamente por `POL-000041` (`$7,215.12` no migrada) + `POL-000047` (`$6,339.03` de diferencia en prima) |
 
-### Decisiones Técnicas en SQL
-- **Comparación segura de atributos (`IS NOT DISTINCT FROM`):** Se utiliza este operador nativo de Snowflake para evaluar la igualdad campo a campo, asegurando que un valor `NULL` en ambos lados se trate correctamente como coincidencia (`OK`), mientras que cualquier asimetría dispare una discrepancia (`ERROR`).
-- **Auditoría basada en LEFT JOIN:** Se emplea una estructura de `LEFT JOIN` desde el origen hacia el destino para aislar de forma determinista los registros no migrados (`MISSING_TARGET`).
+## Decisiones Técnicas en SQL
+- **Comparación segura de atributos (`IS NOT DISTINCT FROM`):** Se utiliza este operador nativo de Snowflake para evaluar la igualdad campo a campo, asegurando que un valor NULL en ambos lados se trate correctamente como coincidencia (`OK`), mientras que cualquier asimetría dispare una discrepancia (`ERROR`).
+- **Auditoría basada en `FULL OUTER JOIN`:** Se reemplazó la estructura de `LEFT JOIN` por un `FULL OUTER JOIN` para integrar en un solo resultado final tanto los registros rezagados en origen (`MISSING_TARGET`) como aquellos inyectados en destino sin procedencia válida (`MISSING_SOURCE`).
 - **Deduplicación y trazabilidad de diferencias (`CONCAT` / `IFF`):** Construcción dinámica de la columna `fields_with_differences` para identificar exactamente qué atributo a nivel de columna causó la variación, blindando el resultado para omitir campos en los registros faltantes.
+- **Seguridad y Permisos:** Todas las consultas y capturas de evidencia se ejecutaron utilizando un rol de servicio estándar (ej. `SYSADMIN`), evitando deliberadamente el uso de `ACCOUNTADMIN` para cumplir con el principio de menor privilegio en entornos productivos.
 
 ### 📸 Evidencias Gráficas y Archivos de Ejecución
 
@@ -137,16 +138,20 @@ La auditoría financiera global compara la suma de primas entre el sistema de or
   * **USD:** Cuadre perfecto con **$175,759.89** tanto en origen como en destino ($\text{Diferencia} = \$0.00$), garantizando que la cartera en dólares migró sin alteraciones.
   * **PEN:** Presenta un total de **$102,540.13** en origen frente a **$88,985.98** en destino, arrojando una varianza contable neta de **$13,554.15** en Soles peruanos.
 
-2.8. 🔗 Validación de Integridad Referencial en Snowflake (Pólizas Huérfanas)
+### 🔗 2.8 Validación de Integridad Referencial en Snowflake (Pólizas Huérfanas)
 
-Para garantizar la consistencia relacional entre tablas en el entorno de destino, se implementó un control de integridad para detectar pólizas que referencian a un titular inexistente en el maestro de cuentas (`accounts`).
+Para garantizar la consistencia relacional, se implementó un control de integridad bidireccional (`legacy_policies` y `target_policies`) detectando pólizas que referencian a un titular inexistente en el maestro de cuentas (`accounts`).
 
 **Evidencia de Ejecución (Snowflake):**
 ![Póliza Sin Cliente](Pregunta2/sin_cliente.png)
 
-- **Hallazgo Detectado:** 
-  * Se identifica la póliza **`POL-000008`** en `target_policies` asociada al `client_id` `e88f1410-f52f-47fb-96bb-41751a1f5cd1`, el cual **no existe** en la tabla `accounts`.
-  * Este resultado corrobora a nivel de base de datos relacional la misma anomalía de integridad referencial detectada de forma cruzada por el framework de calidad en Python.
+**Hallazgo Detectado y Causa Raíz:**
+- En origen (`legacy_policies`), la póliza `POL-000008` tenía un cliente válido.
+- En destino (`target_policies`), se identifica la póliza `POL-000008` asociada al `client_id` `e88f1410-f52f-47fb-96bb-41751a1f5cd1`, el cual **no existe** en la tabla `accounts`.
+- **Causa Raíz:** El error de integridad se debe a que el UUID del cliente sufrió una mutación durante el proceso de migración (cambió de `e88f6b10...` en origen a `e88f1410...` en destino). Este hallazgo SQL confirma la anomalía detectada por la regla `Orphan_Policy` del framework en Python.
+ 
+### 👥 2.9 Clientes que posean más de una póliza
+Se implementó el conteo mediante `COUNT(DISTINCT policy_id)` agrupado por `client_id` para validar la correcta migración de carteras de clientes múltiples, asegurando que ningún cliente perdiera pólizas asociadas en el entorno destino.
 ---
 
 ### 💡 Conclusiones de Negocio a Partir de los Resultados
