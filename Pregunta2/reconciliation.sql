@@ -87,20 +87,9 @@ ORDER BY 1,3 DESC;
 
 
 
---------------------------------------------------------------------------------
--- 6. CLIENTES QUE POSEEN MÁS DE UNA PÓLIZA EN ORIGEN
---------------------------------------------------------------------------------
-SELECT 
-    client_id, 
-    COUNT(policy_id) AS total_policies
-FROM GALLAGHER.PUBLIC.legacy_policies
-GROUP BY client_id
-HAVING COUNT(policy_id) > 1
-ORDER BY total_policies DESC;
-
 
 --------------------------------------------------------------------------------
--- 7. RECONCILIACIÓN Y COMPARACIÓN CAMPO POR CAMPO (OK / ERROR / MISSING_TARGET)
+-- 6. RECONCILIACIÓN Y COMPARACIÓN CAMPO POR CAMPO (OK / ERROR / MISSING_TARGET)
 --------------------------------------------------------------------------------
 WITH comparison AS (
     SELECT 
@@ -147,7 +136,7 @@ FROM comparison;
 
 
 --------------------------------------------------------------------------------
--- 8. CONCILIACIÓN FINANCIERA POR MONEDA (Suma de Primas Origen vs Destino)
+-- 7. CONCILIACIÓN FINANCIERA POR MONEDA (Suma de Primas Origen vs Destino)
 --------------------------------------------------------------------------------
 SELECT 
     currency,
@@ -162,7 +151,7 @@ FROM (
 GROUP BY currency;
 
 --------------------------------------------------------------------------------
--- 9. INTEGRIDAD REFERENCIAL: PÓLIZAS SIN CLIENTE EXISTENTE
+-- 8. INTEGRIDAD REFERENCIAL: PÓLIZAS SIN CLIENTE EXISTENTE
 --------------------------------------------------------------------------------
 
 SELECT 'target' AS source, t.policy_id, t.client_id
