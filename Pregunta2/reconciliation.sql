@@ -89,13 +89,14 @@ ORDER BY 1,3 DESC;
 
 
 --------------------------------------------------------------------------------
--- 6. RECONCILIACIÓN Y COMPARACIÓN CAMPO POR CAMPO (OK / ERROR / MISSING_TARGET)
+-- 6. RECONCILIACIÓN Y COMPARACIÓN CAMPO POR CAMPO (OK / ERROR / MISSING_TARGET / MISSING_SOURCE)
 --------------------------------------------------------------------------------
 WITH comparison AS (
     SELECT 
-        l.policy_id,
+        COALESCE(l.policy_id, t.policy_id) AS policy_id,
         CASE 
             WHEN t.policy_id IS NULL THEN 'MISSING_TARGET'
+            WHEN l.policy_id IS NULL THEN 'MISSING_SOURCE'
             WHEN l.client_id IS NOT DISTINCT FROM t.client_id 
                  AND l.policy_number IS NOT DISTINCT FROM t.policy_number 
                  AND l.premium IS NOT DISTINCT FROM t.premium 
@@ -105,9 +106,9 @@ WITH comparison AS (
                  AND l.status IS NOT DISTINCT FROM t.status THEN 'OK'
             ELSE 'ERROR'
         END AS validation_status,
-        -- Identificación dinámica de campos discrepantes blindada
+        -- Identificación dinámica de campos discrepantes
         IFF(
-            t.policy_id IS NULL, 
+            t.policy_id IS NULL OR l.policy_id IS NULL, 
             NULL, 
             NULLIF(
                 TRIM(
@@ -126,14 +127,14 @@ WITH comparison AS (
             )
         ) AS fields_with_differences
     FROM GALLAGHER.PUBLIC.legacy_policies l
-    LEFT JOIN GALLAGHER.PUBLIC.target_policies t ON l.policy_id = t.policy_id
+    -- Cambio a FULL OUTER JOIN para integrar MISSING_SOURCE
+    FULL OUTER JOIN GALLAGHER.PUBLIC.target_policies t ON l.policy_id = t.policy_id
 )
 SELECT 
     policy_id,
     validation_status,
     NULLIF(fields_with_differences, '') AS fields_with_differences
 FROM comparison;
-
 
 --------------------------------------------------------------------------------
 -- 7. CONCILIACIÓN FINANCIERA POR MONEDA (Suma de Primas Origen vs Destino)
@@ -151,10 +152,35 @@ FROM (
 GROUP BY currency;
 
 --------------------------------------------------------------------------------
--- 8. INTEGRIDAD REFERENCIAL: PÓLIZAS SIN CLIENTE EXISTENTE
+-- 8. INTEGRIDAD REFERENCIAL: PÓLIZAS SIN CLIENTE EXISTENTE (EVALUANDO ORIGEN Y DESTINO)
 --------------------------------------------------------------------------------
-
-SELECT 'target' AS source, t.policy_id, t.client_id
+SELECT 'legacy' AS source_table, l.policy_id, l.client_id
+FROM GALLAGHER.PUBLIC.legacy_policies l
+LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id = l.client_id
+WHERE a.client_id IS NULL
+UNION ALL
+SELECT 'target' AS source_table, t.policy_id, t.client_id
 FROM GALLAGHER.PUBLIC.target_policies t
-LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id =t.client_id
+LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id = t.client_id
 WHERE a.client_id IS NULL;
+
+--------------------------------------------------------------------------------
+-- 9. CLIENTES QUE POSEAN MÁS DE UNA PÓLIZA (ORIGEN VS DESTINO)
+--------------------------------------------------------------------------------
+SELECT 
+    'legacy_policies' AS dataset_name, 
+    client_id, 
+    COUNT(DISTINCT policy_id) AS policy_count
+FROM GALLAGHER.PUBLIC.legacy_policies
+GROUP BY client_id
+HAVING COUNT(DISTINCT policy_id) > 1
+UNION ALL
+SELECT 
+    'target_policies' AS dataset_name, 
+    client_id, 
+    COUNT(DISTINCT policy_id) AS policy_count
+FROM GALLAGHER.PUBLIC.target_policies
+GROUP BY client_id
+HAVING COUNT(DISTINCT policy_id) > 1
+ORDER BY 1, 3 DESC;
+
