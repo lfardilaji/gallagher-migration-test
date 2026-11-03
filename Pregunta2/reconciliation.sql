@@ -160,3 +160,13 @@ FROM (
     SELECT 'T' AS side, currency, premium FROM GALLAGHER.PUBLIC.target_policies
 )
 GROUP BY currency;
+
+--------------------------------------------------------------------------------
+-- 9. INTEGRIDAD REFERENCIAL: PÓLIZAS SIN CLIENTE EXISTENTE
+--------------------------------------------------------------------------------
+
+SELECT 'target' AS source, t.policy_id, t.client_id
+FROM GALLAGHER.PUBLIC.target_policies t
+LEFT JOIN GALLAGHER.PUBLIC.accounts a ON a.client_id =
+t.client_id
+WHERE a.client_id IS NULL;
