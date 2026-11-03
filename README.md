@@ -111,20 +111,19 @@ Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target
 ### 📸 Evidencias Gráficas y Archivos de Ejecución
 
 2.1. **Conteo Volumétrico (Comparativa de registros totales):**
-![1](Pregunta2/1.png)
-![1](Pregunta2/1.png)
+![1](Pregunta2/Conteo.png)
 
 2.2. **Control de Nulos en Origen y Destino:**
-![Control de Nulos](Pregunta2/Nulos_source_dest.png)
+![Control de Nulos](Pregunta2/nulos_both.png)
 
 2.3. **Registros Faltantes / Sin Migrar (`legacy` vs. `target`):**
-![Sin Migrar](Pregunta2/Sin%20migrar.png)
+![Sin Migrar](Pregunta2/missing.png)
 
 2.4. **Control de Pólizas en Destino Inexistentes en Origen (`MISSING_SOURCE`):**
-![Basura en Destino](Pregunta2/Sin%20migrar.png)
+![Basura en Destino](Pregunta2/no_go.png)
 
 2.5. **Detección de Duplicados en Origen y Destino:**
-![Duplicados](Pregunta2/5_origen_destino.png)
+![Duplicados](Pregunta2/dupli.png)
 
 2.6. **Clientes con más de una póliza en el origen:**
 - Exportación de clientes con múltiples pólizas activas/históricas en el sistema legado: [`duplicados_src.csv`](Pregunta2/duplicados_src.csv).
