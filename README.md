@@ -302,7 +302,7 @@ Para mitigar los riesgos inherentes a una migración masiva de 12 millones de re
 ### 2. Decisiones de Diseño y Estrategia de Migración
 
 #### A. Procesamiento de Grandes Volúmenes de Datos (Cascada Relacional)
-- **Procesamiento por Lotes y Particionado:** Dada la alta cantidad de registros (**8M de ítems**), la extracción y transformación se ejecutan respetando estrictamente la cascada relacional: primero `Clientes` (500k) $\rightarrow$ luego `Pólizas` (2M) $\rightarrow$ después `Ítems` (8M) $\rightarrow$ y finalmente `Endosos` (1.5M). Esto evita desalineaciones de llaves foráneas.
+- **Procesamiento por Lotes y Particionado:** Dada la alta cantidad de registros (**8M de ítems**), la extracción y transformación se ejecutan respetando estrictamente la cascada relacional: primero `Clientes` -> luego `Pólizas` -> después `Ítems` -> y finalmente `Endosos`. Esto evita desalineaciones de llaves foráneas.
 - **Optimización Nativa en Snowflake:** El almacenamiento en stages internos y procesamiento columnar dentro de Snowflake maneja eficientemente el volumen estimado de ~12 GB totales, evitando la sobrecarga de infraestructura distribuida externa innecesaria (*over-engineering*).
 
 #### B. Control de Calidad de Datos (Data Quality)
@@ -311,7 +311,6 @@ Para mitigar los riesgos inherentes a una migración masiva de 12 millones de re
   2. *Validación estricta en pipeline* mediante pruebas nativas de dbt, restricciones de contrato (`contract: enforced`) y el paquete **dbt-expectations** para certificar la integridad referencial antes del empaquetado final.
 
 #### C. Criterios Go/No-Go del Corte y Plan de Reversa
-
 Para la ventana de corte de migración hacia OPTIMA, no se admiten umbrales porcentuales genéricos. La decisión de salida a producción se rige por los siguientes criterios obligatorios:
 
 - **Criterios Go/No-Go del corte:**
@@ -322,7 +321,7 @@ Para la ventana de corte de migración hacia OPTIMA, no se admiten umbrales porc
 
 - **Plan de Reversa (*Rollback Plan*):**
   - Durante la ventana de ejecución, la base de datos origen permanece en modo de solo lectura (*read-only*).
-  - Si se incumple cualquiera de los criterios Go/No-Go al alcanzar el punto de no retorno (*Point of No Return*), se descartan los lotes cargados en OPTIMA vía API/staging y se restablece de inmediato la operatividad transaccional en el sistema legado sin pérdida de continuidad operativa.
+  - Si se incumple cualquiera de los criterios Go/No-Go al alcanzar el punto de no retorno (*Point of No Return*), se revierten las cargas masivas en el Lakehouse (aprovechando el Time Travel de Snowflake) y se restablece de inmediato la operatividad transaccional en el sistema legado sin pérdida de continuidad.
 
 #### D. Migración Incremental y por Lotes
 - **Estrategia en 3 Fases:**
@@ -338,6 +337,6 @@ Para la ventana de corte de migración hacia OPTIMA, no se admiten umbrales porc
 - **Protección PII:** Enmascaramiento dinámico en Snowflake y cumplimiento normativo de datos sensibles de clientes alineado con las leyes de privacidad de la región (Perú Ley 29733, Colombia Ley 1581 de 2012, Chile Ley 19.628 y su reforma Ley 21.719).
 - **Linaje y Trazabilidad:** Documentación automática del flujo de datos mediante *dbt docs* y control total de versiones en Git.
 
-#### G. Estrategia de Carga Transaccional hacia OPTIMA LATAM (Core de Pólizas)
-- **Carga por Lotes y APIs:** Dado que OPTIMA es el sistema transaccional de destino, los datos transformados no se insertan mediante consultas analíticas masivas (`MERGE`), sino a través de un **generador de lotes por entidad** que interactúa con las APIs o utilitarios nativos de carga del core.
-- **Gestión de Rechazos de Destino:** Si OPTIMA rechaza un registro por validaciones internas de su motor transaccional, el sistema captura dichos errores y los enruta automáticamente hacia la tabla de cuarentena o gestión de rechazos, permitiendo auditar y corregir sin afectar la integridad del sistema operativo.
+#### G. Estrategia de Carga e Inyección hacia OPTIMA LATAM (Lakehouse)
+- **Inyección Idempotente (ELT):** Dado que OPTIMA LATAM consolida su almacenamiento en una arquitectura Lakehouse unificada (ej. Snowflake), los datos transformados se insertan de manera nativa mediante operaciones analíticas masivas (`MERGE INTO`). Esto asegura que tanto las cargas masivas iniciales (T-1) como las sincronizaciones incrementales (*Delta Sync*) se ejecuten rápidamente y sin duplicar registros, aprovechando el procesamiento paralelo del motor.
+- **Gestión de Rechazos y Cuarentena:** Si un registro no cumple con los contratos de datos (data contracts) o restricciones de integridad antes o durante la operación de inserción, el framework de calidad lo captura y lo enruta automáticamente hacia la *Dead Letter Queue (DLQ)*. Esto permite auditar y corregir anomalías específicas sin detener el flujo de carga masiva ni afectar la disponibilidad del entorno de destino.
