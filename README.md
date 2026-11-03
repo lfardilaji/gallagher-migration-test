@@ -131,6 +131,36 @@ Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target
 2.7. **Auditoría Detallada Campo por Campo:**
 - Validación a nivel de atributo (`premium`, `currency`, `start_date`, `end_date`, `status`) clasificada por estado (`OK` / `ERROR`): [`Auditoria.csv`](Pregunta2/Auditoria.csv).
 
+2.8. 💵 Conciliación Financiera por Moneda y Análisis de Varianza
+
+La auditoría financiera global compara la suma de primas entre el sistema de origen (`legacy_policies`) y el destino (`target_policies`), segmentada por moneda para garantizar trazabilidad contable al centavo.
+
+**Evidencia de Ejecución (Snowflake):**
+![Financiera](Pregunta2/financiera.png)
+
+* **Resumen de Cuadre Financiero:**
+  * **USD:** Cuadre perfecto con **$175,759.89** tanto en origen como en destino ($\text{Diferencia} = \$0.00$), garantizando que la cartera en dólares migró sin alteraciones.
+  * **PEN:** Presenta un total de **$102,540.13** en origen frente a **$88,985.98** en destino, arrojando una varianza contable neta de **$13,554.15** en Soles peruanos.
+
+---
+
+### 💡 Conclusiones de Negocio a Partir de los Resultados
+
+1. **Explicación Causal y Exacta de la Varianza Financiera:**
+   La diferencia de **$13,554.15** en la moneda local no representa un error sistémico ni una pérdida de dinero no controlada; está matemáticamente explicada y reconciliada por dos eventos específicos identificados en la migración:
+   * **$7,215.12** corresponden a la póliza **`POL-000041`**, la cual se quedó rezagada en el sistema legado y **no fue migrada** (`MISSING_TARGET`).
+   * **$6,339.03** corresponden a la discrepancia de valor en la prima de la póliza migrada **`POL-000047`** (`ERROR` por alteración de atributo en destino).
+   * *Suma de control:* $\$7,215.12 + \$6,339.03 = \mathbf{\$13,554.15}$. Este nivel de precisión es el requisito indispensable exigido por el área de Finanzas para firmar el acta de aceptación (*Go-Live*).
+
+2. **Mitigación de Riesgos de Suscripción por Datos Incompletos:**
+   La existencia de la póliza no migrada (`POL-000041`) y el registro huérfano detectado (`POL-000008`, que apunta a un `client_id` inexistente en `accounts`) evidencian la necesidad imperativa de ejecutar barreras de validación relacional antes de abrir los canales transaccionales a los usuarios de negocio en OPTIMA LATAM.
+
+3. **Estrategia de Saneamiento y Cierre de Brechas (*Data Remediation*):**
+   * **Acción Inmediata 1:** Inyectar manualmente la póliza rezagada `POL-000041` junto con su cliente asociado en el entorno de destino.
+   * **Acción Inmediata 2:** Corregir el monto de la prima de la póliza `POL-000047` para nivelar la contabilidad en Soles (`PEN`).
+   * **Criterio de Aceptación Final:** Una vez ejecutadas estas dos correcciones, la varianza financiera será exactamente **$0.00**, permitiendo al comité técnico firmar el certificado de salida a producción sin reparos de auditoría.
+
+
 ---
 
 ## 🏗️ Punto 3: Consolidación Regional LATAM con dbt (OneSource)
