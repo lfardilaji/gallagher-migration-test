@@ -1,0 +1,14 @@
+name: gallagher_transform
+version: "1.0.0"
+profile: gallagher
+
+models:
+  gallagher_transform:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      +materialized: table
+      +schema: analytics

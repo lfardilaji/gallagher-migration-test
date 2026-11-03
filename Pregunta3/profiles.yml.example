@@ -1,0 +1,14 @@
+gallagher:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: <tu_cuenta_snowflake>
+      user: <tu_usuario>
+      password: <tu_password>
+      role: <tu_rol_ej_SYSADMIN>
+      database: GALLAGHER
+      warehouse: COMPUTE_WH
+      schema: PUBLIC
+      threads: 4
+      client_session_keep_alive: False

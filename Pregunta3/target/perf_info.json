@@ -1,0 +1,46 @@
+{
+    "path_count": 216,
+    "parsed_path_count": 216,
+    "static_analysis_path_count": 0,
+    "static_analysis_parsed_path_count": 0,
+    "is_partial_parse_enabled": true,
+    "is_static_analysis_enabled": true,
+    "read_files_elapsed": 0.23041610000655055,
+    "load_macros_elapsed": 3.3756155999726616,
+    "parse_project_elapsed": 0.05116470000939444,
+    "patch_sources_elapsed": 2.6600027922540903e-05,
+    "process_manifest_elapsed": 0.1580547000048682,
+    "load_all_elapsed": 3.9810026000486687,
+    "projects": [
+        {
+            "project_name": "gallagher_transform",
+            "elapsed": 0.03066350001608953,
+            "parsers": [],
+            "parsed_path_count": 0
+        },
+        {
+            "project_name": "dbt_snowflake",
+            "elapsed": 0.006074699980672449,
+            "parsers": [],
+            "parsed_path_count": 0
+        },
+        {
+            "project_name": "dbt",
+            "elapsed": 0.006561699963640422,
+            "parsers": [
+                {
+                    "parser": "doc",
+                    "elapsed": 0.0011163000017404556,
+                    "parsed_path_count": 1
+                }
+            ],
+            "parsed_path_count": 1
+        },
+        {
+            "project_name": "dbt_utils",
+            "elapsed": 0.00760370003990829,
+            "parsers": [],
+            "parsed_path_count": 0
+        }
+    ]
+}

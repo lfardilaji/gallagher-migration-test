@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_colombia
+    schema: raw_colombia
+    tables:
+      - name: policies
+
+  - name: raw_peru
+    schema: raw_peru
+    tables:
+      - name: policies
+
+  - name: raw_chile
+    schema: raw_chile
+    tables:
+      - name: policies

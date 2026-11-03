@@ -1,0 +1,733 @@
+[0m23:14:10.347180 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001516200D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001515FB44CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000151649B39D0>]}
+
+
+============================== 23:14:10.355104 | 312c205e-5260-4a24-aa5d-bfb1221bcf59 ==============================
+[0m23:14:10.355104 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:14:10.356243 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\ferna\\.dbt', 'use_colors': 'True', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'invocation_command': 'dbt deps', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:14:10.357179 [debug] [MainThread]: Tracking: tracking
+[0m23:14:10.836969 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '312c205e-5260-4a24-aa5d-bfb1221bcf59', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000151647CB820>]}
+[0m23:14:10.917273 [debug] [MainThread]: Set downloads directory='C:\Users\ferna\AppData\Local\Temp\dbt-downloads-9d8k0tzr'
+[0m23:14:10.918080 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m23:14:11.151255 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m23:14:11.153631 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m23:14:11.287810 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m23:14:11.325591 [info ] [MainThread]: Updating lock file in file path: C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3/package-lock.yml
+[0m23:14:11.331691 [debug] [MainThread]: Set downloads directory='C:\Users\ferna\AppData\Local\Temp\dbt-downloads-xn3r0atr'
+[0m23:14:11.340662 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m23:14:13.065509 [info ] [MainThread]: Installed from version 1.1.1
+[0m23:14:13.076800 [info ] [MainThread]: Updated version available: 1.4.1
+[0m23:14:13.078613 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '312c205e-5260-4a24-aa5d-bfb1221bcf59', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000015164AD99D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001515FC698C0>]}
+[0m23:14:13.080037 [info ] [MainThread]: 
+[0m23:14:13.084374 [info ] [MainThread]: Updates available for packages: ['dbt-labs/dbt_utils']                 
+Update your versions in packages.yml, then run dbt deps
+[0m23:14:13.093087 [debug] [MainThread]: Command `dbt deps` succeeded at 23:14:13.089921 after 3.07 seconds
+[0m23:14:13.100663 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000015164C7EB50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000151649F73E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000015164C89F40>]}
+[0m23:14:13.101712 [debug] [MainThread]: Flushing usage events
+[0m23:14:13.488720 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:14:20.707474 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08CE1D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08A974CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08F7C39D0>]}
+
+
+============================== 23:14:20.712285 | 02f7317b-3860-4708-b74b-1a0b7e1d89e3 ==============================
+[0m23:14:20.712285 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:14:20.713386 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\ferna\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt parse', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:14:20.713896 [debug] [MainThread]: Tracking: tracking
+[0m23:14:20.719125 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  Could not find profile named 'gallagher'
+[0m23:14:20.721814 [debug] [MainThread]: Command `dbt parse` failed at 23:14:20.721517 after 0.37 seconds
+[0m23:14:20.722611 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08F5DB230>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08F7E56D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B08F7D6BE0>]}
+[0m23:14:20.723425 [debug] [MainThread]: Flushing usage events
+[0m23:14:21.139003 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:16:10.154466 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF1B0D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DEF654CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF44B39D0>]}
+
+
+============================== 23:16:10.160643 | 426605fb-ef98-4777-a1c6-fc53ab2cac1d ==============================
+[0m23:16:10.160643 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:16:10.161549 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt parse --profiles-dir .', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:16:10.162033 [debug] [MainThread]: Tracking: tracking
+[0m23:16:11.956872 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:16:11.958535 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:16:11.960194 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:16:12.377931 [debug] [MainThread]: Snowflake adapter: Replaced underscores (_) with hyphens (-) in Snowflake account name to form a valid account URL.
+[0m23:16:12.884981 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '426605fb-ef98-4777-a1c6-fc53ab2cac1d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF5FA09D0>]}
+[0m23:16:13.103486 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '426605fb-ef98-4777-a1c6-fc53ab2cac1d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF616DBF0>]}
+[0m23:16:13.107566 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:16:14.521380 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:16:14.524525 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m23:16:14.525542 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '426605fb-ef98-4777-a1c6-fc53ab2cac1d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF5F8B650>]}
+[0m23:16:18.444265 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.gallagher_transform.staging
+- models.gallagher_transform.marts
+- models.gallagher_transform.intermediate
+[0m23:16:18.456203 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '426605fb-ef98-4777-a1c6-fc53ab2cac1d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF62B58B0>]}
+[0m23:16:18.475357 [info ] [MainThread]: Performance info: C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\perf_info.json
+[0m23:16:18.707599 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:16:18.719891 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:16:18.795646 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:16:18.800932 [debug] [MainThread]: Command `dbt parse` succeeded at 23:16:18.800390 after 8.89 seconds
+[0m23:16:18.802481 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF42EB4D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF6683150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023DF27AA0D0>]}
+[0m23:16:18.802985 [debug] [MainThread]: Flushing usage events
+[0m23:16:19.148302 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:19:09.102837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025417BA17F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000254156D4CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541A593890>]}
+
+
+============================== 23:19:09.108104 | cb507940-ce7e-4f52-9d91-f15c392b1dd9 ==============================
+[0m23:19:09.108104 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:19:09.109015 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:19:09.109537 [debug] [MainThread]: Tracking: tracking
+[0m23:19:09.689020 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:19:09.690207 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:19:09.691257 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:19:10.155557 [debug] [MainThread]: Snowflake adapter: Replaced underscores (_) with hyphens (-) in Snowflake account name to form a valid account URL.
+[0m23:19:10.557449 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'cb507940-ce7e-4f52-9d91-f15c392b1dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541BDA6650>]}
+[0m23:19:10.762210 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'cb507940-ce7e-4f52-9d91-f15c392b1dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541C123570>]}
+[0m23:19:10.764767 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:19:11.847309 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:19:12.131823 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m23:19:12.132628 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m23:19:12.133218 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m23:19:12.134111 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.gallagher_transform.intermediate
+- models.gallagher_transform.staging
+- models.gallagher_transform.marts
+[0m23:19:12.145180 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'cb507940-ce7e-4f52-9d91-f15c392b1dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541D708F50>]}
+[0m23:19:12.346588 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:19:12.358416 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:19:12.414851 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:19:12.432017 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'cb507940-ce7e-4f52-9d91-f15c392b1dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541D67BC50>]}
+[0m23:19:12.432585 [info ] [MainThread]: Found 677 macros
+[0m23:19:12.433116 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'cb507940-ce7e-4f52-9d91-f15c392b1dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541D66B4D0>]}
+[0m23:19:12.438022 [warn ] [MainThread]: [[33mWARNING[0m]: Nothing to do. Try checking your model configs and model specification args
+[0m23:19:12.444415 [debug] [MainThread]: Command end result
+[0m23:19:12.568141 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:19:12.577402 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:19:12.582721 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:19:12.591419 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\run_results.json
+[0m23:19:12.594593 [debug] [MainThread]: Command `dbt compile` succeeded at 23:19:12.594400 after 3.74 seconds
+[0m23:19:12.595319 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541A389D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541D806BD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002541D806D50>]}
+[0m23:19:12.595890 [debug] [MainThread]: Flushing usage events
+[0m23:19:12.937222 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:22:42.661722 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027366E7D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000273649D4CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027369873890>]}
+
+
+============================== 23:22:42.665662 | 8a63aa3f-f3a7-452d-909c-3eebd2604306 ==============================
+[0m23:22:42.665662 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:22:42.666610 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'use_colors': 'True', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'invocation_command': 'dbt compile --profiles-dir .', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:22:42.666925 [debug] [MainThread]: Tracking: tracking
+[0m23:22:43.080715 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:22:43.081173 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:22:43.081497 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:22:43.265942 [debug] [MainThread]: Snowflake adapter: Replaced underscores (_) with hyphens (-) in Snowflake account name to form a valid account URL.
+[0m23:22:43.436652 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '8a63aa3f-f3a7-452d-909c-3eebd2604306', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002736B106650>]}
+[0m23:22:43.519861 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '8a63aa3f-f3a7-452d-909c-3eebd2604306', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002736B483570>]}
+[0m23:22:43.521430 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:22:43.960123 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:22:44.110931 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 5 files added, 0 files changed.
+[0m23:22:44.111508 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\intermediate\int_latam_policies_unioned.sql
+[0m23:22:44.111850 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\marts\fact_policy.sql
+[0m23:22:44.112125 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_colombia_policies.sql
+[0m23:22:44.112381 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_chile_policies.sql
+[0m23:22:44.112652 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_peru_policies.sql
+[0m23:22:44.485888 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Compilation Error
+  Model 'model.gallagher_transform.stg_colombia_policies' (models\staging\stg_colombia_policies.sql) depends on a source named 'raw_colombia.policies' which was not found
+[0m23:22:44.488245 [debug] [MainThread]: Command `dbt compile` failed at 23:22:44.488068 after 2.01 seconds
+[0m23:22:44.488698 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002736B34D450>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002736B34F550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002736CBC77A0>]}
+[0m23:22:44.489429 [debug] [MainThread]: Flushing usage events
+[0m23:22:44.809134 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:24:09.401009 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB26B2D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB24674CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB29523890>]}
+
+
+============================== 23:24:09.407530 | 70ed47b6-111c-45d8-b1c5-1fa736084248 ==============================
+[0m23:24:09.407530 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:24:09.409085 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:24:09.409768 [debug] [MainThread]: Tracking: tracking
+[0m23:24:09.869232 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:24:09.870233 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:24:09.871004 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:24:10.051591 [debug] [MainThread]: Snowflake adapter: Replaced underscores (_) with hyphens (-) in Snowflake account name to form a valid account URL.
+[0m23:24:10.232483 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '70ed47b6-111c-45d8-b1c5-1fa736084248', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2AD26650>]}
+[0m23:24:10.310250 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '70ed47b6-111c-45d8-b1c5-1fa736084248', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2B0A3570>]}
+[0m23:24:10.312188 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:24:10.784171 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:24:10.976132 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 6 files added, 0 files changed.
+[0m23:24:10.977022 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_chile_policies.sql
+[0m23:24:10.977638 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_peru_policies.sql
+[0m23:24:10.978225 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\_sources.yml
+[0m23:24:10.978690 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\staging\stg_colombia_policies.sql
+[0m23:24:10.979152 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\intermediate\int_latam_policies_unioned.sql
+[0m23:24:10.979593 [debug] [MainThread]: Partial parsing: added file: gallagher_transform://models\marts\fact_policy.sql
+[0m23:24:11.580459 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '70ed47b6-111c-45d8-b1c5-1fa736084248', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2AF6D050>]}
+[0m23:24:11.698819 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:24:11.702233 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:24:11.736723 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:24:11.753051 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '70ed47b6-111c-45d8-b1c5-1fa736084248', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2C887200>]}
+[0m23:24:11.753770 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:24:11.754720 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '70ed47b6-111c-45d8-b1c5-1fa736084248', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2CA7BD90>]}
+[0m23:24:11.757050 [info ] [MainThread]: 
+[0m23:24:11.757593 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:24:11.758125 [info ] [MainThread]: 
+[0m23:24:11.758702 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:24:11.765008 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:24:11.785349 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:24:11.788677 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:24:11.789046 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:24:11.789332 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:24:11.790399 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:24:11.790729 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:24:11.790995 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:24:11.803659 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:24:11.804133 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:24:11.804590 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:24:11.804873 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:24:11.806418 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:24:11.806849 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:24:11.807199 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:24:11.807473 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:24:11.808223 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:24:11.808625 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:24:11.809006 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:24:11.809256 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:24:11.809635 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:24:11.810145 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  251001: Invalid account identifier: only letters, digits, '_', '-' and '.' (as a label separator) allowed; no slashes or backslashes
+[0m23:24:11.811913 [debug] [MainThread]: Command `dbt compile` failed at 23:24:11.811764 after 2.60 seconds
+[0m23:24:11.812310 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB29319D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2C5C19D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BB2C5C2750>]}
+[0m23:24:11.812664 [debug] [MainThread]: Flushing usage events
+[0m23:24:12.210595 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:26:54.883762 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D7F41D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D7CF64CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D01EC3890>]}
+
+
+============================== 23:26:54.887038 | 6a1b6776-3c9d-41bb-b48a-54fdd36c3d24 ==============================
+[0m23:26:54.887038 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:26:54.887979 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'invocation_command': 'dbt compile --profiles-dir .', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:26:54.888552 [debug] [MainThread]: Tracking: tracking
+[0m23:26:55.179771 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:26:55.180210 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:26:55.180477 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:26:55.408609 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D03826650>]}
+[0m23:26:55.464296 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D03BA3570>]}
+[0m23:26:55.465362 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:26:55.769332 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:26:55.843480 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m23:26:55.844340 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D051F1050>]}
+[0m23:26:57.238692 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D051E5C70>]}
+[0m23:26:57.336477 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:26:57.341456 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:26:57.367436 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:26:57.377458 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D05563930>]}
+[0m23:26:57.377887 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:26:57.378362 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6a1b6776-3c9d-41bb-b48a-54fdd36c3d24', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D051D4FC0>]}
+[0m23:26:57.380480 [info ] [MainThread]: 
+[0m23:26:57.380922 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:26:57.381267 [info ] [MainThread]: 
+[0m23:26:57.381761 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:26:57.386348 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:26:57.404955 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:26:57.409472 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:26:57.410296 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:26:57.410987 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:26:57.412324 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:26:57.413057 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:26:57.414375 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:26:57.799973 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:26:57.800302 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:26:57.800605 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:26:57.800815 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:26:57.805551 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:26:57.805854 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:26:57.806129 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:26:57.806341 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:26:57.806937 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:26:57.807169 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:26:57.807374 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:26:57.807548 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:26:57.807753 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:26:57.808086 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  390100 (28000): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Incorrect username or password was specified. [55dcd5c5-3021-46c6-bb6d-38c3cf8f30d4]
+[0m23:26:57.809300 [debug] [MainThread]: Command `dbt compile` failed at 23:26:57.809196 after 3.06 seconds
+[0m23:26:57.809612 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D0550CB90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D05523E30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000013D05523B70>]}
+[0m23:26:57.809927 [debug] [MainThread]: Flushing usage events
+[0m23:26:58.172891 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:27:13.950235 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C4D6D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C28A4CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C7763890>]}
+
+
+============================== 23:27:13.953423 | f2d82594-18cb-4d3c-a38e-0e893bb9dbfd ==============================
+[0m23:27:13.953423 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:27:13.954236 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:27:13.954537 [debug] [MainThread]: Tracking: tracking
+[0m23:27:14.244764 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:27:14.245125 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:27:14.245376 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:27:14.478965 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'f2d82594-18cb-4d3c-a38e-0e893bb9dbfd', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C8F66650>]}
+[0m23:27:14.538156 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'f2d82594-18cb-4d3c-a38e-0e893bb9dbfd', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C92E3570>]}
+[0m23:27:14.539298 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:27:14.845211 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:27:14.977827 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m23:27:14.978162 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m23:27:14.978359 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m23:27:14.986294 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'f2d82594-18cb-4d3c-a38e-0e893bb9dbfd', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280CA929150>]}
+[0m23:27:15.083924 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:27:15.086546 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:27:15.106597 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:27:15.114298 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'f2d82594-18cb-4d3c-a38e-0e893bb9dbfd', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C9752A80>]}
+[0m23:27:15.114677 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:27:15.115334 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'f2d82594-18cb-4d3c-a38e-0e893bb9dbfd', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280CA9D4C90>]}
+[0m23:27:15.117044 [info ] [MainThread]: 
+[0m23:27:15.117486 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:27:15.117853 [info ] [MainThread]: 
+[0m23:27:15.118296 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:27:15.123756 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:27:15.141229 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:27:15.143749 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:27:15.144018 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:27:15.144247 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:27:15.144723 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:27:15.145010 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:27:15.145363 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:27:16.183647 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:27:16.183977 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:16.184263 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:27:16.184463 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:16.185387 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:27:16.185656 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:16.185922 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:27:16.186111 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:16.186841 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:27:16.187053 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:27:16.187238 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:27:16.187391 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:27:16.187549 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:27:16.187833 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  390100 (28000): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Incorrect username or password was specified. [718fafe8-d310-44e1-ace4-5ee148c5f1eb]
+[0m23:27:16.189044 [debug] [MainThread]: Command `dbt compile` failed at 23:27:16.188939 after 2.37 seconds
+[0m23:27:16.189337 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C7559D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C97C8590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000280C97C9250>]}
+[0m23:27:16.189605 [debug] [MainThread]: Flushing usage events
+[0m23:27:16.526116 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:27:34.841178 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000141FCC0D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000141FA754CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000141FF603890>]}
+
+
+============================== 23:27:34.845461 | b1d521f3-2d13-4f66-adb1-d9500d91a41a ==============================
+[0m23:27:34.845461 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:27:34.846813 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'use_colors': 'True', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'invocation_command': 'dbt compile --profiles-dir .', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:27:34.847361 [debug] [MainThread]: Tracking: tracking
+[0m23:27:35.186610 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:27:35.187117 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:27:35.187451 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:27:35.470751 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014181066650>]}
+[0m23:27:35.529727 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000141813E3570>]}
+[0m23:27:35.530873 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:27:35.935563 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:27:36.015409 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m23:27:36.016299 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000141829FD050>]}
+[0m23:27:37.609647 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182A2DC70>]}
+[0m23:27:37.691739 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:27:37.694278 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:27:37.716506 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:27:37.729323 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182DA3930>]}
+[0m23:27:37.730147 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:27:37.730956 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b1d521f3-2d13-4f66-adb1-d9500d91a41a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182A04FC0>]}
+[0m23:27:37.734326 [info ] [MainThread]: 
+[0m23:27:37.735053 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:27:37.735404 [info ] [MainThread]: 
+[0m23:27:37.736707 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:27:37.744152 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:27:37.744925 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:27:37.769599 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:27:37.769948 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:27:37.771092 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:27:37.770537 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:27:37.771682 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:27:37.772074 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:27:38.166762 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:27:38.167083 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:38.167367 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:27:38.167566 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:38.169021 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:27:38.169262 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:38.169516 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:27:38.169706 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:27:38.170253 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:27:38.170449 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:27:38.170627 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:27:38.170778 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:27:38.170936 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:27:38.171226 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  390100 (28000): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Incorrect username or password was specified. [5945f67d-ec07-4dc6-a5f6-12e4eda221f6]
+[0m23:27:38.172512 [debug] [MainThread]: Command `dbt compile` failed at 23:27:38.172362 after 3.49 seconds
+[0m23:27:38.172846 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182D4D9D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182D638B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014182D63C20>]}
+[0m23:27:38.173162 [debug] [MainThread]: Flushing usage events
+[0m23:27:38.520575 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:28:38.883875 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB25FD7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB0138CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB4FF3890>]}
+
+
+============================== 23:28:38.887233 | e1e815fc-dbe1-498a-84f2-ed62f3411398 ==============================
+[0m23:28:38.887233 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:28:38.887839 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:28:38.888179 [debug] [MainThread]: Tracking: tracking
+[0m23:28:39.162551 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:28:39.162917 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:28:39.163157 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:28:39.388657 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'e1e815fc-dbe1-498a-84f2-ed62f3411398', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB67F6650>]}
+[0m23:28:39.444262 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'e1e815fc-dbe1-498a-84f2-ed62f3411398', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB6B73570>]}
+[0m23:28:39.445412 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:28:39.730457 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:28:39.856712 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m23:28:39.857113 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m23:28:39.857323 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m23:28:39.864546 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'e1e815fc-dbe1-498a-84f2-ed62f3411398', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB818D150>]}
+[0m23:28:39.961483 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:28:39.964735 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:28:39.990046 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:28:39.998139 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'e1e815fc-dbe1-498a-84f2-ed62f3411398', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB7FB2A80>]}
+[0m23:28:39.998557 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:28:39.998968 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'e1e815fc-dbe1-498a-84f2-ed62f3411398', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB8290C90>]}
+[0m23:28:40.000928 [info ] [MainThread]: 
+[0m23:28:40.001320 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:28:40.001734 [info ] [MainThread]: 
+[0m23:28:40.002276 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:28:40.006173 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:28:40.022570 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:28:40.025288 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:28:40.025599 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:28:40.026365 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:28:40.026018 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:28:40.026767 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:28:40.026987 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:28:40.410567 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:28:40.411157 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:28:40.411616 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:28:40.411887 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:28:40.412999 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:28:40.413233 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:28:40.413485 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:28:40.413675 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:28:40.414220 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:28:40.414420 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:28:40.414602 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:28:40.414757 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:28:40.414919 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:28:40.415211 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  390100 (28000): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Incorrect username or password was specified. [5c4a4fa5-3f60-473e-a361-5fa502589763]
+[0m23:28:40.416496 [debug] [MainThread]: Command `dbt compile` failed at 23:28:40.416377 after 1.67 seconds
+[0m23:28:40.416809 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB4DE9D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB8028590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021AB8029190>]}
+[0m23:28:40.417069 [debug] [MainThread]: Flushing usage events
+[0m23:28:40.736494 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:31:09.454531 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248BBC3D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248B9784CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248BE633890>]}
+
+
+============================== 23:31:09.459983 | 71d19dea-f4c5-407d-ac68-d03b0f4536c0 ==============================
+[0m23:31:09.459983 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:31:09.461081 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:31:09.461886 [debug] [MainThread]: Tracking: tracking
+[0m23:31:10.165511 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:31:10.166113 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:31:10.166546 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:31:10.610735 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248BFED6650>]}
+[0m23:31:10.703212 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C014B790>]}
+[0m23:31:10.704980 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:31:11.230590 [debug] [MainThread]: checksum: 3fa5a2ab7ee8ecb454e8fa9161ae6212830286987459f481fe5b0e9cc948619f, vars: {}, profile: gallagher, target: dev, version: 1.13.0b1
+[0m23:31:11.344830 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m23:31:11.345529 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C186D050>]}
+[0m23:31:13.566814 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C18B5C70>]}
+[0m23:31:13.690746 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\manifest.json
+[0m23:31:13.694791 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\semantic_manifest.json
+[0m23:31:13.729593 [debug] [MainThread]: Wrote artifact OsiDocument to C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\target\osi_document.json
+[0m23:31:13.743660 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C1C03930>]}
+[0m23:31:13.744233 [info ] [MainThread]: Found 5 models, 3 sources, 677 macros
+[0m23:31:13.745211 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '71d19dea-f4c5-407d-ac68-d03b0f4536c0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C187CFC0>]}
+[0m23:31:13.747964 [info ] [MainThread]: 
+[0m23:31:13.748561 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m23:31:13.749080 [info ] [MainThread]: 
+[0m23:31:13.749844 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m23:31:13.756948 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_staging'
+[0m23:31:13.779095 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_GALLAGHER_PUBLIC_ANALYTICS'
+[0m23:31:13.783140 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_staging"
+[0m23:31:13.784204 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_staging: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:31:13.784614 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:31:13.783785 [debug] [ThreadPool]: Using snowflake connection "list_GALLAGHER_PUBLIC_ANALYTICS"
+[0m23:31:13.785080 [debug] [ThreadPool]: On list_GALLAGHER_PUBLIC_ANALYTICS: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:31:13.785428 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m23:31:14.220179 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_ANALYTICS
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_ANALYTICS"} */;
+[0m23:31:14.220587 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:31:14.220976 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:31:14.221598 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:31:14.223767 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: show objects in GALLAGHER.PUBLIC_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.13.0b1", "profile_name": "gallagher", "target_name": "dev", "connection_name": "list_GALLAGHER_PUBLIC_staging"} */;
+[0m23:31:14.224097 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:31:14.224436 [debug] [ThreadPool]: Snowflake adapter: Error running SQL: macro list_relations_without_caching
+[0m23:31:14.224700 [debug] [ThreadPool]: Snowflake adapter: Rolling back transaction.
+[0m23:31:14.225478 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m23:31:14.225766 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_staging' was left open.
+[0m23:31:14.226027 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_staging: No close available on handle
+[0m23:31:14.226251 [debug] [MainThread]: Connection 'list_GALLAGHER_PUBLIC_ANALYTICS' was left open.
+[0m23:31:14.226479 [debug] [MainThread]: On list_GALLAGHER_PUBLIC_ANALYTICS: No close available on handle
+[0m23:31:14.226900 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Database Error
+  390303 (08001): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Invalid OAuth access token.  [63f035b1-532f-4f10-8eed-f46ed29e563b]
+[0m23:31:14.228309 [debug] [MainThread]: Command `dbt compile` failed at 23:31:14.228179 after 5.01 seconds
+[0m23:31:14.228685 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C1BBD9D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C1BD3EE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000248C1BD3AC0>]}
+[0m23:31:14.229019 [debug] [MainThread]: Flushing usage events
+[0m23:31:14.606014 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:31:56.265230 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A6DD4D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A6B894CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A706F39D0>]}
+
+
+============================== 23:31:56.273019 | 609e6475-09d9-4c33-ae19-dd358bbe45df ==============================
+[0m23:31:56.273019 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:31:56.274145 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'invocation_command': 'dbt debug --profiles-dir .', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:31:56.274856 [debug] [MainThread]: Tracking: tracking
+[0m23:31:56.310200 [info ] [MainThread]: dbt version: 1.13.0-b1
+[0m23:31:56.311030 [info ] [MainThread]: python version: 3.14.6
+[0m23:31:56.311676 [info ] [MainThread]: python path: C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\venv\Scripts\python.exe
+[0m23:31:56.312121 [info ] [MainThread]: os info: Windows-11-10.0.26300-SP0
+[0m23:31:56.892228 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:31:56.892884 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:31:56.893272 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:31:57.116775 [info ] [MainThread]: Using profiles dir at .
+[0m23:31:57.117800 [info ] [MainThread]: Using profiles.yml file at .\profiles.yml
+[0m23:31:57.118262 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\dbt_project.yml
+[0m23:31:57.120070 [info ] [MainThread]: adapter type: snowflake
+[0m23:31:57.120656 [info ] [MainThread]: adapter version: 1.12.4
+[0m23:31:57.282005 [info ] [MainThread]: Configuration:
+[0m23:31:57.283021 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m23:31:57.283901 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m23:31:57.284328 [info ] [MainThread]: Required dependencies:
+[0m23:31:57.285020 [debug] [MainThread]: Executing "git --help"
+[0m23:31:57.351728 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m23:31:57.352832 [debug] [MainThread]: STDERR: "b''"
+[0m23:31:57.353634 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m23:31:57.354319 [info ] [MainThread]: Connection:
+[0m23:31:57.354934 [info ] [MainThread]:   account: ze17464.us-east-2.aws
+[0m23:31:57.355628 [info ] [MainThread]:   user: Fernando.Ardila
+[0m23:31:57.356123 [info ] [MainThread]:   database: GALLAGHER
+[0m23:31:57.356635 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m23:31:57.357059 [info ] [MainThread]:   role: SYSADMIN
+[0m23:31:57.357492 [info ] [MainThread]:   schema: PUBLIC
+[0m23:31:57.357853 [info ] [MainThread]:   authenticator: oauth
+[0m23:31:57.358230 [info ] [MainThread]:   oauth_client_id: None
+[0m23:31:57.358621 [info ] [MainThread]:   query_tag: None
+[0m23:31:57.359007 [info ] [MainThread]:   client_session_keep_alive: False
+[0m23:31:57.359467 [info ] [MainThread]:   host: None
+[0m23:31:57.359902 [info ] [MainThread]:   port: None
+[0m23:31:57.360286 [info ] [MainThread]:   proxy_host: None
+[0m23:31:57.360650 [info ] [MainThread]:   proxy_port: None
+[0m23:31:57.361005 [info ] [MainThread]:   protocol: None
+[0m23:31:57.361352 [info ] [MainThread]:   connect_retries: 1
+[0m23:31:57.361696 [info ] [MainThread]:   connect_timeout: None
+[0m23:31:57.362035 [info ] [MainThread]:   retry_on_database_errors: False
+[0m23:31:57.362371 [info ] [MainThread]:   retry_all: False
+[0m23:31:57.362713 [info ] [MainThread]:   insecure_mode: False
+[0m23:31:57.363045 [info ] [MainThread]:   reuse_connections: True
+[0m23:31:57.363388 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m23:31:57.363731 [info ] [MainThread]:   workload_identity_provider: None
+[0m23:31:57.364091 [info ] [MainThread]:   workload_identity_entra_resource: None
+[0m23:31:57.364433 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m23:31:57.365304 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:31:58.014346 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m23:31:58.016988 [debug] [MainThread]: Using snowflake connection "debug"
+[0m23:31:58.017384 [debug] [MainThread]: On debug: select 1 as id
+[0m23:31:58.017689 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:31:58.442037 [debug] [MainThread]: Snowflake adapter: Error running SQL: select 1 as id
+[0m23:31:58.442904 [debug] [MainThread]: Snowflake adapter: Rolling back transaction.
+[0m23:31:58.443499 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m23:31:58.444499 [info ] [MainThread]: [31m1 check failed:[0m
+[0m23:31:58.444994 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  390303 (08001): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443. Invalid OAuth access token.  [52d37349-406f-46da-9c1d-99703bafdb30]
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m23:31:58.446330 [debug] [MainThread]: Command `dbt debug` failed at 23:31:58.446209 after 2.48 seconds
+[0m23:31:58.446642 [debug] [MainThread]: Connection 'debug' was left open.
+[0m23:31:58.446903 [debug] [MainThread]: On debug: No close available on handle
+[0m23:31:58.447175 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A71F9F100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A724439B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020A7070AE00>]}
+[0m23:31:58.447514 [debug] [MainThread]: Flushing usage events
+[0m23:31:58.797239 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:33:29.998258 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F61880D7F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F616344CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F61B1B39D0>]}
+
+
+============================== 23:33:30.003253 | 96651472-b0dc-4285-b17f-b209f5d75120 ==============================
+[0m23:33:30.003253 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m23:33:30.004897 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt debug --profiles-dir .', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'C:\\Users\\ferna\\OneDrive\\Documentos\\Ghallager\\Pregunta3\\logs'}
+[0m23:33:30.005537 [debug] [MainThread]: Tracking: tracking
+[0m23:33:30.034652 [info ] [MainThread]: dbt version: 1.13.0-b1
+[0m23:33:30.035765 [info ] [MainThread]: python version: 3.14.6
+[0m23:33:30.036316 [info ] [MainThread]: python path: C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\venv\Scripts\python.exe
+[0m23:33:30.036727 [info ] [MainThread]: os info: Windows-11-10.0.26300-SP0
+[0m23:33:30.651463 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:33:30.652022 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:33:30.652387 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:33:30.876630 [info ] [MainThread]: Using profiles dir at .
+[0m23:33:30.877256 [info ] [MainThread]: Using profiles.yml file at .\profiles.yml
+[0m23:33:30.877795 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\ferna\OneDrive\Documentos\Ghallager\Pregunta3\dbt_project.yml
+[0m23:33:30.879216 [info ] [MainThread]: adapter type: snowflake
+[0m23:33:30.879841 [info ] [MainThread]: adapter version: 1.12.4
+[0m23:33:31.041949 [info ] [MainThread]: Configuration:
+[0m23:33:31.042865 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m23:33:31.043436 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m23:33:31.043840 [info ] [MainThread]: Required dependencies:
+[0m23:33:31.044258 [debug] [MainThread]: Executing "git --help"
+[0m23:33:31.105904 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m23:33:31.106565 [debug] [MainThread]: STDERR: "b''"
+[0m23:33:31.107093 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m23:33:31.107775 [info ] [MainThread]: Connection:
+[0m23:33:31.108464 [info ] [MainThread]:   account: ze17464.us-east-2.aws
+[0m23:33:31.109315 [info ] [MainThread]:   user: Fernando.Ardila
+[0m23:33:31.110255 [info ] [MainThread]:   database: GALLAGHER
+[0m23:33:31.110893 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m23:33:31.111413 [info ] [MainThread]:   role: SYSADMIN
+[0m23:33:31.112021 [info ] [MainThread]:   schema: PUBLIC
+[0m23:33:31.112621 [info ] [MainThread]:   authenticator: externalbrowser
+[0m23:33:31.113128 [info ] [MainThread]:   oauth_client_id: None
+[0m23:33:31.113496 [info ] [MainThread]:   query_tag: None
+[0m23:33:31.113860 [info ] [MainThread]:   client_session_keep_alive: False
+[0m23:33:31.114217 [info ] [MainThread]:   host: None
+[0m23:33:31.114603 [info ] [MainThread]:   port: None
+[0m23:33:31.114951 [info ] [MainThread]:   proxy_host: None
+[0m23:33:31.115295 [info ] [MainThread]:   proxy_port: None
+[0m23:33:31.115658 [info ] [MainThread]:   protocol: None
+[0m23:33:31.115977 [info ] [MainThread]:   connect_retries: 1
+[0m23:33:31.116331 [info ] [MainThread]:   connect_timeout: None
+[0m23:33:31.116758 [info ] [MainThread]:   retry_on_database_errors: False
+[0m23:33:31.117180 [info ] [MainThread]:   retry_all: False
+[0m23:33:31.117572 [info ] [MainThread]:   insecure_mode: False
+[0m23:33:31.117919 [info ] [MainThread]:   reuse_connections: True
+[0m23:33:31.118302 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m23:33:31.118657 [info ] [MainThread]:   workload_identity_provider: None
+[0m23:33:31.119024 [info ] [MainThread]:   workload_identity_entra_resource: None
+[0m23:33:31.119434 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m23:33:31.120572 [info ] [MainThread]: Registered adapter: snowflake=1.12.4
+[0m23:33:31.716645 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m23:33:31.718933 [debug] [MainThread]: Using snowflake connection "debug"
+[0m23:33:31.719279 [debug] [MainThread]: On debug: select 1 as id
+[0m23:33:31.719642 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:33:32.266534 [debug] [MainThread]: Snowflake adapter: Error running SQL: select 1 as id
+[0m23:33:32.266941 [debug] [MainThread]: Snowflake adapter: Rolling back transaction.
+[0m23:33:32.267252 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m23:33:32.268051 [info ] [MainThread]: [31m1 check failed:[0m
+[0m23:33:32.268885 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  390190 (08001): Failed to connect to DB: ze17464.us-east-2.aws.snowflakecomputing.com:443, There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m23:33:32.271852 [debug] [MainThread]: Command `dbt debug` failed at 23:33:32.271655 after 2.52 seconds
+[0m23:33:32.272252 [debug] [MainThread]: Connection 'debug' was left open.
+[0m23:33:32.272552 [debug] [MainThread]: On debug: No close available on handle
+[0m23:33:32.272829 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F61CA1F100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F61CEC39B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F61CE6A7A0>]}
+[0m23:33:32.273173 [debug] [MainThread]: Flushing usage events
+[0m23:33:32.682089 [debug] [MainThread]: An error was encountered while trying to flush usage events

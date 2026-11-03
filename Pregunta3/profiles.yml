@@ -1,0 +1,14 @@
+gallagher:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ze17464.us-east-2.aws
+      user: Fernando.Ardila
+      authenticator: externalbrowser # Esto abrirá una pestaña en tu navegador web
+      role: SYSADMIN
+      database: GALLAGHER
+      warehouse: COMPUTE_WH
+      schema: PUBLIC
+      threads: 4
+      client_session_keep_alive: False
