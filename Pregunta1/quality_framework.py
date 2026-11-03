@@ -14,7 +14,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)]
 )
 
-# Diccionario explícito de llaves primarias por dataset (Mejora T09)
+# Diccionario explícito de llaves primarias por dataset.
 PRIMARY_KEYS = {
     "accounts": "client_id",
     "legacy_policies": "policy_id",
@@ -114,7 +114,7 @@ def generate_text_log(summary_df: pd.DataFrame, details_df: pd.DataFrame, log_fi
                 
                 pk_col = PRIMARY_KEYS.get(ds_name, 'client_id')
                 
-                for _, row in group_df.iterrows():
+                for row in group_df.to_dict("records"):
                     identifier = row.get(pk_col, 'N/A')
                     f.write(f"  * Registro ID   : {identifier}\n")
                     f.write(f"    Dimensión     : {row.get('dimension', 'N/A')}\n")
@@ -139,11 +139,30 @@ if __name__ == "__main__":
     }
 
     datasets = {}
-    logging.info("Iniciando ingesta segura de datos (preservando formatos de texto)...")
+    logging.info("Iniciando ingesta segura de datos y normalización de formatos...")
     for name, filepath in files_to_process.items():
         if os.path.exists(filepath):
-            datasets[name] = pd.read_csv(filepath, dtype=str)
-            logging.info(f" -> {name} cargado correctamente ({len(datasets[name])} filas).")
+            # 1. Cargar preservando texto
+            df = pd.read_csv(filepath, dtype=str)
+            
+            # A. Normalizar nombres de columnas a minúsculas y sin espacios (Evita KeyError)
+            df.columns = df.columns.str.strip().str.lower()
+            
+            # B. Limpiar y estandarizar correos si la columna existe
+            if 'email' in df.columns:
+                df['email'] = df['email'].astype(str).str.strip()
+                df.loc[df['email'].isin(['nan', 'None', '']), 'email'] = None
+
+            # C. Forzar formato de fechas europeo (dayfirst=True) para evitar inversión MM/DD
+            columnas_fecha = ['start_date', 'end_date', 'created_date', 'birthdate']
+            for col in columnas_fecha:
+                if col in df.columns:
+                    # errors='coerce' convierte valores mal formados en NaT en lugar de romper
+                    df[col] = pd.to_datetime(df[col], dayfirst=True, errors='coerce')
+            # =========================================================================
+
+            datasets[name] = df
+            logging.info(f" -> {name} cargado y normalizado correctamente ({len(datasets[name])} filas).")
         else:
             logging.warning(f" -> ADVERTENCIA: No se encontró el archivo en {filepath}.")
 
@@ -151,12 +170,16 @@ if __name__ == "__main__":
 
     # --- SET COMPLETO DE 14 REGLAS DE NEGOCIO Y CALIDAD (T12) ---
 
-    # 1. Correo por Regex (rechaza @example.com o formatos incorrectos)
+    # 1. Correo por Regex 
     def check_malformed_email(d):
         df = d["accounts"]
         email_regex = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-        mask_invalid = ~df['email'].str.match(email_regex, na=False) | df['email'].str.contains("example.com", case=False, na=False)
-        return df[mask_invalid]
+        
+        # Detectar sintaxis realmente rota (sin @, sin punto, espacios, etc.)
+        sintaxis_rota = ~df['email'].str.match(email_regex, na=False)
+        
+        # Retorna solo los que tienen sintaxis rota de verdad
+        return df[sintaxis_rota]
 
     dq_framework.add_rule(Rule(
         name="Malformed_Email", dimension="Validez", severity="WARNING",
@@ -172,11 +195,22 @@ if __name__ == "__main__":
         description="Combinación de tipo y número de documento duplicada."
     ))
 
-    # 3. Correo único (Unicidad)
+   # 3. Correo único (Unicidad) - 
+    def check_duplicate_email(d):
+        df = d["accounts"]
+        # Validar que la columna exista (evita KeyError si hay variaciones)
+        col_email = 'email' if 'email' in df.columns else [c for c in df.columns if 'email' in c.lower()][0]
+        
+        # Filtrar solo registros que tengan un correo válido (no nulos ni vacíos)
+        valid_emails = df[df[col_email].notna() & (df[col_email].str.strip() != '') & (df[col_email].str.lower() != 'nan')]
+        
+        # Retornar los duplicados exactos
+        return valid_emails[valid_emails.duplicated(subset=[col_email], keep=False)]
+
     dq_framework.add_rule(Rule(
         name="Duplicate_Email", dimension="Unicidad", severity="WARNING",
         dataset="accounts", key="client_id",
-        check=lambda d: d["accounts"][d["accounts"].duplicated(subset=['email'], keep=False) & d['email'].notna()],
+        check=check_duplicate_email,
         description="Mismo correo electrónico asignado a múltiples clientes."
     ))
 
@@ -226,7 +260,7 @@ if __name__ == "__main__":
         df = d["accounts"].copy()
         df['birth'] = pd.to_datetime(df['birthdate'], errors='coerce')
         df['created'] = pd.to_datetime(df['created_date'], errors='coerce')
-        df['age_at_creation'] = (df['created'] - df.dataset if 'dataset' in df else df['created'] - df['birth']).dt.days / 365.25
+        df['age_at_creation'] = ((df['created'] - df['birth']).dt.days / 365.25)
         return df[(df['age_at_creation'] < 18) & df['age_at_creation'].notna()]
 
     dq_framework.add_rule(Rule(
