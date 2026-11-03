@@ -1,12 +1,32 @@
 version: 2
 
 sources:
-  - name: raw_latam
+  - name: raw_peru
     database: RAW_DB
+    schema: RAW_PERU
+    loaded_at_field: _loaded_at
+    freshness:
+      warn_after: {count: 24, period: hour}
     tables:
-      - name: policies_peru
-        identifier: RAW_PERU.POLICIES
-      - name: policies_chile
-        identifier: RAW_CHILE.POLICIES
-      - name: policies_colombia
-        identifier: RAW_COLOMBIA.POLICIES
+      - name: policies
+        identifier: POLICIES
+
+  - name: raw_chile
+    database: RAW_DB
+    schema: RAW_CHILE
+    loaded_at_field: _loaded_at
+    freshness:
+      warn_after: {count: 24, period: hour}
+    tables:
+      - name: policies
+        identifier: POLICIES
+
+  - name: raw_colombia
+    database: RAW_DB
+    schema: RAW_COLOMBIA
+    loaded_at_field: _loaded_at
+    freshness:
+      warn_after: {count: 24, period: hour}
+    tables:
+      - name: policies
+        identifier: POLICIES

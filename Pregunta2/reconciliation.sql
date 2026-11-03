@@ -152,5 +152,3 @@ FROM (
     SELECT 'T' AS side, currency, premium FROM GALLAGHER.PUBLIC.target_policies
 )
 GROUP BY currency;
--- Resultado documentado: Total $278,300.02 vs $264,745.87
--- Diferencia de $13,554.15 explicada por: POL-000041 ($7,215.12) + POL-000047 ($6,339.03)

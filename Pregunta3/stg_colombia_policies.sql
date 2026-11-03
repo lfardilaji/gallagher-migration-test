@@ -8,4 +8,4 @@ select
     try_to_date(end_date, 'DD/MM/YYYY') as end_date,
     lower(status) as policy_status,
     'CO' as country_code
-from {{ source('raw_latam', 'policies_colombia') }}
+from {{ source('raw_colombia', 'policies') }}
