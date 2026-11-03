@@ -105,14 +105,13 @@ Se identificaron **50 pólizas en origen (`legacy`)** y **49 en destino (`target
 | **Pólizas huérfanas (sin cliente en `accounts`)** | `POL-000008` en destino |
 
 ### Decisiones Técnicas en SQL
-- **Comparación segura ante nulos (`EQUAL_NULL`):** Un valor `NULL` en un solo lado se detecta inmediatamente como discrepancia; `NULL` en ambos lados se evalúa como igualdad.
-- **Cruce simétrico (`FULL OUTER JOIN`):** Permite detectar tanto pérdidas en la extracción (`MISSING_TARGET`) como inyecciones no autorizadas en destino (`MISSING_SOURCE`).
-- **Deduplicación preventiva (`QUALIFY ROW_NUMBER()`):** Evita que eventuales duplicados generen un producto cartesiano que distorsione las sumas de primas.
-
+- **Comparación segura de atributos (`IS NOT DISTINCT FROM`):** Se utiliza este operador nativo de Snowflake para evaluar la igualdad campo a campo, asegurando que un valor `NULL` en ambos lados se trate correctamente como coincidencia (`OK`), mientras que cualquier asimetría dispare una discrepancia (`ERROR`).
+- **Auditoría modular y simétrica:** Se emplea una combinación de `LEFT JOIN` (para aislar registros faltantes en destino como `MISSING_TARGET`) y consultas de exclusión cruzada (para detectar excesos no autorizados como `EXTRA_IN_TARGET`), garantizando un control volumétrico y de integridad estricto.
+- **Deduplicación y trazabilidad de diferencias (`CONCAT` / `IFF`):** Construcción de dinámicas de campos disímiles (`fields_with_differences`) para identificar exactamente qué atributo a nivel de columna (ej. `premium`, `client_id`, `start_date`) causó la variación financiera o de negocio.
 ### 📸 Evidencias Gráficas y Archivos de Ejecución
 
 2.1. **Conteo Volumétrico (Comparativa de registros totales):**
-![Conteo Total](Pregunta2/Conteo_Total.png)
+![1](Pregunta2/1.png)
 
 2.2. **Control de Nulos en Origen y Destino:**
 ![Control de Nulos](Pregunta2/Nulos_source_dest.png)
