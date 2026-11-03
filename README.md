@@ -203,17 +203,16 @@ graph LR
     E --> G
     F --> G
     G --> H
-
 ```
+
 ## 🏛️ 2. Arquitectura en Capas y Responsabilidades
 
 | Capa | Materialización | Responsabilidad Técnica |
 | :--- | :---: | :--- |
 | **Sources (`_sources.yml`)** | Tablas RAW | Declaración modular por esquema (`raw_peru`, `raw_chile`, `raw_colombia`) con monitoreo de frescura (*freshness*) y control de carga (`_loaded_at`). |
 | **Staging (`models/staging/`)** | Vistas (`view`) | Estandarización de tipos (`try_to_date`), conversión de texto a mayúsculas/minúsculas, mapeo de `policy_id` a `policy_key`, inyección del código de país (`country_code`) y manejo seguro de nulos (`coalesce(premium, 0)`). Utilizan la referencia `source('raw_<pais>', 'policies')`. |
-| **Intermediate (`models/intermediate/`)** | Efímero (`ephemeral`) | Unificación estructural (`UNION ALL`) de los tres países mediante el modelo [`int_latam_policies_unioned.sql`](Pregunta3/int_latam_policies_unioned.sql). |
-| **Marts (`models/marts/`)** | Tabla (`table`) | Construcción de [`fact_policy.sql`](Pregunta3/fact_policy.sql) generando llaves subrogadas mediante `dbt_utils.generate_surrogate_key` a partir de `country_code` y `policy_key`. |
-
+| **Intermediate (`models/intermediate/`)** | Efímero (`ephemeral`) | Unificación estructural (`UNION ALL`) de los tres países mediante el modelo [`int_latam_policies_unioned.sql`](models/intermediate/int_latam_policies_unioned.sql). |
+| **Marts (`models/marts/`)** | Tabla (`table`) | Construcción de [`fact_policy.sql`](models/marts/fact_policy.sql) generando llaves subrogadas mediante `dbt_utils.generate_surrogate_key` a partir de `country_code` y `policy_key`. |
 
 ### 🛡️ 3. Calidad de Datos, Tests y Contratos en dbt (`_marts.yml`)
 
@@ -223,14 +222,53 @@ Para garantizar la gobernanza del modelo corporativo `fact_policy`, se implement
 - **Tipado Estricto:** Definición explícita de tipos de datos (`varchar`, `number`, `date`, `timestamp_ntz`) alineados con la estructura generada en Snowflake.
 
 ### 📂 4. Estructura de Archivos del Proyecto
+
+Implementación estandarizada siguiendo las mejores prácticas de dbt (Medallion Architecture):
+
 ```text
 Pregunta3/
-├── _marts.yml
-├── _sources.yml
-├── fact_policy.sql
-├── int_latam_policies_unioned.sql
-└── stg_colombia_policies.sql
+├── dbt_project.yml          # Configuración principal y materialización por carpetas
+├── packages.yml             # Declaración de dependencias (dbt_utils)
+├── profiles.yml.example     # Plantilla segura de conexión a Snowflake
+└── models/
+    ├── staging/
+    │   ├── _sources.yml
+    │   ├── stg_peru_policies.sql
+    │   ├── stg_chile_policies.sql
+    │   └── stg_colombia_policies.sql
+    ├── intermediate/
+    │   └── int_latam_policies_unioned.sql
+    └── marts/
+        ├── _marts.yml
+        └── fact_policy.sql
 ```
+
+### 🚀 5. Puesta en Marcha (Setup Local)
+
+Para ejecutar y compilar este proyecto localmente, sigue estos pasos desde la carpeta `Pregunta3/`:
+
+1. **Crear y activar entorno virtual:**
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate  # En Windows
+   pip install dbt-snowflake
+   ```
+2. **Configurar credenciales:**
+   Copia el archivo de plantilla `profiles.yml.example`, renómbralo a `profiles.yml` y reemplaza los valores con tus credenciales o token de acceso a Snowflake.
+3. **Instalar dependencias y compilar:**
+   ```bash
+   dbt deps                     # Descarga dbt_utils
+   dbt compile --profiles-dir . # Compila el código SQL verificando referencias
+   dbt build --profiles-dir .   # Ejecuta modelos y tests en Snowflake
+   ```
+### 💡 6. Impacto y Valor de Negocio
+
+La adopción de esta arquitectura Medallón con dbt transforma el procesamiento de pólizas regionales en un producto de datos robusto y gobernable:
+* **Escalabilidad (Plug & Play):** Integrar las operaciones de un nuevo país en el futuro solo requerirá crear su vista estandarizada en la capa `staging` y añadirlo al modelo `intermediate`, sin afectar ni romper la tabla de hechos corporativa.
+* **Gobernanza y Prevención de Errores:** La implementación de contratos de datos y tests (integridad y dominio) asegura que cualquier anomalía en los orígenes (llaves nulas, monedas o estados de póliza inválidos) detenga el pipeline antes de contaminar los tableros de BI.
+* **Única Fuente de Verdad (OneSource):** Se elimina la lógica fragmentada por país, consolidando todas las métricas en un estándar corporativo único, tipado, autotestéable y listo para consumo analítico.
+
+   
 ## 🏗️ Punto 4: Propuesta de Arquitectura y Estrategia de Migración End-to-End
 
 ### 1. Arquitectura de Datos y Stack Tecnológico Propuesto (Flujo de 11 Pasos)
