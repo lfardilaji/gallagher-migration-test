@@ -208,3 +208,20 @@ graph LR
 | **Staging (`models/staging/`)** | Vistas (`view`) | Estandarización de tipos (`try_to_date`), conversión de texto a mayúsculas/minúsculas, mapeo de `policy_id` a `policy_key`, inyección del código de país (`country_code`) y manejo seguro de nulos (`coalesce(premium, 0)`). Utilizan la referencia `source('raw_<pais>', 'policies')`. |
 | **Intermediate (`models/intermediate/`)** | Efímero (`ephemeral`) | Unificación estructural (`UNION ALL`) de los tres países mediante el modelo [`int_latam_policies_unioned.sql`](Pregunta3/int_latam_policies_unioned.sql). |
 | **Marts (`models/marts/`)** | Tabla (`table`) | Construcción de [`fact_policy.sql`](Pregunta3/fact_policy.sql) generando llaves subrogadas mediante `dbt_utils.generate_surrogate_key` a partir de `country_code` y `policy_key`. |
+
+
+### 🛡️ 3. Calidad de Datos, Tests y Contratos en dbt (`_marts.yml`)
+
+Para garantizar la gobernanza del modelo corporativo `fact_policy`, se implementó un contrato de datos estricto (`contract: { enforced: true }`) junto con pruebas automatizadas ejecutadas mediante `dbt build`:
+- **Pruebas de Integridad:** Tests de `unique` y `not_null` sobre la llave subrogada `policy_sk`.
+- **Pruebas de Dominio:** Validación de valores permitidos (`accepted_values`) en las columnas `currency` (`USD`, `PEN`, `CLP`, `COP`) y `policy_status` (`ACTIVE`, `INACTIVE`, `CANCELLED`).
+- **Tipado Estricto:** Definición explícita de tipos de datos (`varchar`, `number`, `date`, `timestamp_ntz`) alineados con la estructura generada en Snowflake.
+
+### 📂 4. Estructura de Archivos del Proyecto
+```text
+Pregunta3/
+├── _marts.yml
+├── _sources.yml
+├── fact_policy.sql
+├── int_latam_policies_unioned.sql
+└── stg_colombia_policies.sql
