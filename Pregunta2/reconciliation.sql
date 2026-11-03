@@ -136,3 +136,21 @@ SELECT
     validation_status,
     NULLIF(fields_with_differences, '') AS fields_with_differences
 FROM comparison;
+
+
+--------------------------------------------------------------------------------
+-- 8. CONCILIACIÓN FINANCIERA POR MONEDA (Suma de Primas Origen vs Destino)
+--------------------------------------------------------------------------------
+SELECT 
+    currency,
+    SUM(IFF(side = 'S', premium, 0)) AS premium_source,
+    SUM(IFF(side = 'T', premium, 0)) AS premium_target,
+    premium_source - premium_target AS diff
+FROM (
+    SELECT 'S' AS side, currency, premium FROM GALLAGHER.PUBLIC.legacy_policies
+    UNION ALL
+    SELECT 'T' AS side, currency, premium FROM GALLAGHER.PUBLIC.target_policies
+)
+GROUP BY currency;
+-- Resultado documentado: Total $278,300.02 vs $264,745.87
+-- Diferencia de $13,554.15 explicada por: POL-000041 ($7,215.12) + POL-000047 ($6,339.03)
