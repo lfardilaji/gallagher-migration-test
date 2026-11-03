@@ -231,33 +231,34 @@ Pregunta3/
 ├── int_latam_policies_unioned.sql
 └── stg_colombia_policies.sql
 ```
-## 🏗️ Punto 4: Arquitectura End-to-End para la Incorporación de un Nuevo País (OPTIMA LATAM)
+## 🏗️ Punto 4: Propuesta de Arquitectura y Estrategia de Migración End-to-End
 
-### 📊 1. Diagrama de Arquitectura de Alto Nivel
+### 1. Arquitectura de Datos y Stack Tecnológico Propuesto (Flujo de 11 Pasos)
 
+Para mitigar los riesgos inherentes a una migración masiva de 12 millones de registros transaccionales (~7 GB base), se adopta una arquitectura agnóstica y *Open Source* con portabilidad en la nube. El flujo de datos sigue un ciclo de vida estricto de 11 fases:
 
+**Diagrama de Arquitectura de Migración:**
 ![Arquitectura de Migración](Pregunta4/arquitectura_migracion_optima.jpeg)
 
+| # | Fase del Pipeline | Tecnología Seleccionada | Justificación Técnica y Operativa |
+| :-: | :--- | :--- | :--- |
+| **1** | **Source (Origen)** | RDBMS (PostgreSQL / Oracle / MySQL) | Extracción respetando la cascada relacional (Clientes $\rightarrow$ Pólizas $\rightarrow$ Ítems $\rightarrow$ Endosos) para evitar bloqueos transaccionales en el legado. |
+| **2** | **Extracción** | Apache Airflow / Python | Orquestación mediante particionado de lotes (por rango de ID o fechas) para una lectura paralela eficiente. |
+| **3** | **Landing / RAW** | MinIO / Ceph S3 | Almacenamiento inmutable (*Bronze*) en formato Parquet comprimido con Snappy, garantizando rápida ingesta y bajo costo de almacenamiento. |
+| **4** | **Profiling** | Python (Pandas / Polars) | Análisis exploratorio rápido para detección temprana de valores nulos, anomalías de cardinalidad y formatos de fecha invertidos. |
+| **5** | **Data Quality** | Great Expectations | Declaración de aserciones estables para certificar la integridad estructural y reglas de negocio antes de la transformación. |
+| **6** | **Mapping** | dbt Seeds | Homologación estática de catálogos (ramos, monedas locales a USD, estados corporativos) requeridos por el destino. |
+| **7** | **Transformación** | dbt Core | Modelado SQL modular (Staging $\rightarrow$ Intermediate $\rightarrow$ Marts) con generación de llaves subrogadas (Surrogate Keys) y linaje automático. |
+| **8** | **Migración** | Pipeline ELT / `MERGE INTO` | Mecanismo de inyección idempotente. Permite realizar cargas masivas iniciales (T-1) y sincronizaciones incrementales (*Delta Sync*) sin duplicar registros. |
+| **9** | **Destination** | OPTIMA LATAM (Lakehouse) | Almacenamiento final unificado (Trino / ClickHouse / Snowflake) preparado para consumo analítico y operativo del core de seguros. |
+| **10** | **Reconciliation** | Engine SQL / Python | Cuadre contable y volumétrico (*Origen = Destino + Cuarentena*), comparando la suma de primas ($\sum$ Premium) y firmas *Hash SHA-256*. |
+| **11** | **Reporting & Observability** | Apache Superset / Metabase + Grafana | Tableros visuales para el seguimiento del pipeline y emisión del certificado formal de aceptación (Go/No-Go). |
+
+> **Nota de Tolerancia a Fallos (DLQ / Cuarentena):** Entre los pasos 5 y 9, cualquier registro que incumpla las reglas de calidad es derivado a una *Dead Letter Queue (DLQ)* (PostgreSQL / MinIO). Allí se almacena el payload en crudo (JSON) junto con el código de falla y timestamp para su análisis y reproceso idempotente, aislando el error sin detener el pipeline general.
+
 ---
 
-### 🏛️ 2. Descripción de Componentes y Stack Tecnológico (Alineado con OneSource / Snowflake)
-
-| # | Componente | Rol / Función en la Solución | Tecnología Seleccionada | Criterio de Selección |
-| :---: | :--- | :--- | :--- | :--- |
-| **1** | **Origen (Source)** | Sistemas legados transaccionales del nuevo país. | PostgreSQL / Oracle / SQL Server | Integridad relacional transaccional nativa de los legados. |
-| **2** | **Extracción** | Orquestación y carga por lotes particionados por rango de ID/fecha. | Airflow + Python | Portabilidad y control fino de dependencias y reintentos. |
-| **3** | **Landing / RAW (Bronze)** | Capa de almacenamiento inmutable en crudo (Parquet Snappy). | Snowflake Internal Stages + Parquet | **Coherencia con P3**: Evita duplicar infraestructura y usar almacenamiento externo innecesario. |
-| **4** | **Profiling** | Análisis automatizado de calidad estructural y de dominio (nulos, formatos, cardinalidad). | Python (Pandas / Polars) | Agilidad y flexibilidad para el perfilamiento inicial en crudo. |
-| **5** | **Data Quality** | Validación declarativa de reglas de negocio antes de transformar. | Great Expectations / dbt Tests | Estandarización de gobierno de datos corporativo. |
-| **6** | **Mapping** | Homologación de catálogos, monedas, estados y ramos. | dbt Seeds / Tablas de Referencia | Integración nativa dentro del flujo de dbt. |
-| **7** | **Transformación** | Modelado modular en capas (Staging $\rightarrow$ Marts) con Surrogate Keys. | dbt Core sobre Snowflake | Con **12 millones de registros (~7 GB)**, Snowflake procesa esto de forma nativa y eficiente sin sobrecostos de clústeres externos. |
-| **8** | **Migración (Sink)** | Generación de lotes por entidad y carga transaccional hacia el destino. | Generador de Lotes / Python | Estructura las cargas respetando la cascada relacional exigida por el core. |
-| **9** | **Destino (OPTIMA LATAM)** | Sistema transaccional final (core de pólizas) que recibe la carga y valida reglas de negocio mediante APIs o utilitarios nativos, retornando rechazos operativos. | OPTIMA LATAM Core + APIs / Utilitarios de Carga | Integración oficial con el sistema operativo de destino especificado en la prueba. |
-| **10** | **Conciliación** | Verificación cruzada (Origen vs. Destino + DLQ) con sumas de primas y hashes SHA-256. | Motor SQL / Python | Trazabilidad exacta de cada centavo y póliza migradas. |
-| **11** | **Reporting & Observability** | Cuadros de mando, métricas de avance y certificación formal (*Go/No-Go*). | Superset / Metabase + Prometheus / Grafana | Visibilidad operativa y de negocio en tiempo real. |
----
-
-### ⚙️ 3. Estrategias Técnicas Clave
+### 2. Decisiones de Diseño y Estrategia de Migración
 
 #### A. Procesamiento de Grandes Volúmenes de Datos (Cascada Relacional)
 - **Procesamiento por Lotes y Particionado:** Dada la alta cantidad de registros (**8M de ítems**), la extracción y transformación se ejecutan respetando estrictamente la cascada relacional: primero `Clientes` (500k) $\rightarrow$ luego `Pólizas` (2M) $\rightarrow$ después `Ítems` (8M) $\rightarrow$ y finalmente `Endosos` (1.5M). Esto evita desalineaciones de llaves foráneas.
@@ -265,12 +266,22 @@ Pregunta3/
 
 #### B. Control de Calidad de Datos (Data Quality)
 - **Validación en Dos Fases:** 
-  1. *Profiling inicial* con scripts en Python para detectar anomalías de tipos y nulos en la capa inicial.
-  2. *Validación estricta* mediante **Great Expectations** y pruebas nativas de **dbt** antes de la migración para asegurar la integridad referencial.
+  1. *Profiling inicial* con scripts en Python para detectar anomalías estructurales, tipos de datos y valores nulos en la zona de aterrizaje (*Landing/Raw*).
+  2. *Validación estricta en pipeline* mediante pruebas nativas de dbt, restricciones de contrato (`contract: enforced`) y el paquete **dbt-expectations** para certificar la integridad referencial antes del empaquetado final.
 
-#### C. Gestión de Errores y Reprocesamiento (DLQ / Cuarentena)
-- **Manejo de Registros Huérfanos:** Los registros que no cumplan con las reglas de validación o no tengan un registro padre asociado no se descartan silenciosamente; son desviados automáticamente a una **Tabla de Cuarentena (DLQ) en Snowflake**.
-- **Reprocesamiento Idempotente:** La tabla de cuarentena almacena el payload en formato JSON junto con el código de error y el timestamp. Una vez corregidos los datos en origen, se dispara un re-proceso idempotente aplicando operaciones `MERGE INTO`.
+#### C. Criterios Go/No-Go del Corte y Plan de Reversa
+
+Para la ventana de corte de migración hacia OPTIMA, no se admiten umbrales porcentuales genéricos. La decisión de salida a producción se rige por los siguientes criterios obligatorios:
+
+- **Criterios Go/No-Go del corte:**
+  - **100 % de registros conciliados**, o cada diferencia restante explicada matemáticamente y aprobada por escrito por el dueño de negocio (*Data Owner*).
+  - **Suma de primas por moneda igual en origen y destino** (varianza contable neta de $0.00 tras aplicar saneamientos).
+  - **0 registros clasificados como `CRITICAL`** retenidos en la tabla de cuarentena.
+  - **2 ensayos completos de migración (*mock migrations*)** ejecutados exitosamente en el entorno de pruebas previo al fin de semana de corte.
+
+- **Plan de Reversa (*Rollback Plan*):**
+  - Durante la ventana de ejecución, la base de datos origen permanece en modo de solo lectura (*read-only*).
+  - Si se incumple cualquiera de los criterios Go/No-Go al alcanzar el punto de no retorno (*Point of No Return*), se descartan los lotes cargados en OPTIMA vía API/staging y se restablece de inmediato la operatividad transaccional en el sistema legado sin pérdida de continuidad operativa.
 
 #### D. Migración Incremental y por Lotes
 - **Estrategia en 3 Fases:**
@@ -280,10 +291,10 @@ Pregunta3/
 
 #### E. Conciliación entre Origen y Destino
 - **Cruce Automatizado:** Se ejecuta una consulta de conciliación que compara conteos absolutos de registros, cruces por ID y funciones de resumen (`SUM(Premium)`) utilizando firmas de control para garantizar que ni un solo centavo ni póliza se pierda en el tránsito.
-- **Estados de Salida:** El reporte final entrega una matriz estandarizada (`OK`, `ERROR`, `MISSING_TARGET`) idéntica a la solicitada en los requerimientos del negocio[cite: 6].
+- **Estados de Salida:** El reporte final entrega una matriz estandarizada (`OK`, `ERROR`, `MISSING_TARGET`) idéntica a la solicitada en los requerimientos del negocio.
 
 #### F. Seguridad y Gobierno
-- **Protección PII:** Enmascaramiento y cumplimiento normativo de datos sensibles de clientes alineado con las leyes de privacidad de la región (Perú Ley 29733, Colombia Ley 1581, Chile Ley 19.628).
+- **Protección PII:** Enmascaramiento dinámico en Snowflake y cumplimiento normativo de datos sensibles de clientes alineado con las leyes de privacidad de la región (Perú Ley 29733, Colombia Ley 1581 de 2012, Chile Ley 19.628 y su reforma Ley 21.719).
 - **Linaje y Trazabilidad:** Documentación automática del flujo de datos mediante *dbt docs* y control total de versiones en Git.
 
 #### G. Estrategia de Carga Transaccional hacia OPTIMA LATAM (Core de Pólizas)
