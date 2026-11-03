@@ -1,22 +1,1686 @@
 ======================================================================
- REPORTE DE CALIDAD DE DATOS - LOG DE EJECUCIÓN
- Timestamp de Ejecución: 2026-11-01 11:25:37
+ REPORTE DE CALIDAD DE DATOS - LOG DE EJECUCIÓN (ISO/IEC 25012)
+ Timestamp de Ejecución: 2026-11-02 19:06:50
 ======================================================================
 
-Resumen General: Se detectaron 1 incidencias totales.
+--- RESUMEN DE ESTADO DE REGLAS ---
+ * Regla: Malformed_Email | Dataset: accounts | Estado: FAILED | Fallidos: 100
+ * Regla: Duplicate_Document | Dataset: accounts | Estado: FAILED | Fallidos: 2
+ * Regla: Duplicate_Email | Dataset: accounts | Estado: ERROR | Fallidos: 0
+ * Regla: Invalid_Document_Length | Dataset: accounts | Estado: FAILED | Fallidos: 3
+ * Regla: Country_Document_Mismatch | Dataset: accounts | Estado: FAILED | Fallidos: 98
+ * Regla: Sentinel_Phone | Dataset: accounts | Estado: FAILED | Fallidos: 51
+ * Regla: Invalid_Birthdate_Range | Dataset: accounts | Estado: FAILED | Fallidos: 2
+ * Regla: Underage_At_Creation | Dataset: accounts | Estado: FAILED | Fallidos: 5
+ * Regla: Invalid_Created_Date | Dataset: accounts | Estado: PASSED | Fallidos: 0
+ * Regla: Invalid_Policy_Dates | Dataset: legacy_policies | Estado: PASSED | Fallidos: 0
+ * Regla: Invalid_Policy_Dates | Dataset: target_policies | Estado: PASSED | Fallidos: 0
+ * Regla: Active_Policy_Inactive_Client | Dataset: target_policies | Estado: FAILED | Fallidos: 3
+ * Regla: Future_Start_Date | Dataset: target_policies | Estado: FAILED | Fallidos: 11
+ * Regla: Orphan_Policy | Dataset: target_policies | Estado: FAILED | Fallidos: 1
+ * Regla: Policy_Before_Client_Creation | Dataset: target_policies | Estado: PASSED | Fallidos: 0
+
+======================================================================
 
 --- Dataset Evaluado: ACCOUNTS ---
-Status: ⚠️ ATENCIÓN (1 registros con errores)
-  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+Status: ⚠️ ATENCIÓN (261 registros con errores)
+  * Registro ID   : 0141a173-f132-4d9b-b0d3-df067104363f
+    Dimensión     : Validez
+    Severidad     : WARNING
     Regla Fallida : Malformed_Email
-    Descripción   : Formato de email inválido (falta el @).
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 0e819e98-43aa-4074-912d-56aa4f46c3c5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 0eeebf2d-645e-4e27-8151-9babb5a797aa
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 118cceec-86dc-4bd2-a9a9-75d16ad2abad
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 11f9c0d3-fd29-4f53-ac18-263755d10161
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 18cde18e-057d-4b5d-bd44-c251a303f996
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 1bd3d2f4-9dd1-41b0-a343-bae6f062eadf
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 20ebc30d-480a-43c3-ba99-7133e10b9050
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 317bd867-d03e-43c6-8d5e-6b1d2be592e7
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 334d60ac-f38c-4566-acd2-cd7e572ae50b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 3ac95e26-642e-4644-972a-a5409508d138
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 3cf81ffe-2ff1-46ca-a4f2-35e08366cc1b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 400e1169-4b31-4193-a096-188d145449d8
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 41074e70-5256-45a4-abe3-e19f14e6bdd9
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4558f982-992d-4e13-b613-5995b8cd6cc2
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4ae3ccd3-9605-469e-aeb4-5feee0d042d4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4c7e43df-9e4d-4d14-aca4-4a10b72f3cc7
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4ef0b0f7-a269-4a06-98f9-67d9cf0c1f81
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4f10d946-c666-4b6e-bb96-0bd976812349
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 4ff442b9-e892-44ec-ac3f-6479b3fc11dc
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 55d800b7-04bb-4d8f-a735-45f361e7e479
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 5997adac-630f-4704-a506-5d8a38e1fb6c
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 60868b3a-ec6b-4b0b-8433-6a01adc62be7
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 60e11cce-c8c9-47b1-8e8d-41436a75be5b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 626f26c0-df6c-45bc-9060-ae4ac500f22e
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 63f46ed8-bb16-461b-9714-2cd4992bf4dc
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 656d9dea-912b-49f6-98d3-01c38ce0e496
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 685bd3c2-f8cb-4b37-8d5e-2cc07bbc46a0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 6bfe2c33-ee83-4593-9ff1-f611936f7c90
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 6fd74613-ef09-4a7a-b0e2-63cce00154f4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 7096dd2d-1d9f-4ad1-ad95-42bf4de514be
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 72242518-7d2f-4514-9084-2063f20f8d16
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 766836db-327b-4a92-a883-30334eee69af
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 77965cec-f195-4862-ac67-a8bba36fac17
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 7c94010f-cecd-4c48-9318-3560f745e784
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 82783854-39c6-4120-93a7-75695eb613e9
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 829ec322-d9e9-44ba-a684-ba1e7bf1b641
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 86c492df-5a6d-44dd-93a6-ba54dacc1da5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8a17f83d-6b67-433f-ae79-6ad0823bb348
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8adcbe9c-c1f4-4e18-919e-558627c42f0d
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8b13967e-e6d2-437c-bc26-396d98e58b22
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8c110455-e065-469b-8bad-d22a5633ced7
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8ec825bd-a504-4888-9c8a-400fab2ec2d0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 92a3686c-64e0-4bf7-a15a-e04643f9aa31
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 940f4b45-1e87-46b0-844f-667bdb6de98f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 941f1be1-cb3f-4b14-87aa-e03dad4da677
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 9432716c-e1df-4577-a5dc-12ffd734678a
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 982895f5-747e-40f7-b5e5-d257c71306fb
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 9ad3db92-fc35-44ed-9db4-a5d1421cff2c
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 9cd82982-3e6c-462e-8eb9-3363ed8ce2d9
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a0936ce8-4300-4a25-a430-e6d094622d90
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a1c3c04c-4e77-403e-9415-ef284bed6d65
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a4df057c-1bd1-48f3-94dd-79021634d73f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a523e5b2-a935-44c0-a660-f4c79ceb76e6
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a715e7ae-d791-43dc-a54f-cab0b41d133b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : a8a11cd4-8a13-4466-9f80-ef124a4d1d08
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : aa6447c9-0633-4f85-aceb-d796c868b6fc
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : ac394bee-21e1-440f-a9b6-4748c56397ad
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : b114f1dc-9943-4748-94e5-6e2059af2874
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : b2f2d04e-cc59-43d1-b842-a20648ed8142
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : b5ca1adb-2872-4f3a-be21-e20cd5337d65
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : bdd05c33-612d-45e1-8a93-1688e28a772e
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : be3c71e0-6526-4e84-acb5-426fc9f83063
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : c44ff934-a250-4ac0-ba33-141b91514b4f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : c4bcfcde-5c56-46d3-bf9e-b6642b638ac2
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : c74d0b01-82c5-4411-8283-d652e72bb3fe
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : caef601c-5be8-4bdf-a1ad-77dcf46bfa43
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : cec66d64-76a7-4a6c-9d08-a9b82e081c3e
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d184e6c9-18d2-4dec-9846-abfea1a720ff
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d1ea6cb1-3d16-4b3a-8324-2aa39a3a72b0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d3887bc0-10e9-4301-a741-feb46ec372cd
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d4b3f57d-c42d-45ea-a5fb-8f1652c51317
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d547bdf4-f511-42a5-a1cb-e529254358f3
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d6bf934d-39fe-435a-8db5-7abd588766a1
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d7974b60-122f-48f3-b64e-636bfd9d4217
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : d967fd9e-9ee4-49d6-a535-e64ec7f25668
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : dc15bace-198e-443f-8054-a6c94364898d
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : df449f2d-95f9-4ed8-8312-d2179b30ce09
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : dfc2331a-825e-44cc-9736-49924c61001c
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e04d58f8-4e2e-4459-9cfe-d6d2ecc44058
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e1e661f7-7031-4f22-a5d1-7bdac12b1d56
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e2f844b6-584b-4fe8-875f-4638e350a47a
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e61b82c1-2197-409a-b76d-e37cd78da27f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e6fa7a58-9024-4ea8-ac16-714dbdbb1ba0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e76bc5bc-841f-471d-9207-304afdec8bf4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e88f6b10-f52f-47fb-96bb-41751a1f5cd1
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e8ab8976-3ebe-4253-b4e6-6f7f14d9d953
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : e9bece97-f56d-4dc0-8147-a968b215d759
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : ebe7eb34-3b4d-4840-8d2a-ede1a80cdae1
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : edb30bbc-732d-40df-8b78-41a7ab5bb375
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : f30e4d23-6ca5-4c9d-92f0-570fd0e3ddef
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : f56bf605-d021-447f-9bbb-d93f52809904
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : f7734da1-8ed0-41e1-baee-d5e02fb7b557
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : f8e10906-04c3-407c-be9d-9afbbf71221e
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : fb0528d6-1833-4943-b4a5-a15f687e237c
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : fcbcbd93-85ff-4439-aa36-af7938514db5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : fdc90613-79ba-441c-bde8-5ffcd7f9eb51
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : fe982231-1e03-4130-8c98-f427aad945dc
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : ff6dd57a-6595-4158-834b-e23304cb4e80
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Malformed_Email
+    Descripción   : Formato de email inválido o dominio placeholder (@example.com).
+--------------------------------------------------
+  * Registro ID   : 8a17f83d-6b67-433f-ae79-6ad0823bb348
+    Dimensión     : Unicidad
+    Severidad     : CRITICAL
+    Regla Fallida : Duplicate_Document
+    Descripción   : Combinación de tipo y número de documento duplicada.
+--------------------------------------------------
+  * Registro ID   : 9ad3db92-fc35-44ed-9db4-a5d1421cff2c
+    Dimensión     : Unicidad
+    Severidad     : CRITICAL
+    Regla Fallida : Duplicate_Document
+    Descripción   : Combinación de tipo y número de documento duplicada.
+--------------------------------------------------
+  * Registro ID   : 63f46ed8-bb16-461b-9714-2cd4992bf4dc
+    Dimensión     : Validez
+    Severidad     : CRITICAL
+    Regla Fallida : Invalid_Document_Length
+    Descripción   : Longitud de documento de identidad anómala (5, 6 u 11 dígitos).
+--------------------------------------------------
+  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+    Dimensión     : Validez
+    Severidad     : CRITICAL
+    Regla Fallida : Invalid_Document_Length
+    Descripción   : Longitud de documento de identidad anómala (5, 6 u 11 dígitos).
+--------------------------------------------------
+  * Registro ID   : b114f1dc-9943-4748-94e5-6e2059af2874
+    Dimensión     : Validez
+    Severidad     : CRITICAL
+    Regla Fallida : Invalid_Document_Length
+    Descripción   : Longitud de documento de identidad anómala (5, 6 u 11 dígitos).
+--------------------------------------------------
+  * Registro ID   : 0141a173-f132-4d9b-b0d3-df067104363f
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 0e819e98-43aa-4074-912d-56aa4f46c3c5
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 0eeebf2d-645e-4e27-8151-9babb5a797aa
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 118cceec-86dc-4bd2-a9a9-75d16ad2abad
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 11f9c0d3-fd29-4f53-ac18-263755d10161
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 18cde18e-057d-4b5d-bd44-c251a303f996
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 1bd3d2f4-9dd1-41b0-a343-bae6f062eadf
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 20ebc30d-480a-43c3-ba99-7133e10b9050
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 317bd867-d03e-43c6-8d5e-6b1d2be592e7
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 3ac95e26-642e-4644-972a-a5409508d138
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 3cf81ffe-2ff1-46ca-a4f2-35e08366cc1b
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 400e1169-4b31-4193-a096-188d145449d8
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 41074e70-5256-45a4-abe3-e19f14e6bdd9
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4558f982-992d-4e13-b613-5995b8cd6cc2
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4ae3ccd3-9605-469e-aeb4-5feee0d042d4
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4c7e43df-9e4d-4d14-aca4-4a10b72f3cc7
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4ef0b0f7-a269-4a06-98f9-67d9cf0c1f81
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4f10d946-c666-4b6e-bb96-0bd976812349
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 4ff442b9-e892-44ec-ac3f-6479b3fc11dc
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 55d800b7-04bb-4d8f-a735-45f361e7e479
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 5997adac-630f-4704-a506-5d8a38e1fb6c
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 60868b3a-ec6b-4b0b-8433-6a01adc62be7
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 60e11cce-c8c9-47b1-8e8d-41436a75be5b
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 626f26c0-df6c-45bc-9060-ae4ac500f22e
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 63f46ed8-bb16-461b-9714-2cd4992bf4dc
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 656d9dea-912b-49f6-98d3-01c38ce0e496
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 685bd3c2-f8cb-4b37-8d5e-2cc07bbc46a0
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 6bfe2c33-ee83-4593-9ff1-f611936f7c90
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 6fd74613-ef09-4a7a-b0e2-63cce00154f4
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 7096dd2d-1d9f-4ad1-ad95-42bf4de514be
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 72242518-7d2f-4514-9084-2063f20f8d16
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 766836db-327b-4a92-a883-30334eee69af
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 77965cec-f195-4862-ac67-a8bba36fac17
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 7c94010f-cecd-4c48-9318-3560f745e784
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 82783854-39c6-4120-93a7-75695eb613e9
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 829ec322-d9e9-44ba-a684-ba1e7bf1b641
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 86c492df-5a6d-44dd-93a6-ba54dacc1da5
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 8a17f83d-6b67-433f-ae79-6ad0823bb348
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 8adcbe9c-c1f4-4e18-919e-558627c42f0d
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 8b13967e-e6d2-437c-bc26-396d98e58b22
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 8c110455-e065-469b-8bad-d22a5633ced7
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 92a3686c-64e0-4bf7-a15a-e04643f9aa31
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 940f4b45-1e87-46b0-844f-667bdb6de98f
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 941f1be1-cb3f-4b14-87aa-e03dad4da677
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 9432716c-e1df-4577-a5dc-12ffd734678a
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 982895f5-747e-40f7-b5e5-d257c71306fb
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 9ad3db92-fc35-44ed-9db4-a5d1421cff2c
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 9cd82982-3e6c-462e-8eb9-3363ed8ce2d9
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a0936ce8-4300-4a25-a430-e6d094622d90
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a1c3c04c-4e77-403e-9415-ef284bed6d65
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a4df057c-1bd1-48f3-94dd-79021634d73f
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a523e5b2-a935-44c0-a660-f4c79ceb76e6
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a715e7ae-d791-43dc-a54f-cab0b41d133b
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : a8a11cd4-8a13-4466-9f80-ef124a4d1d08
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : aa6447c9-0633-4f85-aceb-d796c868b6fc
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : ac394bee-21e1-440f-a9b6-4748c56397ad
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : b114f1dc-9943-4748-94e5-6e2059af2874
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : b2f2d04e-cc59-43d1-b842-a20648ed8142
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : b5ca1adb-2872-4f3a-be21-e20cd5337d65
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : bdd05c33-612d-45e1-8a93-1688e28a772e
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : be3c71e0-6526-4e84-acb5-426fc9f83063
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : c44ff934-a250-4ac0-ba33-141b91514b4f
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : c4bcfcde-5c56-46d3-bf9e-b6642b638ac2
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : c74d0b01-82c5-4411-8283-d652e72bb3fe
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : caef601c-5be8-4bdf-a1ad-77dcf46bfa43
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : cec66d64-76a7-4a6c-9d08-a9b82e081c3e
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d184e6c9-18d2-4dec-9846-abfea1a720ff
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d1ea6cb1-3d16-4b3a-8324-2aa39a3a72b0
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d3887bc0-10e9-4301-a741-feb46ec372cd
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d4b3f57d-c42d-45ea-a5fb-8f1652c51317
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d547bdf4-f511-42a5-a1cb-e529254358f3
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d6bf934d-39fe-435a-8db5-7abd588766a1
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d7974b60-122f-48f3-b64e-636bfd9d4217
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : d967fd9e-9ee4-49d6-a535-e64ec7f25668
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : dc15bace-198e-443f-8054-a6c94364898d
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : df449f2d-95f9-4ed8-8312-d2179b30ce09
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : dfc2331a-825e-44cc-9736-49924c61001c
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e04d58f8-4e2e-4459-9cfe-d6d2ecc44058
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e1e661f7-7031-4f22-a5d1-7bdac12b1d56
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e2f844b6-584b-4fe8-875f-4638e350a47a
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e61b82c1-2197-409a-b76d-e37cd78da27f
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e6fa7a58-9024-4ea8-ac16-714dbdbb1ba0
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e76bc5bc-841f-471d-9207-304afdec8bf4
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e88f6b10-f52f-47fb-96bb-41751a1f5cd1
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e8ab8976-3ebe-4253-b4e6-6f7f14d9d953
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : e9bece97-f56d-4dc0-8147-a968b215d759
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : ebe7eb34-3b4d-4840-8d2a-ede1a80cdae1
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : edb30bbc-732d-40df-8b78-41a7ab5bb375
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : f30e4d23-6ca5-4c9d-92f0-570fd0e3ddef
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : f56bf605-d021-447f-9bbb-d93f52809904
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : f7734da1-8ed0-41e1-baee-d5e02fb7b557
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : f8e10906-04c3-407c-be9d-9afbbf71221e
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : fb0528d6-1833-4943-b4a5-a15f687e237c
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : fcbcbd93-85ff-4439-aa36-af7938514db5
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : fdc90613-79ba-441c-bde8-5ffcd7f9eb51
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : fe982231-1e03-4130-8c98-f427aad945dc
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : ff6dd57a-6595-4158-834b-e23304cb4e80
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Country_Document_Mismatch
+    Descripción   : Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú.
+--------------------------------------------------
+  * Registro ID   : 0e819e98-43aa-4074-912d-56aa4f46c3c5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 0eeebf2d-645e-4e27-8151-9babb5a797aa
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 11f9c0d3-fd29-4f53-ac18-263755d10161
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 1bd3d2f4-9dd1-41b0-a343-bae6f062eadf
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 20ebc30d-480a-43c3-ba99-7133e10b9050
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 334d60ac-f38c-4566-acd2-cd7e572ae50b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 3ac95e26-642e-4644-972a-a5409508d138
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 3cf81ffe-2ff1-46ca-a4f2-35e08366cc1b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 400e1169-4b31-4193-a096-188d145449d8
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 41074e70-5256-45a4-abe3-e19f14e6bdd9
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 4558f982-992d-4e13-b613-5995b8cd6cc2
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 4ae3ccd3-9605-469e-aeb4-5feee0d042d4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 4ef0b0f7-a269-4a06-98f9-67d9cf0c1f81
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 55d800b7-04bb-4d8f-a735-45f361e7e479
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 656d9dea-912b-49f6-98d3-01c38ce0e496
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 685bd3c2-f8cb-4b37-8d5e-2cc07bbc46a0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 6fd74613-ef09-4a7a-b0e2-63cce00154f4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 7096dd2d-1d9f-4ad1-ad95-42bf4de514be
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 73dd490c-d769-457f-82e7-54ac4edd0593
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 7c94010f-cecd-4c48-9318-3560f745e784
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 82783854-39c6-4120-93a7-75695eb613e9
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 829ec322-d9e9-44ba-a684-ba1e7bf1b641
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 86c492df-5a6d-44dd-93a6-ba54dacc1da5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 8adcbe9c-c1f4-4e18-919e-558627c42f0d
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 8c110455-e065-469b-8bad-d22a5633ced7
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 92a3686c-64e0-4bf7-a15a-e04643f9aa31
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : a1c3c04c-4e77-403e-9415-ef284bed6d65
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : a4df057c-1bd1-48f3-94dd-79021634d73f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : a523e5b2-a935-44c0-a660-f4c79ceb76e6
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : a715e7ae-d791-43dc-a54f-cab0b41d133b
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : a8a11cd4-8a13-4466-9f80-ef124a4d1d08
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : aa6447c9-0633-4f85-aceb-d796c868b6fc
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : b2f2d04e-cc59-43d1-b842-a20648ed8142
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : c74d0b01-82c5-4411-8283-d652e72bb3fe
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : caef601c-5be8-4bdf-a1ad-77dcf46bfa43
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d184e6c9-18d2-4dec-9846-abfea1a720ff
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d1ea6cb1-3d16-4b3a-8324-2aa39a3a72b0
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d4b3f57d-c42d-45ea-a5fb-8f1652c51317
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d547bdf4-f511-42a5-a1cb-e529254358f3
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d7974b60-122f-48f3-b64e-636bfd9d4217
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : d967fd9e-9ee4-49d6-a535-e64ec7f25668
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e04d58f8-4e2e-4459-9cfe-d6d2ecc44058
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e2f844b6-584b-4fe8-875f-4638e350a47a
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e61b82c1-2197-409a-b76d-e37cd78da27f
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e76bc5bc-841f-471d-9207-304afdec8bf4
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e88f6b10-f52f-47fb-96bb-41751a1f5cd1
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : e8ab8976-3ebe-4253-b4e6-6f7f14d9d953
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : f30e4d23-6ca5-4c9d-92f0-570fd0e3ddef
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : f56bf605-d021-447f-9bbb-d93f52809904
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : fcbcbd93-85ff-4439-aa36-af7938514db5
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : fdc90613-79ba-441c-bde8-5ffcd7f9eb51
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Sentinel_Phone
+    Descripción   : Teléfono de relleno o centinela repetido masivamente.
+--------------------------------------------------
+  * Registro ID   : 400e1169-4b31-4193-a096-188d145449d8
+    Dimensión     : Validez
+    Severidad     : CRITICAL
+    Regla Fallida : Invalid_Birthdate_Range
+    Descripción   : Fecha de nacimiento fuera de rango lógico (ej. años 1880 o 1893).
+--------------------------------------------------
+  * Registro ID   : 4c7e43df-9e4d-4d14-aca4-4a10b72f3cc7
+    Dimensión     : Validez
+    Severidad     : CRITICAL
+    Regla Fallida : Invalid_Birthdate_Range
+    Descripción   : Fecha de nacimiento fuera de rango lógico (ej. años 1880 o 1893).
+--------------------------------------------------
+  * Registro ID   : 11f9c0d3-fd29-4f53-ac18-263755d10161
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Underage_At_Creation
+    Descripción   : Titular menor de 18 años al momento de la creación de la cuenta.
+--------------------------------------------------
+  * Registro ID   : 77965cec-f195-4862-ac67-a8bba36fac17
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Underage_At_Creation
+    Descripción   : Titular menor de 18 años al momento de la creación de la cuenta.
+--------------------------------------------------
+  * Registro ID   : 941f1be1-cb3f-4b14-87aa-e03dad4da677
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Underage_At_Creation
+    Descripción   : Titular menor de 18 años al momento de la creación de la cuenta.
+--------------------------------------------------
+  * Registro ID   : a1c3c04c-4e77-403e-9415-ef284bed6d65
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Underage_At_Creation
+    Descripción   : Titular menor de 18 años al momento de la creación de la cuenta.
+--------------------------------------------------
+  * Registro ID   : e2f844b6-584b-4fe8-875f-4638e350a47a
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Underage_At_Creation
+    Descripción   : Titular menor de 18 años al momento de la creación de la cuenta.
 --------------------------------------------------
 
---- Dataset Evaluado: LEGACY_POLICIES ---
-Status: ✅ OK (Sin anomalías detectadas)
-
-
 --- Dataset Evaluado: TARGET_POLICIES ---
-Status: ✅ OK (Sin anomalías detectadas)
-
+Status: ⚠️ ATENCIÓN (15 registros con errores)
+  * Registro ID   : POL-000010
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Active_Policy_Inactive_Client
+    Descripción   : Póliza en estado ACTIVE asociada a un cliente INACTIVE.
+--------------------------------------------------
+  * Registro ID   : POL-000034
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Active_Policy_Inactive_Client
+    Descripción   : Póliza en estado ACTIVE asociada a un cliente INACTIVE.
+--------------------------------------------------
+  * Registro ID   : POL-000049
+    Dimensión     : Consistencia
+    Severidad     : WARNING
+    Regla Fallida : Active_Policy_Inactive_Client
+    Descripción   : Póliza en estado ACTIVE asociada a un cliente INACTIVE.
+--------------------------------------------------
+  * Registro ID   : POL-000004
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000007
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000010
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000011
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000014
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000018
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000033
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000034
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000043
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000048
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000049
+    Dimensión     : Validez
+    Severidad     : WARNING
+    Regla Fallida : Future_Start_Date
+    Descripción   : Póliza ACTIVE con fecha de inicio futura.
+--------------------------------------------------
+  * Registro ID   : POL-000008
+    Dimensión     : Integridad Referencial
+    Severidad     : CRITICAL
+    Regla Fallida : Orphan_Policy
+    Descripción   : Póliza huérfana: el client_id no existe en la tabla accounts.
+--------------------------------------------------
 

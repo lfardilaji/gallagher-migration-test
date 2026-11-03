@@ -1,141 +1,330 @@
 import os
+import sys
+import logging
+import re
 from datetime import datetime
+from dataclasses import dataclass
+from typing import Callable, Dict
 import pandas as pd
+
+# Configuración formal de Logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+
+# Diccionario explícito de llaves primarias por dataset (Mejora T09)
+PRIMARY_KEYS = {
+    "accounts": "client_id",
+    "legacy_policies": "policy_id",
+    "target_policies": "policy_id"
+}
+
+@dataclass(frozen=True)
+class Rule:
+    """Estructura formal de una regla de calidad de datos basada en estándares ISO/IEC 25012."""
+    name: str
+    dimension: str          # Completitud, Unicidad, Validez, Integridad Referencial, Consistencia
+    severity: str           # CRITICAL (bloquea migración/cuarentena) o WARNING (bandera de auditoría)
+    dataset: str            # Dataset principal al que evalúa ('accounts', 'legacy_policies', 'target_policies')
+    key: str                # Columna de identificación única
+    check: Callable[[Dict[str, pd.DataFrame]], pd.DataFrame]  # Recibe TODOS los datasets y retorna errores
+    description: str        # Detalle explicativo de la regla
+
 
 class DataQualityFramework:
     """
-    Data Quality Framework para la migración a OPTIMA.
-    Permite registrar reglas de negocio y aplicarlas sobre DataFrames.
+    Data Quality Framework para la migración a OPTIMA con el set completo de 14 reglas de negocio.
     """
     def __init__(self):
         self.rules = []
 
-    def add_rule(self, rule_name: str, validation_func, description: str):
-        """Registra una nueva regla de validación."""
-        self.rules.append({
-            "name": rule_name,
-            "func": validation_func,
-            "description": description
-        })
+    def add_rule(self, rule: Rule):
+        """Registra una nueva regla estructurada de validación."""
+        self.rules.append(rule)
 
-    def run_validations(self, df: pd.DataFrame, dataset_name: str) -> pd.DataFrame:
-        """Aplica las reglas y retorna un DataFrame con los registros defectuosos."""
-        failure_reports = []
+    def run_validations(self, datasets: Dict[str, pd.DataFrame]):
+        """Ejecuta las reglas evaluando el diccionario global de datasets."""
+        summary = []
+        details = []
+        has_execution_errors = False
 
         for rule in self.rules:
+            df = datasets.get(rule.dataset)
+            if df is None or df.empty:
+                logging.warning(f"Dataset '{rule.dataset}' no encontrado o vacío para la regla '{rule.name}'.")
+                continue
+
             try:
-                failed_df = rule["func"](df)
+                failed_df = rule.check(datasets)
                 if not failed_df.empty:
+                    status = "FAILED"
                     failed_df = failed_df.copy()
-                    failed_df['failed_rule'] = rule["name"]
-                    failed_df['rule_description'] = rule["description"]
-                    failed_df['source_dataset'] = dataset_name
-                    failure_reports.append(failed_df)
-            except Exception as e:
-                print(f"ERROR: Fallo al ejecutar la regla '{rule['name']}' en {dataset_name}. Detalle: {e}")
+                    failed_df['rule'] = rule.name
+                    failed_df['dimension'] = rule.dimension
+                    failed_df['severity'] = rule.severity
+                    failed_df['rule_description'] = rule.description
+                    failed_df['source_dataset'] = rule.dataset
+                    details.append(failed_df)
+                else:
+                    status = "PASSED"
+            except Exception:
+                logging.exception(f"ERROR: Fallo crítico al ejecutar la regla '{rule.name}' en '{rule.dataset}'.")
+                status = "ERROR"
+                has_execution_errors = True
+                failed_df = pd.DataFrame()
 
-        if failure_reports:
-            return pd.concat(failure_reports, ignore_index=True)
-        return pd.DataFrame()
+            summary.append({
+                "rule": rule.name,
+                "dimension": rule.dimension,
+                "status": status,
+                "severity": rule.severity,
+                "dataset": rule.dataset,
+                "failed_count": len(failed_df) if not failed_df.empty else 0
+            })
+
+        summary_df = pd.DataFrame(summary)
+        details_df = pd.concat(details, ignore_index=True) if details else pd.DataFrame()
+        
+        return summary_df, details_df, has_execution_errors
 
 
-def generate_text_log(all_reports: dict, log_filename="dq_execution_log.txt"):
-    """
-    Exporta un reporte estructurado en formato de texto plano (.txt) 
-    actuando como un Log de Ejecución con marca de tiempo y detalle de errores.
-    """
+def generate_text_log(summary_df: pd.DataFrame, details_df: pd.DataFrame, log_filepath="dq_execution_log.txt"):
+    """Exporta un reporte estructurado agrupado por estados y dimensiones."""
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    with open(log_filename, "w", encoding="utf-8") as f:
+    with open(log_filepath, "w", encoding="utf-8") as f:
         f.write("=" * 70 + "\n")
-        f.write(f" REPORTE DE CALIDAD DE DATOS - LOG DE EJECUCIÓN\n")
+        f.write(f" REPORTE DE CALIDAD DE DATOS - LOG DE EJECUCIÓN (ISO/IEC 25012)\n")
         f.write(f" Timestamp de Ejecución: {current_time}\n")
         f.write("=" * 70 + "\n\n")
         
-        total_incidences = sum(len(rep) for rep in all_reports.values())
-        f.write(f"Resumen General: Se detectaron {total_incidences} incidencias totales.\n\n")
-        
-        for ds_name, report_df in all_reports.items():
-            f.write(f"--- Dataset Evaluado: {ds_name.upper()} ---\n")
-            if report_df.empty:
-                f.write("Status: ✅ OK (Sin anomalías detectadas)\n\n")
-            else:
-                f.write(f"Status: ⚠️ ATENCIÓN ({len(report_df)} registros con errores)\n")
-                for _, row in report_df.iterrows():
-                    # Identificamos dinámicamente si es client_id o policy_id
-                    identifier = row.get('client_id') or row.get('policy_id', 'N/A')
+        f.write("--- RESUMEN DE ESTADO DE REGLAS ---\n")
+        for _, row in summary_df.iterrows():
+            f.write(f" * Regla: {row['rule']} | Dataset: {row['dataset']} | Estado: {row['status']} | Fallidos: {row['failed_count']}\n")
+        f.write("\n" + "=" * 70 + "\n\n")
+
+        if details_df.empty:
+            f.write("Detalle de Incidencias: ✅ Sin registros defectuosos encontrados.\n")
+        else:
+            for ds_name, group_df in details_df.groupby('source_dataset'):
+                f.write(f"--- Dataset Evaluado: {ds_name.upper()} ---\n")
+                f.write(f"Status: ⚠️ ATENCIÓN ({len(group_df)} registros con errores)\n")
+                
+                pk_col = PRIMARY_KEYS.get(ds_name, 'client_id')
+                
+                for _, row in group_df.iterrows():
+                    identifier = row.get(pk_col, 'N/A')
                     f.write(f"  * Registro ID   : {identifier}\n")
-                    f.write(f"    Regla Fallida : {row['failed_rule']}\n")
+                    f.write(f"    Dimensión     : {row.get('dimension', 'N/A')}\n")
+                    f.write(f"    Severidad     : {row.get('severity', 'CRITICAL')}\n")
+                    f.write(f"    Regla Fallida : {row['rule']}\n")
                     f.write(f"    Descripción   : {row['rule_description']}\n")
                     f.write("-" * 50 + "\n")
-            f.write("\n")
+                f.write("\n")
             
-    print(f"\n[INFO] Log de ejecución exportado con éxito en: '{log_filename}'")
+    logging.info(f"Log de ejecución exportado con éxito en: '{log_filepath}'")
 
 
 if __name__ == "__main__":
-    # 1. Configuración de archivos
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    root_dir = os.path.abspath(os.path.join(current_dir, ".."))
+    enunciado_dir = os.path.join(root_dir, "Enunciado")
+    
     files_to_process = {
-        'accounts': 'accounts.csv',
-        'legacy_policies': 'legacy_policies.csv',
-        'target_policies': 'target_policies.csv'
+        'accounts': os.path.join(enunciado_dir, 'accounts.csv'),
+        'legacy_policies': os.path.join(enunciado_dir, 'legacy_policies.csv'),
+        'target_policies': os.path.join(enunciado_dir, 'target_policies.csv')
     }
 
     datasets = {}
-    print("Iniciando ingesta de datos...")
+    logging.info("Iniciando ingesta segura de datos (preservando formatos de texto)...")
     for name, filepath in files_to_process.items():
         if os.path.exists(filepath):
-            datasets[name] = pd.read_csv(filepath)
-            print(f" -> {name} cargado correctamente ({len(datasets[name])} filas).")
+            datasets[name] = pd.read_csv(filepath, dtype=str)
+            logging.info(f" -> {name} cargado correctamente ({len(datasets[name])} filas).")
         else:
-            print(f" -> ADVERTENCIA: No se encontró el archivo {filepath}.")
+            logging.warning(f" -> ADVERTENCIA: No se encontró el archivo en {filepath}.")
 
-    # 2. Instanciación de frameworks
-    dq_accounts = DataQualityFramework()
-    dq_policies = DataQualityFramework()
+    dq_framework = DataQualityFramework()
 
-    # Definición de reglas (Accounts)
-    dq_accounts.add_rule(
-        rule_name="Invalid_Document_Type",
-        validation_func=lambda df: df[~df['document_type'].isin(['DNI', 'RUT'])],
-        description="El tipo de documento debe ser DNI o RUT según diccionario."
-    )
-    dq_accounts.add_rule(
-        rule_name="Malformed_Email",
-        validation_func=lambda df: df[~df['email'].str.contains('@', na=False)],
-        description="Formato de email inválido (falta el @)."
-    )
-    dq_accounts.add_rule(
-        rule_name="Missing_Document_Number",
-        validation_func=lambda df: df[(df['document_number'].isna()) | (df['document_number'] == '')],
-        description="Document_number nulo o vacío."
-    )
+    # --- SET COMPLETO DE 14 REGLAS DE NEGOCIO Y CALIDAD (T12) ---
 
-    # Definición de reglas (Policies)
-    dq_policies.add_rule(
-        rule_name="Invalid_Premium_Value",
-        validation_func=lambda df: df[(df['premium'].isna()) | (df['premium'] <= 0)],
-        description="La prima debe ser un valor positivo."
-    )
-    dq_policies.add_rule(
-        rule_name="Invalid_Currency",
-        validation_func=lambda df: df[~df['currency'].isin(['PEN', 'USD', 'COP', 'CLP'])],
-        description="Moneda no reconocida en el catálogo."
-    )
+    # 1. Correo por Regex (rechaza @example.com o formatos incorrectos)
+    def check_malformed_email(d):
+        df = d["accounts"]
+        email_regex = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+        mask_invalid = ~df['email'].str.match(email_regex, na=False) | df['email'].str.contains("example.com", case=False, na=False)
+        return df[mask_invalid]
 
-    # 3. Plan de ejecución
-    execution_plan = [
-        {"dataset": "accounts", "framework": dq_accounts},
-        {"dataset": "legacy_policies", "framework": dq_policies},
-        {"dataset": "target_policies", "framework": dq_policies}
-    ]
+    dq_framework.add_rule(Rule(
+        name="Malformed_Email", dimension="Validez", severity="WARNING",
+        dataset="accounts", key="client_id", check=check_malformed_email,
+        description="Formato de email inválido o dominio placeholder (@example.com)."
+    ))
 
-    all_reports = {}
-    for plan in execution_plan:
-        ds_name = plan["dataset"]
-        if ds_name in datasets:
-            report = plan["framework"].run_validations(datasets[ds_name], dataset_name=ds_name)
-            all_reports[ds_name] = report
+    # 2. Documento único por tipo + número (Unicidad)
+    dq_framework.add_rule(Rule(
+        name="Duplicate_Document", dimension="Unicidad", severity="CRITICAL",
+        dataset="accounts", key="client_id",
+        check=lambda d: d["accounts"][d["accounts"].duplicated(subset=['document_type', 'document_number'], keep=False)],
+        description="Combinación de tipo y número de documento duplicada."
+    ))
 
-    # 4. Generación del reporte de texto plano (.txt) tipo log
-    generate_text_log(all_reports, log_filename="dq_execution_log.txt")
+    # 3. Correo único (Unicidad)
+    dq_framework.add_rule(Rule(
+        name="Duplicate_Email", dimension="Unicidad", severity="WARNING",
+        dataset="accounts", key="client_id",
+        check=lambda d: d["accounts"][d["accounts"].duplicated(subset=['email'], keep=False) & d['email'].notna()],
+        description="Mismo correo electrónico asignado a múltiples clientes."
+    ))
+
+    # 4. Longitud de documento por tipo (Validez)
+    def check_doc_length(d):
+        df = d["accounts"]
+        # Supuesto: DNI/RUT válidos deben tener entre 7 y 12 dígitos por ejemplo, detectando anómalos de 5 o 11 dígitos extraños
+        mask_len = df['document_number'].str.len().isin([5, 6, 11])
+        return df[mask_len]
+
+    dq_framework.add_rule(Rule(
+        name="Invalid_Document_Length", dimension="Validez", severity="CRITICAL",
+        dataset="accounts", key="client_id", check=check_doc_length,
+        description="Longitud de documento de identidad anómala (5, 6 u 11 dígitos)."
+    ))
+
+    # 5. Consistencia país vs tipo de documento (Consistencia)
+    dq_framework.add_rule(Rule(
+        name="Country_Document_Mismatch", dimension="Consistencia", severity="WARNING",
+        dataset="accounts", key="client_id",
+        check=lambda d: d["accounts"][(d["accounts"]['country_code'] == 'PER') & (d["accounts"]['document_type'] == 'RUT')],
+        description="Inconsistencia: Tipo de documento RUT (Chile) asignado a cliente de Perú."
+    ))
+
+    # 6. Teléfono centinela (Validez / Valor por defecto)
+    dq_framework.add_rule(Rule(
+        name="Sentinel_Phone", dimension="Validez", severity="WARNING",
+        dataset="accounts", key="client_id",
+        check=lambda d: d["accounts"][d["accounts"]['phone'] == '7010001'],
+        description="Teléfono de relleno o centinela repetido masivamente."
+    ))
+
+    # 7. Fecha de nacimiento en rango (Validez temporal)
+    def check_birthdate_range(d):
+        df = d["accounts"].copy()
+        df['birth_year'] = pd.to_datetime(df['birthdate'], errors='coerce').dt.year
+        return df[(df['birth_year'] < 1920) | (df['birth_year'] > 2010)]
+
+    dq_framework.add_rule(Rule(
+        name="Invalid_Birthdate_Range", dimension="Validez", severity="CRITICAL",
+        dataset="accounts", key="client_id", check=check_birthdate_range,
+        description="Fecha de nacimiento fuera de rango lógico (ej. años 1880 o 1893)."
+    ))
+
+    # 8. Edad mínima a la creación (Menor de 18 años al momento de created_date)
+    def check_underage(d):
+        df = d["accounts"].copy()
+        df['birth'] = pd.to_datetime(df['birthdate'], errors='coerce')
+        df['created'] = pd.to_datetime(df['created_date'], errors='coerce')
+        df['age_at_creation'] = (df['created'] - df.dataset if 'dataset' in df else df['created'] - df['birth']).dt.days / 365.25
+        return df[(df['age_at_creation'] < 18) & df['age_at_creation'].notna()]
+
+    dq_framework.add_rule(Rule(
+        name="Underage_At_Creation", dimension="Validez", severity="WARNING",
+        dataset="accounts", key="client_id", check=check_underage,
+        description="Titular menor de 18 años al momento de la creación de la cuenta."
+    ))
+
+    # 9. created_date entre 2014 y hoy (Validez)
+    def check_created_date(d):
+        df = d["accounts"].copy()
+        df['created'] = pd.to_datetime(df['created_date'], errors='coerce')
+        return df[(df['created'].dt.year < 2014) | (df['created'] > pd.Timestamp.today())]
+
+    dq_framework.add_rule(Rule(
+        name="Invalid_Created_Date", dimension="Validez", severity="CRITICAL",
+        dataset="accounts", key="client_id", check=check_created_date,
+        description="Fecha de creación anterior a 2014 (inicio de operaciones) o futura."
+    ))
+
+    # 10. start_date < end_date en pólizas
+    def check_policy_dates(d, ds_name):
+        df = d[ds_name].copy()
+        df['start'] = pd.to_datetime(df['start_date'], errors='coerce')
+        df['end'] = pd.to_datetime(df['end_date'], errors='coerce')
+        return df[df['start'] > df['end']]
+
+    dq_framework.add_rule(Rule(
+        name="Invalid_Policy_Dates", dimension="Validez", severity="CRITICAL",
+        dataset="legacy_policies", key="policy_id",
+        check=lambda d: check_policy_dates(d, "legacy_policies"),
+        description="Fecha de inicio posterior a la fecha de fin en póliza (Legacy)."
+    ))
+    dq_framework.add_rule(Rule(
+        name="Invalid_Policy_Dates", dimension="Validez", severity="CRITICAL",
+        dataset="target_policies", key="policy_id",
+        check=lambda d: check_policy_dates(d, "target_policies"),
+        description="Fecha de inicio posterior a la fecha de fin en póliza (Target)."
+    ))
+
+    # 11. Póliza ACTIVE con cliente INACTIVE
+    def check_active_policy_inactive_client(d, ds_name):
+        df = d[ds_name].merge(d["accounts"][['client_id', 'status']], on='client_id', suffixes=('', '_acc'), how='inner')
+        return df[(df['status'] == 'ACTIVE') & (df['status_acc'] == 'INACTIVE')]
+
+    dq_framework.add_rule(Rule(
+        name="Active_Policy_Inactive_Client", dimension="Consistencia", severity="WARNING",
+        dataset="target_policies", key="policy_id",
+        check=lambda d: check_active_policy_inactive_client(d, "target_policies"),
+        description="Póliza en estado ACTIVE asociada a un cliente INACTIVE."
+    ))
+
+    # 12. Póliza ACTIVE con inicio futuro
+    def check_future_active_policy(d, ds_name):
+        df = d[ds_name].copy()
+        df['start'] = pd.to_datetime(df['start_date'], errors='coerce')
+        return df[(df['status'] == 'ACTIVE') & (df['start'] > pd.Timestamp.today())]
+
+    dq_framework.add_rule(Rule(
+        name="Future_Start_Date", dimension="Validez", severity="WARNING",
+        dataset="target_policies", key="policy_id",
+        check=lambda d: check_future_active_policy(d, "target_policies"),
+        description="Póliza ACTIVE con fecha de inicio futura."
+    ))
+
+    # 13. Integridad referencial (Póliza huérfana)
+    dq_framework.add_rule(Rule(
+        name="Orphan_Policy", dimension="Integridad Referencial", severity="CRITICAL",
+        dataset="target_policies", key="policy_id",
+        check=lambda d: d["target_policies"][~d["target_policies"]['client_id'].isin(d["accounts"]['client_id'].dropna())],
+        description="Póliza huérfana: el client_id no existe en la tabla accounts."
+    ))
+
+    # 14. Vigencia anterior a la creación del cliente
+    def check_policy_before_client(d, ds_name):
+        df = d[ds_name].merge(d["accounts"][['client_id', 'created_date']], on='client_id', how='inner')
+        df['start'] = pd.to_datetime(df['start_date'], errors='coerce')
+        df['created'] = pd.to_datetime(df['created_date'], errors='coerce')
+        return df[df['start'] < df['created']]
+
+    dq_framework.add_rule(Rule(
+        name="Policy_Before_Client_Creation", dimension="Consistencia", severity="WARNING",
+        dataset="target_policies", key="policy_id",
+        check=lambda d: check_policy_before_client(d, "target_policies"),
+        description="Vigencia de póliza anterior a la fecha de creación del cliente."
+    ))
+
+    # Ejecución global con control de estados
+    summary_df, details_df, has_errors = dq_framework.run_validations(datasets)
+
+    # Exportación del log
+    log_output_path = os.path.join(current_dir, "dq_execution_log.txt")
+    generate_text_log(summary_df, details_df, log_filepath=log_output_path)
+
+    # Salida con error si hay fallas críticas o excepciones técnicas
+    if has_errors or not summary_df[(summary_df['severity'] == 'CRITICAL') & (summary_df['failed_count'] > 0)].empty:
+        logging.error("La ejecución de calidad finalizó con errores críticos detectados.")
+        sys.exit(1)
+    else:
+        logging.info("Validación de calidad completada con éxito operativo.")
+        sys.exit(0)
